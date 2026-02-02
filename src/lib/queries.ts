@@ -56,6 +56,7 @@ export const USE_CASES_QUERY = `
   *[_type == "useCase"] | order(endDate desc) {
     "title": title,
     "slug": slug.current,
+    "href": "/use-cases/" + slug.current,
     "sum": summary,
     "date": endDate,
     

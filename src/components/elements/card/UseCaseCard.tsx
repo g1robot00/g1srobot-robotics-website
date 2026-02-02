@@ -2,17 +2,17 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { UseCase } from '@/types/useCase'
+import { UseCaseDTO } from '@/types/respDto'
 import Badge from '@/components/ui/Badge'
 
 interface UseCaseCardProps {
-  useCase: UseCase
+  useCase: UseCaseDTO
 }
 
 export default function UseCaseCard({useCase}: UseCaseCardProps) {
-   const { title, sum, date, products, industries, slug, thumbnail } = useCase; // 구조분해 할당
+   const { title, sum, date, products, industries, href, thumbnail } = useCase; // 구조분해 할당
   return (
-    <div className='group col-span-1 rounded-xl shadow-md overflow-hidden cursor-pointer'>
+    <Link href={href} className='group col-span-1 rounded-xl shadow-md overflow-hidden cursor-pointer'>
       <div className='relative w-full h-72 overflow-hidden'>
         {thumbnail
           ?<Image src={thumbnail} alt={title} fill
@@ -56,6 +56,6 @@ export default function UseCaseCard({useCase}: UseCaseCardProps) {
         <h3 className='text-xl font-bold group-hover:text-main transition-colors'>{title}</h3>
         <p className='text-gray-400 text-sm'>{date}</p>
       </div>
-    </div>
+    </Link>
   )
 }

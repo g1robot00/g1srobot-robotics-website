@@ -35,7 +35,7 @@ export interface ProductDetailDTO {
     mainImage: string;
     images: string;
     specs: ProductSpec[]
-    productLine: RelatedItem;
+    productLine: string;
     industries: RelatedItem[];
 }
 
@@ -60,6 +60,7 @@ export interface IndustryProductsDTO {
 export interface UseCaseDTO {
     title: string;
     slug: string;
+    href: string;
     sum: string;
     date: string;
     thumbnail?: string; // 이미지를 추가했을 경우

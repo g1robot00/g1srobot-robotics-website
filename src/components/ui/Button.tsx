@@ -18,6 +18,8 @@ extends React.ButtonHTMLAttributes<HTMLButtonElement>
 export default function Button({ 
     label, 
     variant = 'filled',
+    href,
+    showArrow = false,
     className,
     onClick,
     noMinWidth = false,
@@ -29,19 +31,40 @@ export default function Button({
     
     const variantStyles = {
         filled: 'bg-main text-white hover:bg-main/70',
-        outline: 'border border-main text-main hover:bg-main/10'
+        outline: 'border border-main text-main hover:bg-main/70'
     }
 
-    // const disabledStyles = 'opacity-40 grayscale active:scale-100 shadow-none'
+    const Content = (
+        <>
+            {label}
+            {showArrow && <ChevronRight size={20} className='group-hover:translate-x-1 transition-transform'/>}
+        </>
+    )
+
+    if(href) {
+        return (
+            <Link href={href} 
+                className={cn(
+                    baseStyles, 
+                    variantStyles[variant],
+                    'group',
+                    className)}
+            >
+                {Content}
+            </Link>
+        )
+    }
+
     return (
         <button onClick={onClick} 
                 className={cn(
                     baseStyles, 
-                    variantStyles[variant], 
+                    variantStyles[variant],
+                    'group',
                     className)}
                 {...props}
         >
-            {label}
+            {Content}
         </button>
     )
 }

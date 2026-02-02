@@ -1,3 +1,6 @@
+'use client'
+
+import { useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -8,9 +11,10 @@ import { ProductDetailDTO } from '@/types/respDto'
 
 interface ProductIntroSectionProps {
     product: ProductDetailDTO
+    onInquiryClick: () => void
 }
 
-export default function ProductIntroSection({ product }: ProductIntroSectionProps) {
+export default function ProductIntroSection({ product, onInquiryClick }: ProductIntroSectionProps) {
     const buttonStyle = 'flex-1 justify-start text-md h-15'
 
     return (
@@ -46,8 +50,8 @@ export default function ProductIntroSection({ product }: ProductIntroSectionProp
                     {product.description}
                 </p>
                 <div className='flex gap-5'>
-                    <Button label='제품 문의하기' className={buttonStyle} />
-                    <Button label='카탈로그 다운로드' className={buttonStyle} />
+                    <Button label='제품 문의하기' onClick={onInquiryClick} className={buttonStyle} showArrow />
+                    <Button href='/tech-doc' label='카탈로그 다운로드' className={buttonStyle} showArrow/>
                 </div>
             </div>
         </div>
