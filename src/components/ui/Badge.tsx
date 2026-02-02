@@ -1,4 +1,4 @@
-import React from 'react'
+import { cn } from "@/lib/utils"
 
 interface BadgeProps {
     label: string
@@ -30,7 +30,7 @@ export default function Badge({
 
     return (
         <span onClick={onClick}
-                className={`${baseStyles} ${variantStyles[variant]} ${className}`}>
+                className={cn(baseStyles, variantStyles[variant], className)}>
             {prefix && <span>{prefix}</span>}
             {label}
         </span>

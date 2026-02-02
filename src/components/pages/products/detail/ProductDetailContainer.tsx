@@ -17,7 +17,7 @@ export default function ProductDetailContainer({product}: ProductDetailContainer
                 
                 <ProductDescriptionSection />
 
-                {/* <ProductInquirySection /> */}
+                <ProductInquirySection productName={product.name}/>
             </div>
         </div>
     )

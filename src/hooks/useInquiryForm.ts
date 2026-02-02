@@ -1,18 +1,29 @@
 import { useState, useRef } from 'react'
 
 import { sendInquiry } from '@/app/support/actions'
+import { InquiryFormRefs } from '@/types/contact'
 
-export function useInquiryForm() {
+
+interface UseInquiryFormReturn {
+    isAgreed: boolean
+    setIsAgreed: React.Dispatch<React.SetStateAction<boolean>>
+    formRefs: InquiryFormRefs
+    agreeRef: React.RefObject<HTMLInputElement | null>
+    handleFormSubmit: (e: React.FormEvent) => Promise<void>
+}
+
+export function useInquiryForm(): UseInquiryFormReturn {
     const [isAgreed, setIsAgreed] = useState(false);
+    
+    const inquiryTypeRef = useRef<HTMLSelectElement>(null);
+    const emailRef = useRef<HTMLInputElement>(null);
+    const companyRef = useRef<HTMLInputElement>(null);
+    const nameRef = useRef<HTMLInputElement>(null);
+    const phoneRef = useRef<HTMLInputElement>(null);
+    const contentRef = useRef<HTMLTextAreaElement>(null);
+    const formRefs = { inquiryTypeRef, emailRef, companyRef, nameRef, phoneRef, contentRef };
 
-    const refs = {
-        inquiryTypeRef: useRef<HTMLSelectElement>(null),
-        emailRef: useRef<HTMLInputElement>(null),
-        companyRef: useRef<HTMLInputElement>(null),
-        nameRef: useRef<HTMLInputElement>(null),
-        phoneRef: useRef<HTMLInputElement>(null),
-        contentRef: useRef<HTMLTextAreaElement>(null),
-    };
+    const agreeRef = useRef<HTMLInputElement>(null);
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -23,12 +34,12 @@ export function useInquiryForm() {
         const fullEmail = `${emailId}@${emailDomain}`;
 
         const checkList = [
-            { name: 'inquiryType', label: '문의유형', ref: refs.inquiryTypeRef },
-            { name: 'company', label: '회사명', ref: refs.companyRef },
-            { name: 'name', label: '이름', ref: refs.nameRef },
-            { name: 'emailId', label: '이메일', ref: refs.emailRef },
-            { name: 'phone', label: '전화번호', ref: refs.phoneRef },
-            { name: 'content', label: '문의내용', ref: refs.contentRef },
+            { name: 'inquiryType', label: '문의유형', ref: formRefs.inquiryTypeRef },
+            { name: 'company', label: '회사명', ref: formRefs.companyRef },
+            { name: 'name', label: '이름', ref: formRefs.nameRef },
+            { name: 'emailId', label: '이메일', ref: formRefs.emailRef },
+            { name: 'phone', label: '전화번호', ref: formRefs.phoneRef },
+            { name: 'content', label: '문의내용', ref: formRefs.contentRef },
         ]
 
         for (const item of checkList) {
@@ -49,10 +60,16 @@ export function useInquiryForm() {
         const result = await sendInquiry(formData);
         if(result.success) {
             alert(result.message);
-            window.location.reload();
+            window.location.reload();   // 성공 후 새로고침
+            console.log('제출완료');
         }
     };
 
-    return {isAgreed, setIsAgreed, refs, handleFormSubmit};
-
+    return {
+        isAgreed, 
+        setIsAgreed, 
+        formRefs,
+        agreeRef, 
+        handleFormSubmit
+    };
 }

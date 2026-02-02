@@ -1,6 +1,9 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
+import NavDropbar from '@/components/elements/hero/NavDropbar'
 import Button from '@/components/ui/Button'
+import Badge from '@/components/ui/Badge'
 import { ProductDetailDTO } from '@/types/respDto'
 
 interface ProductIntroSectionProps {
@@ -9,6 +12,7 @@ interface ProductIntroSectionProps {
 
 export default function ProductIntroSection({ product }: ProductIntroSectionProps) {
     const buttonStyle = 'flex-1 justify-start text-md h-15'
+
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-16'>
             <div className='relative aspect-square rounded-xl overflow-hidden bg-gray-100'>
@@ -19,10 +23,17 @@ export default function ProductIntroSection({ product }: ProductIntroSectionProp
                 />
             </div>
             <div className='flex flex-col gap-10 '>
-                <span className='text-4xl font-bold pb-5 border-b border-gray-200'>{product.name}</span>
+                <NavDropbar />
+                <div className='pb-5 border-b border-gray-200 flex gap-5 items-center'>
+                    <h4 className='text-4xl font-bold '>{product.name}</h4>
+                    <Badge label={product.productLine}
+                            variant='outline'
+                            className='text-gray-500 border-gray-200' 
+                    />
+                </div>
                 <div className='flex justify-between'>
                     {product.specs.map(spec => (
-                        <div className='flex flex-col'>
+                        <div key={spec.label} className='flex flex-col'>
                             <div className='text-2xl font-semibold'>
                                 <span>{spec.value}</span>
                                 <span>{spec.unit}</span>

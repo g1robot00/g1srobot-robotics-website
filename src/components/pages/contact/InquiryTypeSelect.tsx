@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 
+import { cn } from '@/lib/utils'
 import { INPUT_STYLE } from '@/constants/styles'
 import { ChevronDown } from 'lucide-react'
 
@@ -11,7 +12,7 @@ const InquiryTypeSelect = forwardRef<HTMLSelectElement, InquiryTypeSelectProps>(
             <select name='inquiryType'
                     ref={ref}
                     {...props}
-                    className={`${INPUT_STYLE.input} w-full appearance-none cursor-pointer`} 
+                    className={cn(`${INPUT_STYLE.input} w-full appearance-none cursor-pointer`, props.className)} 
             >
                 <option value='' disabled>문의유형을 선택해주세요.</option>
                 <option value='inquiry'>구매문의</option>

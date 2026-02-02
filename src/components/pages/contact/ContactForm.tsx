@@ -2,38 +2,36 @@ import FormField from '@/components/ui/FormField'
 import InquiryTypeSelect from './InquiryTypeSelect'
 import EmailField from './EmailField'
 import Input from '@/components/ui/Input'
+import { InquiryFormRefs } from '@/types/contact'
 
 interface ContactFormProps {
-    refs: {
-        inquiryTypeRef: React.RefObject<HTMLSelectElement | null>
-        emailRef: React.RefObject<HTMLInputElement | null>
-        companyRef: React.RefObject<HTMLInputElement | null>
-        nameRef: React.RefObject<HTMLInputElement | null>
-        phoneRef: React.RefObject<HTMLInputElement | null>
-        contentRef: React.RefObject<HTMLTextAreaElement | null>
-    },
-    defaultProductName?: string;    //상세페이지에서 주는 제품명
+    refs: InquiryFormRefs
+    defaultProductName?: string   //상세페이지에서 주는 제품명
 }
 
 export default function ContactForm({ refs, defaultProductName }: ContactFormProps) {
     const {inquiryTypeRef, emailRef, companyRef, nameRef, phoneRef, contentRef} = refs
 
     return (
-        <div className='border-y border-gray-200'>
-            <FormField label="문의유형" required className='border-b border-gray-200'>
+        <div className='border-y border-gray-200 devide-y divide-gray-200'>
+            <FormField label="문의유형" required className={defaultProductName ? '': 'border-b border-gray-200'}>
                 <InquiryTypeSelect ref={inquiryTypeRef}
                                     defaultValue={defaultProductName ? 'inquiry': ''}
+                                    // disabled={!!defaultProductName} //제품명이 있으면 비활성화
+                                    // className= {defaultProductName ? 'bg-gray-50 opacity-70': ''}
                 />
             </FormField>
-
             {defaultProductName && (
-                <Input label='관심 제품'
-                        name='targetProduct'
-                        value={defaultProductName}
-                        readOnly
-                        className='bg-gray-50 font-bold'
-                />
+                <div className={defaultProductName ? 'border-b border-gray-200': ''}>
+                    <Input label='관심 제품'
+                            name='targetProduct'
+                            value={defaultProductName}
+                            readOnly
+                            className={`bg-gray-50 font-bold opacity-70 `}
+                    />
+                </div>
             )}
+
 
             <Input name='company'
                 ref={companyRef}
