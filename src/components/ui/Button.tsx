@@ -1,11 +1,15 @@
-import React from 'react'
+import Link from 'next/link'
+
 import { cn } from '@/lib/utils'
+import { ChevronRight } from 'lucide-react'
 
 interface ButtonProps 
 extends React.ButtonHTMLAttributes<HTMLButtonElement> 
 {
     label: string | React.ReactNode
     variant?: 'filled' | 'outline'
+    href?: string
+    showArrow?: boolean
     className?: string
     onClick?: () => void
     noMinWidth?: boolean

@@ -14,23 +14,24 @@ export default function ContactForm({ refs, defaultProductName }: ContactFormPro
 
     return (
         <div className='border-y border-gray-200 devide-y divide-gray-200'>
-            <FormField label="문의유형" required className={defaultProductName ? '': 'border-b border-gray-200'}>
-                <InquiryTypeSelect ref={inquiryTypeRef}
-                                    defaultValue={defaultProductName ? 'inquiry': ''}
-                                    // disabled={!!defaultProductName} //제품명이 있으면 비활성화
-                                    // className= {defaultProductName ? 'bg-gray-50 opacity-70': ''}
+            <div className='w-full border-b border-gray-200 '>
+                {defaultProductName 
+                ? 
+                <Input label='관심 제품'
+                        name='targetProduct'
+                        value={defaultProductName}
+                        readOnly
+                        className='bg-gray-50 font-bold opacity-70'
                 />
-            </FormField>
-            {defaultProductName && (
-                <div className={defaultProductName ? 'border-b border-gray-200': ''}>
-                    <Input label='관심 제품'
-                            name='targetProduct'
-                            value={defaultProductName}
-                            readOnly
-                            className={`bg-gray-50 font-bold opacity-70 `}
+                
+                : 
+                <FormField label="문의유형" required>
+                    <InquiryTypeSelect ref={inquiryTypeRef}
+                                        defaultValue={defaultProductName ? 'inquiry': ''}
                     />
-                </div>
-            )}
+                </FormField>
+                }
+            </div>
 
 
             <Input name='company'
