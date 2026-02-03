@@ -29,6 +29,24 @@ export const PRODUCT_DETAIL_QUERY = `
   }
 `
 
+// robot 상세
+export const ROBOT_DETAIL_QUERY = `
+  *[_type == "robot"][0] {
+    "id": _id,
+    "name": name,
+    "description": description,
+    "specs": specs,
+    "productLine": productLine->name,
+    "industries": industries[]->name,
+    "mainImage": mainImage.asset->url,
+    "images": images[].asset->url,
+    "video": video[].asset->url,
+    "components": components[] ->name,
+  }
+`
+
+// system 상세
+
 // 제품군
 export const PRODUCT_LINE_QUERY = `
   *[_type == "productLine"] | order(name asc) {

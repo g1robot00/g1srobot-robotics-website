@@ -39,6 +39,19 @@ export interface ProductDetailDTO {
     industries: RelatedItem[];
 }
 
+export interface RobotDetailDTO {
+    id: string;
+    name: string;
+    description: string;
+    specs: ProductSpec[]
+    productLine: string;
+    industries: RelatedItem[];
+    mainImage: string;
+    images: string[];
+    video: string[],
+    components: string[];
+}
+
 // 제품군
 export interface ProductLineDTO {
     id: string,

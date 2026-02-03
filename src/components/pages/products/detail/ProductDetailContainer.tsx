@@ -5,10 +5,10 @@ import { useRef } from 'react'
 import ProductIntroSection from './ProductIntroSection'
 import ProductDescriptionSection from './ProductDescriptionSection'
 import ProductInquirySection from './ProductInquirySection'
-import { ProductDetailDTO } from '@/types/respDto'
+import { ProductDetailDTO, RobotDetailDTO } from '@/types/respDto'
 
 interface ProductDetailContainerProps {
-    product: ProductDetailDTO
+    product: RobotDetailDTO //ProductDetailDTO
 }
 
 export default function ProductDetailContainer({product}: ProductDetailContainerProps) {

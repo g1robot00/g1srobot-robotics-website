@@ -1,27 +1,20 @@
 import React from 'react'
 
 import HeroBanner from '@/components/elements/hero/HeroBanner'
+import SubCategoryTab from '@/components/elements/hero/SubCategoryTab'
+import CompanyContainer from '@/components/pages/company/CompanyContainer'
+
 
 export default function page() {
-  const titleStyle = ''
+  
+  const tabList = [
+    // {label: 'About', id: }
+  ]
 
   return (
     <div >
         <HeroBanner />
-        <div className='mx-auto max-w-7xl px-5 md:px-10 lg:px-20 py-20'>
-          <div>
-            <h4>About</h4>
-            <div>
-
-            </div>
-          </div>
-          <div>
-            <h4>성장연혁</h4>
-            <div>
-            
-            </div>
-          </div>
-        </div>
+        <CompanyContainer/>
     </div>
   )
 }

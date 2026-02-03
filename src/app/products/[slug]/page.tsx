@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import { client } from "@/lib/sanity"
 
 import { PRODUCT_DETAIL_QUERY } from "@/lib/queries"
+import { ROBOT_DETAIL_QUERY } from "@/lib/queries"
 import ProductDetailContainer from "@/components/pages/products/detail/ProductDetailContainer"
 
 interface PageProps {
@@ -15,16 +16,18 @@ export default async function page({ params }: PageProps) {
 
     // cms에 해당 slug를 가진 제품 데이터 요청
     //$slug 자리에 현재 주소의 slug 값을 넣어줌
-    const product = await client.fetch(PRODUCT_DETAIL_QUERY, { slug });
+    const product = await client.fetch(PRODUCT_DETAIL_QUERY, { slug }); // (기존)제품
+    const robot = await client.fetch(ROBOT_DETAIL_QUERY); // 로봇
+
 
     // 데이터없으면 404페이지
-    if (!product) {
+    if (!robot) {
         notFound();
     }
 
     return (
         <main>
-            <ProductDetailContainer product={product}/>
+            <ProductDetailContainer product={robot}/>
         </main>
     )
 }

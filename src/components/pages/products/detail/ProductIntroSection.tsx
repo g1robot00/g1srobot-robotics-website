@@ -1,39 +1,35 @@
 'use client'
 
-import { useRef } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import NavDropbar from '@/components/elements/hero/NavDropbar'
+import ProductGallery from './ProductGallery'
 import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
-import { ProductDetailDTO } from '@/types/respDto'
+import { ProductDetailDTO, RobotDetailDTO } from '@/types/respDto'
 
 interface ProductIntroSectionProps {
-    product: ProductDetailDTO
+    product: RobotDetailDTO
     onInquiryClick: () => void
 }
 
 export default function ProductIntroSection({ product, onInquiryClick }: ProductIntroSectionProps) {
+
+
     const buttonStyle = 'flex-1 justify-start text-md h-15'
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-16'>
-            <div className='relative aspect-square rounded-xl overflow-hidden bg-gray-100'>
-                <Image src={product.mainImage}
-                    alt={product.name}
-                    fill
-                    className='object-cover'
-                />
-            </div>
+            <ProductGallery imgUrls={product.images} videoUrls={product.video}/>
+            
             <div className='flex flex-col gap-10 '>
-                <NavDropbar />
-                <div className='pb-5 border-b border-gray-200 flex gap-5 items-center'>
-                    <h4 className='text-4xl font-bold '>{product.name}</h4>
+                <div className='pb-5 border-b border-gray-200 flex flex-col gap-5'>
                     <Badge label={product.productLine}
                             variant='outline'
-                            className='text-gray-500 border-gray-200' 
+                            className='text-gray-500 border-gray-200 w-fit' 
                     />
+                    <h4 className='text-4xl font-bold '>{product.name}</h4>
                 </div>
                 <div className='flex justify-between'>
                     {product.specs.map(spec => (
