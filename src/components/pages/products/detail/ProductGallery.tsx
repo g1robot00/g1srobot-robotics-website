@@ -29,7 +29,7 @@ export default function ProductGallery({ imgUrls, videoUrls }: ProductGalleryPro
         <div className="flex flex-col gap-4">
             <div className='relative w-full h-full bg-gray-100 overflow-hidden '>
                 {currentMedia?.type === 'image'
-                    ? (<Image src={currentMedia.url} alt={currentMedia.url} fill className="object-contain w-full h-full"  sizes="(max-width: 768px) 100vw, 33vw"/>)
+                    ? (<Image src={currentMedia.url} alt={currentMedia.url} fill className="w-full h-auto"  sizes="(max-width: 768px) 100vw, 33vw"/>)
                     : (<video src={currentMedia.url} controls className="w-full h-full" />)
                 }
             </div>
@@ -42,7 +42,7 @@ export default function ProductGallery({ imgUrls, videoUrls }: ProductGalleryPro
                                 ${activeIndex === idx ? 'border-main' : 'border-transparent'}`}
                     >
                         {item.type === 'image' ? (
-                            <img src={item.url} className="object-cover w-full h-full opacity-60 hover:opacity-100" />
+                            <Image src={item.url} alt={item.url} fill className="object-cover w-full h-full opacity-60 hover:opacity-100" />
                         ) : (
                             <div className="w-full h-full bg-black flex items-center justify-center">
                                 <PlayCircle className="text-white w-8 h-8" /> {/* 영상임을 표시하는 아이콘 */}

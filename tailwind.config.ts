@@ -6,6 +6,7 @@ const config: Config = {
         "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
         "./src/components/**/*.{js,ts,jsx,tsx,mdx}", // components 폴더 감시
         "./src/app/**/*.{js,ts,jsx,tsx,mdx}",       // app 폴더 감시
+        "./src/**/*.{js,ts,jsx,tsx,mdx}", 
     ],
     theme: {
         extend: {

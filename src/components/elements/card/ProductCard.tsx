@@ -30,13 +30,13 @@ export default function ProductCard({ product }: ProductCardProps) {
                     <div className='w-full'>
                         {/* <h4 className='flex justify-center text-lg font-bold'>제품사양</h4> */}
                         {specs?.map((spec, idx) => (
-                                <div key={`${idx}.${spec.label}`} 
+                                <div key={`${idx}_${spec.label}`} 
                                     className={`w-full py-4 ${idx !== 0 && 'border-t border-white/20'}` +
                                                 ` flex items-center justify-between`}>
                                     <span>{spec.label}</span>
                                     <span className='text-lg font-semibold'>
-                                    {spec.value}
-                                    {spec.unit}
+                                        {spec.value}
+                                        {spec.unit}
                                     </span>
                                 </div>
                             )
