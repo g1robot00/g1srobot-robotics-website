@@ -7,7 +7,7 @@ import {
   INDUSTRY_LIST_QUERY,
   PRODUCTS_QUERY
 } from '@/lib/queries'
-import HeroBanner from '@/components/elements/hero/HeroBanner'
+import HeroBanner from '@/components/shared/hero/HeroBanner'
 import UseCaseContainer from '@/components/pages/use-cases/UseCaseContainer';
 import { 
   UseCaseDTO, 

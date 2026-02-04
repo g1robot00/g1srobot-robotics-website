@@ -1,8 +1,8 @@
 import { client } from "@/lib/sanity";
 
 import { PRODUCT_LINE_QUERY, PRODUCTS_QUERY } from "@/lib/queries";
-import HeroBanner from "@/components/elements/hero/HeroBanner";
-import SubCategoryTab from "@/components/elements/hero/SubCategoryTab";
+import HeroBanner from "@/components/shared/hero/HeroBanner";
+import SubCategoryTab from "@/components/shared/hero/SubCategoryTab";
 import ProductContainer from "@/components/pages/products/ProductContainer";
 import { ProductLineDTO } from "@/types/respDto";
 

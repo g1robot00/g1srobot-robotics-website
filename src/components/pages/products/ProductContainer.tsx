@@ -14,12 +14,12 @@ export default function ProductContainer({ productLines }: ProductContainerProps
                 <section key={line.id} id={line.id} className="mb-30 scroll-mt-28">
                     {/* --- 제품군(Product Line) 헤더 --- */}
                     <div className="flex flex-col mb-10">
-                        <h2 className="text-3xl font-bold mb-4">{line.label}</h2>
-                        <p className="text-gray-600">{line.content}</p>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-4">{line.label}</h2>
+                        <p className="text-sm md:text-base text-gray-600">{line.content}</p>
                     </div>
 
                     {/* --- 해당 제품군에 속한 제품(Products) 리스트 --- */}
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {line.kind.map((product: ProductItemDTO) => (
                             <ProductCard key={product.href} product={product} />
                         ))}

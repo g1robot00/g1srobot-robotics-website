@@ -34,7 +34,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                                     className={`w-full py-4 ${idx !== 0 && 'border-t border-white/20'}` +
                                                 ` flex items-center justify-between`}>
                                     <span>{spec.label}</span>
-                                    <span className='text-lg font-semibold'>
+                                    <span className='text-base md:text-lg font-semibold'>
                                         {spec.value}
                                         {spec.unit}
                                     </span>

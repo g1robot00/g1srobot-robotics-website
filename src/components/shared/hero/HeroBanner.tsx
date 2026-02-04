@@ -6,7 +6,7 @@ import HeroTitle from './HeroTitle'
 export default function HeroBanner() {
   
   return (
-        <div className='w-full relative h-[600px]'>
+        <div className='w-full relative h-[300px] md:h-[600px]'>
             <HeroTitle />
         </div>
   )

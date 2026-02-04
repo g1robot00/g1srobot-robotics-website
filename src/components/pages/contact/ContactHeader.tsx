@@ -6,10 +6,10 @@ export default function ContactHeader() {
     const contacts = [CONTACT_LIST.MAIL, CONTACT_LIST.PHONE];
     return (
         <div className='flex flex-col gap-10 items-center justify-center '>
-            <h3 className='text-3xl font-bold '>
+            <h3 className='text-xl md:text-3xl text-center font-bold '>
                 궁금한 점을 남겨주시면 빠른 시간 내로 연락드리겠습니다.
             </h3>
-            <div className='flex gap-10'>
+            <div className='grid gap-4 grid-cols-1 md:gap-10 md:grid-cols-2 '>
                 {contacts.map(item => {
                     const { icon: Icon, value } = item
                     return (

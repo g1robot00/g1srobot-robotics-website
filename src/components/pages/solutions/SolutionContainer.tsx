@@ -12,9 +12,9 @@ export default function SolutionContainer({ industries }: SolutionContainerProps
     <div className='mx-auto max-w-7xl px-5 md:px-10 lg:px-20 py-20'>
       {industries.map((ind: IndustryProductsDTO) => (
         <section key={ind.id} id={ind.id} className="mb-30 scroll-mt-28">
-          <h2 className="text-3xl font-bold mb-4 mb-10">{ind.label}</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 mb-10">{ind.label}</h2>
 
-          <div className='grid grid-cols-3 gap-4'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
             {ind.kind.map((product: ProductItemDTO) => (
               <ProductCard key={product.href} product={product} />
             ))}

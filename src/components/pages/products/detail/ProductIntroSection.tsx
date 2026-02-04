@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
-import NavDropbar from '@/components/elements/hero/NavDropbar'
+import NavDropbar from '@/components/shared/hero/NavDropbar'
 import ProductGallery from './ProductGallery'
 import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'

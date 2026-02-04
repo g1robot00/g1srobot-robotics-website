@@ -57,13 +57,13 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
   
   return (
     <div className='sticky top-0 z-30
-                    h-20 bg-gray-200 
-                    flex justify-center items-center space-x-10'
+                    h-20 bg-gray-200 px-5 overflow-x-auto scrollbar-hide
+                    flex justify-center items-center gap-10'
     >
       {list.map(item => (
         <button key={item.id}
               onClick={() => handleScroll(item.id)}
-              className={`text-lg font-bold transition-colors cursor-pointer
+              className={`text-base md:text-lg font-bold transition-colors cursor-pointer flex-shrink-0
                         ${activeId === item.id ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
               >
           {item.label}

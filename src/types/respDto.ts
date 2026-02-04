@@ -48,7 +48,7 @@ export interface RobotDetailDTO {
     industries: RelatedItem[];
     mainImage: string;
     images: string[];
-    video: string[],
+    videos: string[],
     components: string[];
 }
 

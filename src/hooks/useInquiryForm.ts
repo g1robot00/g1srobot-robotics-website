@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 
-import { sendInquiry } from '@/app/support/actions'
+import { sendInquiry } from '@/app/(main)/support/actions' 
 import { InquiryFormRefs } from '@/types/contact'
 
 

@@ -9,7 +9,7 @@ interface NavItemProps {
 export default function NavItem({href, children} : NavItemProps) {
     return (
         <li className='p-3'>
-            <Link href={href} className='font-bold text-gray-700 hover:text-main hover:cursor-pointer block'>
+            <Link href={href} className='lg:text-lg font-bold hover:text-main hover:cursor-pointer block'>
                 {children}
             </Link>
         </li>

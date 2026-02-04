@@ -40,7 +40,7 @@ export const ROBOT_DETAIL_QUERY = `
     "industries": industries[]->name,
     "mainImage": mainImage.asset->url,
     "images": images[].asset->url,
-    "video": video[].asset->url,
+    "videos": videos[].asset->url,
     "components": components[] ->name,
   }
 `
