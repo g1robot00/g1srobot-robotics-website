@@ -55,12 +55,12 @@ export default function ContactForm({ refs, defaultProductName }: ContactFormPro
                     required 
                     placeholder='전화번호를 입력해주세요' />
             <Input name='content'
-                ref={contentRef}
-                label="문의사항"
-                required
-                isTextArea
-                placeholder='문의내용을 입력해주세요' 
-                defaultValue={defaultProductName ? `${defaultProductName} 제품 견적 및 사양 문의드립니다.` : ''}
+                    ref={contentRef}
+                    label="문의사항"
+                    required
+                    isTextArea
+                    placeholder='문의내용을 입력해주세요' 
+                    defaultValue={defaultProductName ? `${defaultProductName} 제품 견적 및 사양 문의드립니다.` : ''}
             />
         </div>
     )

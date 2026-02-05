@@ -30,7 +30,7 @@ export default function ProductThumbnails({ allMedia, name, activeIndex, setActi
     }
 
     return (
-        <div className='w-full flex gap-2 md:gap-4 items-center justify-center mt-5 md:mt-10'>
+        <div className='w-full mt-5 md:mt-10 px-5 flex gap-2 md:gap-4 items-center justify-center '>
             <button onClick={() => handleScroll('left')}
                 className={`hidden md:block p-3 hover:bg-gray-200 rounded-full text-gray-700 cursor-pointer transition-colors 
                             disabled:text-gray-400 disabled:cursor-not-allowed disabled:bg-transparent`}
