@@ -30,7 +30,7 @@ export default function ProductGallery({ imgUrls, videoUrls, name }: ProductGall
     return (
         <div className='flex flex-col items-center h-full w-full'>
             <div className="flex-1 w-full min-h-0 flex items-center jutify-center">
-                <div className='relative w-full h-full md:max-w-[95%] max-h-full aspect-[4/3] bg-gray-100 overflow-hidden'>
+                <div className='relative w-full h-full md:max-w-[95%] max-h-full aspect-[4/3] bg-black overflow-hidden'>
                     {currentMedia.type === 'image'
                         ?<Image src={allMedia[activeIndex].url}
                             alt={`${name} main`}

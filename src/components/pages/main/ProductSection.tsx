@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image';
 
 import { PRODUCT_LINE } from '@/constants/productLine';
+import SectionHeader from './SectionHeader';
 import { MoveRight } from 'lucide-react';
 
 export default function ProductSection() {
@@ -36,15 +37,15 @@ export default function ProductSection() {
     }, []);
 
     return (
-        <section className='w-full py-20'>
-            <div className='mx-auto max-w-7xl px-5 md:px-10 lg:px-20'>
-                <h3 className='text-main'>Products</h3>
-                <h2 className='text-4xl font-bold mb-20 max-w-2xl leading-tight'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                </h2>
+        <section className='w-full bg-black'>
+            <SectionHeader category='Product Lines' 
+                        title='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+                        theme='dark'
+                        className='py-30'
+            >
                 <div className='relative flex gap-20'>
                     {/* 왼쪽: 스크롤되는 텍스트 리스트 */}
-                    <div className='flex-1 flex flex-col gap-30 transition-opacity duration-500'>
+                    <div className='flex-1 flex flex-col gap-30 md:gap-70 transition-opacity duration-500 py-10 md:pt-20 md:pb-40'>
                         {PRODUCT_LINE.map((item, index) => (
                             <div key={`${index}_${item.content}`}
                                 data-index = {index}
@@ -52,7 +53,7 @@ export default function ProductSection() {
                                 className= {`flex flex-col gap-6 transition-opacity duration-500
                                             ${activeId === index ? 'opacity-100' : 'opacity-30'}`}
                                 >
-                                <h3 className='text-3xl font-bold'>{item.label}</h3>
+                                <h3 className='text-2xl md:text-3xl text-white font-bold'>{item.label}</h3>
                                 <p className='text-gray-400 text-lg leading-relaxed'>{item.content}</p>
                                 <div className='flex flex-wrap gap-2'>
                                     {item.kind.map((sub, i) => (
@@ -82,7 +83,7 @@ export default function ProductSection() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </SectionHeader>
         </section>
     )
 }

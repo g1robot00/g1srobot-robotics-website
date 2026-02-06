@@ -27,7 +27,7 @@ export default function Button({
 }: ButtonProps) {
     const baseStyles = `${ noMinWidth ? 'p-2' :'min-w-40 px-4 py-2'} rounded-md 
                         flex justify-center items-center 
-                        text-lg font-semibold cursor-pointer`
+                        text-base md:text-lg font-semibold cursor-pointer`
     
     const variantStyles = {
         filled: 'bg-main text-white hover:bg-main/70',

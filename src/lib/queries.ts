@@ -29,7 +29,7 @@ export const PRODUCT_DETAIL_QUERY = `
   }
 `
 
-// 시스템,로봇,부품 상세 //FIXME slug로 해당 로봇 찾기
+// 시스템,로봇,부품 상세
 export const UNIVERSAL_DETAIL_QUERY = `
   *[_type in ["system", "robot", "component"] && slug.current == $slug][0] {
     "id": _id,
@@ -60,28 +60,23 @@ export const UNIVERSAL_DETAIL_QUERY = `
   }
 `
 
-// system 상세 //FIXME slug로 해당 시스템 찾기
-export const SYSTEM_DETAIL_QUERY = `
-  *[_type == "system"][0] {
+// 제품군
+export const PRODUCT_LINE_LIST_QUERY = `
+  *[_type == "productLine"] | order(name asc) {
     "id": _id,
     "name": name,
+    "href": "/products"
     "description": description,
-    "specs": specs,
-    "productLine": productLine->name,
-    "industries": industries[]->name,
-    "mainImage": mainImage.asset->url,
-    "images": images[].asset->url,
-    "videos": videos[].asset->url,
-    "robots": robots[] -> {
-      "id": _id,
-      "name": name,
-      "mainImage": mainImage.asset->url,
-      "href": "/products/" +slug.current
-    }
+    "kind": *[_type in ["system", "robot", "component" ] && references(^._id)] {
+      "id":_id,
+      "type": _type,
+      "label": name,
+      "href": "/products/" + slug.current,
+    },
+    "thumbnail": 
   }
 `
 
-// 제품군
 export const PRODUCT_LINE_QUERY = `
   *[_type == "productLine"] | order(name asc) {
     "id": _id,
@@ -137,10 +132,11 @@ export const INDUSTRY_WITH_PRODUCTS_QUERY = `
   *[_type == 'industry'] {
     "id": _id,
     "label": name,
-    "kind": *[_type == "product" && references(^._id)] {
+    "kind": *[_type in ["system", "robot", "component" ] && references(^._id)] {
       "id": _id,
+      "type": _type,
       "label": name,
-      "href": "/solutions/" + slug.current,
+      "href": "/products/" + slug.current,
       "specs": specs,
       "thumbnail": coalesce(mainImage.asset->url, images[0].asset->url)
     }

@@ -20,16 +20,18 @@ export default function ProductDetailContainer({ product }: ProductDetailContain
 
 
     return (
-        <section className='mx-auto max-w-7xl px-5 md:px-10 lg:px-20 py-20 md:py-30'>
-            <div className='flex flex-col gap-30'>
-                <div className='flex flex-col'
+        <section className='mx-auto '>
+            <div className='flex flex-col gap-20 md:gap-30 '>
+                <div className='flex flex-col px-5 md:px-10 lg:px-30 py-20 md:pb-30 md:pt-40 bg-gray-900'
                 >
                     <ProductIntroSection product={product} onInquiryClick={scrollToInquiry} />
                 </div>
 
-                <ProductDescriptionSection product={product} />
+                <div className='px-5 md:px-10 lg:px-30 '>
+                    <ProductDescriptionSection product={product} />
+                </div>
 
-                <div ref={inquiryRef}>
+                <div ref={inquiryRef} className='px-5 md:px-10 lg:px-30 bg-gray-200 py-20 md:pt-30 md:pb-40'>
                     <ProductInquirySection productName={product.name} />
                 </div>
             </div>

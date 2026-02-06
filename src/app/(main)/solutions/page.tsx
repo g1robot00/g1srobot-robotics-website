@@ -14,11 +14,14 @@ export default async function page() {
     label: ind.label,
     id: ind.id,
   }))
+
+  console.log('산업군별: ', industries)
+
   return (
     <div>
         <HeroBanner />
         <SubCategoryTab list={tabList} />
-        <ProductContainer list={industries} type='normal'/>
+        <ProductContainer list={industries} />
     </div>
   )
 }

@@ -60,7 +60,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </h3>
                 <div className='flex flex-wrap'>
                     {specToShow.map((spec, idx) => (
-                        <div className='text-gray-500 text-[10px] md:text-sm 
+                        <div className='text-gray-500 text-xs md:text-sm 
                                         before:mr-1 after:content-["/"] after:ml-1 last:after:content-none'
                         >
                             <span className='mr-1'>{spec.label}</span>

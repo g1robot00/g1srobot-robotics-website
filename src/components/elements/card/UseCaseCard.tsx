@@ -53,8 +53,8 @@ export default function UseCaseCard({useCase}: UseCaseCardProps) {
       </div>
 
       <div className='px-3 py-5'>
-        <h3 className='text-xl font-bold group-hover:text-main transition-colors'>{title}</h3>
-        <p className='text-gray-400 text-sm'>{date}</p>
+        <h3 className='text-lg md:text-xl font-bold group-hover:text-main transition-colors'>{title}</h3>
+        <p className='text-gray-400 text-xs md:text-sm'>{date}</p>
       </div>
     </Link>
   )

@@ -73,7 +73,7 @@ export default function UseCaseContainer({ initialUseCases, industries, products
     return (
         <section className='mx-auto max-w-7xl px-5 md:px-10 lg:px-20'> 
             <div className='py-10 border-b border-gray-300  flex flex-col gap-5 items-center'>
-                <div className='flex gap-3 text-xl font-bold text-gray-400 '>
+                <div className='flex gap-3 text-base md:text-xl font-bold text-gray-400 '>
                     <button onClick={() => setFilterType('industry')}
                             className={`${filterType === 'industry' ? 'text-main' : ''} cursor-pointer `}
                     >
@@ -86,7 +86,7 @@ export default function UseCaseContainer({ initialUseCases, industries, products
                         제품군별
                     </button>
                 </div>
-                <div className='max-w-4xl flex flex-wrap gap-3 justify-center'>
+                <div className='max-w-4xl flex flex-wrap gap-1 md:gap-3 justify-center'>
                     <Badge label= '전체' 
                             variant='filter'
                             isActive={isAllSelected}
@@ -98,18 +98,19 @@ export default function UseCaseContainer({ initialUseCases, industries, products
                                 variant='filter' 
                                 isActive={selectedFilters.includes(item.label)}
                                 onClick={()=>handleToggle(item.label)}
-                                className='text-md' />
+                        />
                     ))}
                 </div>
                 <div className='flex gap-2'>
                     <Button label='검색하기'
                             onClick = {handleSearch}
+                            className=''
                     />
                 </div>
             </div>
 
             {/* use cases card */}
-            <div className='py-20 grid grid-cols-3 gap-5'>
+            <div className='py-10 md:py-20 grid grid-cols-1 md:grid-cols-3 gap-5'>
                 {filteredCases.length > 0
                     ? filteredCases.map(item => (
                         <UseCaseCard key={item.title}

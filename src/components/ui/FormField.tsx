@@ -8,7 +8,7 @@ extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>
 {
     label: string
     required: boolean
-    children: React.ReactNode // 여기에 input, select, textarea
+    children: React.ReactNode
     className?: string
 }
 

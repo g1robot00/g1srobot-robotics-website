@@ -11,7 +11,7 @@ const PolicySection = forwardRef<HTMLInputElement, PolicySectionProps>(
         return (
         <div className='px-2 pb-10 space-y-5 border-b border-gray-200'>
             <h3 className='text-xl font-bold text-gray-800'>개인정보 수집 및 이용 동의</h3>
-            <div className='w-full p-8 bg-gray-200 rounded-lg space-y-4 text-gray-600 '>
+            <div className='w-full p-8 bg-gray-300 rounded-lg space-y-4 text-gray-600 '>
                 <p>{PRIVACY_POLICY.SUMMARY}</p>
                 {PRIVACY_POLICY.DETAILS.map(item => (
                     <div key={item.id}>
