@@ -45,8 +45,8 @@ export default function ProductThumbnails({ allMedia, name, activeIndex, setActi
                         <button key={`${idx}_${item.url}`}
                             onClick={() => setActiveIndex(idx)}
                             className={cn(
-                                "relative flex-shrink-0 w-[clamp(60px,10vw,100px)] aspect-square snap-center overflow-hidden border-2 transition-all bg-white cursor-pointer",
-                                activeIndex === idx ? "border-main shadow-md" : "border-transparent opacity-60 hover:opacity-100"
+                                "relative flex-shrink-0 w-[clamp(60px,5vw,100px)] aspect-square snap-center overflow-hidden transition-all bg-white cursor-pointer",
+                                activeIndex === idx ? "border-main shadow-md" : "opacity-60 hover:opacity-100"
                             )}
                         >
                             {item.type === 'image' 

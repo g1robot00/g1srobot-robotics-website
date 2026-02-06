@@ -74,7 +74,7 @@ export default function Nav() {
           </div>
         </div>
       </nav>
-      {showMenu && <MenuDrawer isOpen={showMenu} onClose={() => setShowMenu(false)}/>}
+      <MenuDrawer isOpen={showMenu} onClose={() => setShowMenu(false)}/>
     </>
   )
 }

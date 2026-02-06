@@ -13,7 +13,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
     return (
         <Link href={href} key={label} className="group block">
-            <div className='relative w-full h-82 rounded-xl overflow-hidden'>
+            <div className='relative w-full aspect-square md:aspect-10/9  rounded-xl overflow-hidden'>
                 {thumbnail
                     ? <Image src={thumbnail} alt={label} fill 
                             className="object-cover transition-transform duration-500 group-hover:scale-105" 

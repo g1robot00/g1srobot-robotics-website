@@ -17,6 +17,13 @@ export interface RelatedItem {
     name: string;
 }
 
+export interface ComponentItemDTO {
+    id: string;
+    name: string;
+    mainImage: string;
+    href: string;
+}
+
 // 제품
 export interface ProductDTO {
     id: string;
@@ -45,11 +52,11 @@ export interface RobotDetailDTO {
     description: string;
     specs: ProductSpec[]
     productLine: string;
-    industries: RelatedItem[];
+    industries: string[];
     mainImage: string;
     images: string[];
     videos: string[],
-    components: string[];
+    components: ComponentItemDTO[];
 }
 
 // 제품군

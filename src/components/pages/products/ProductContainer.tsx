@@ -19,7 +19,7 @@ export default function ProductContainer({ productLines }: ProductContainerProps
                     </div>
 
                     {/* --- 해당 제품군에 속한 제품(Products) 리스트 --- */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {line.kind.map((product: ProductItemDTO) => (
                             <ProductCard key={product.href} product={product} />
                         ))}

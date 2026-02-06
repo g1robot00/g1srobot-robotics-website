@@ -29,7 +29,7 @@ export const PRODUCT_DETAIL_QUERY = `
   }
 `
 
-// robot 상세
+// robot 상세 //FIXME slug로 해당 로봇 찾기
 export const ROBOT_DETAIL_QUERY = `
   *[_type == "robot"][0] {
     "id": _id,
@@ -41,11 +41,34 @@ export const ROBOT_DETAIL_QUERY = `
     "mainImage": mainImage.asset->url,
     "images": images[].asset->url,
     "videos": videos[].asset->url,
-    "components": components[] ->name,
+    "components": components[] -> {
+      "id": _id,
+      "name": name,
+      "mainImage": mainImage.asset->url,
+      "href": "/products/" +slug.current
+    }
   }
 `
-
-// system 상세
+// system 상세 //FIXME slug로 해당 시스템 찾기
+export const SYSTEM_DETAIL_QUERY = `
+  *[_type == "system"][0] {
+    "id": _id,
+    "name": name,
+    "description": description,
+    "specs": specs,
+    "productLine": productLine->name,
+    "industries": industries[]->name,
+    "mainImage": mainImage.asset->url,
+    "images": images[].asset->url,
+    "videos": videos[].asset->url,
+    "robots": robots[] -> {
+      "id": _id,
+      "name": name,
+      "mainImage": mainImage.asset->url,
+      "href": "/products/" +slug.current
+    }
+  }
+`
 
 // 제품군
 export const PRODUCT_LINE_QUERY = `
@@ -53,7 +76,7 @@ export const PRODUCT_LINE_QUERY = `
     "id": _id,
     "label": name,
     "content": description,
-    "href": "/products",
+    "href": "/products/" + slug.current,
 
     // 2. 해당 제품군에 속한 제품들을 필터링해서 가져오기(SQL의 JOIN)
     "kind": *[_type == "product" && references(^._id)] {

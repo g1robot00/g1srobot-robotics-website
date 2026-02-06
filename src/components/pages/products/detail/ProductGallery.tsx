@@ -3,14 +3,16 @@
 import { useState } from "react"
 import Image from "next/image"
 
+import ProductThumbnails from "./ProductThumbnails"
 import { PlayCircle } from "lucide-react"
 
 interface ProductGalleryProps {
     imgUrls: string[],
-    videoUrls: string[]
+    videoUrls: string[],
+    name: string
 }
 
-export default function ProductGallery({ imgUrls, videoUrls }: ProductGalleryProps) {
+export default function ProductGallery({ imgUrls, videoUrls, name }: ProductGalleryProps) {
     const allMedia = [
         ...(imgUrls?.map(url => ({ type: 'image', url })) ?? []),
         ...(videoUrls?.map(url => ({ type: 'video', url })) ?? [])
@@ -26,30 +28,30 @@ export default function ProductGallery({ imgUrls, videoUrls }: ProductGalleryPro
     )}
 
     return (
-        <div className="flex flex-col gap-4">
-            <div className='relative w-full h-full bg-gray-100 overflow-hidden '>
-                {currentMedia?.type === 'image'
-                    ? (<Image src={currentMedia.url} alt={currentMedia.url} fill className="w-full h-auto"  sizes="(max-width: 768px) 100vw, 33vw"/>)
-                    : (<video src={currentMedia.url} controls className="w-full h-full" />)
-                }
+        <div className='flex flex-col items-center h-full w-full'>
+            <div className="flex-1 w-full min-h-0 flex items-center jutify-center">
+                <div className='relative w-full h-full md:max-w-[95%] max-h-full aspect-[4/3] bg-gray-100 overflow-hidden'>
+                    {currentMedia.type === 'image'
+                        ?<Image src={allMedia[activeIndex].url}
+                            alt={`${name} main`}
+                            fill
+                            priority
+                            className='object-contain'
+                        />
+                        : <video key={allMedia[activeIndex].url}
+                                src={allMedia[activeIndex].url}
+                                controls
+                                className='w-full h-full object-contain'
+                        />
+                    }
+                </div>
             </div>
-            <div className="flex gap-2 overflow-x-auto pb-2">
-                {allMedia.map((item, idx) => (
-                    <button
-                        key={idx}
-                        onClick={() => setActiveIndex(idx)}
-                        className={`relative w-20 h-20 flex-shrink-0 overflow-hidden border-2 
-                                ${activeIndex === idx ? 'border-main' : 'border-transparent'}`}
-                    >
-                        {item.type === 'image' ? (
-                            <Image src={item.url} alt={item.url} fill className="object-cover w-full h-full opacity-60 hover:opacity-100" />
-                        ) : (
-                            <div className="w-full h-full bg-black flex items-center justify-center">
-                                <PlayCircle className="text-white w-8 h-8" /> {/* 영상임을 표시하는 아이콘 */}
-                            </div>
-                        )}
-                    </button>
-                ))}
+            <div className='w-full flex-shrink-0'>
+                <ProductThumbnails allMedia={allMedia} 
+                                    name={name} 
+                                    activeIndex={activeIndex} 
+                                    setActiveIndex={setActiveIndex}
+                />
             </div>
         </div>
     )
