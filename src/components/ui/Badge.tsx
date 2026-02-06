@@ -20,7 +20,7 @@ export default function Badge({
     const baseStyles = 'transition-colors duration-300'
 
     const variantStyles = {
-        filled: 'text-[12px] px-3 py-1 bg-main text-white font-semibold tracking-tight shadow-md rounded-md',
+        filled: 'text-[10px] md:text-[12px] px-3 py-1 bg-main text-white font-semibold tracking-tight shadow-md rounded-md',
         outline: 'text-[12px] px-2 py-0.5 border border-white/50 rounded-full ',
         filter: `px-4 py-1.5 border rounded-full
                 ${isActive

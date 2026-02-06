@@ -1,3 +1,5 @@
+// FIXME ProductContainer랑 합쳤으니 삭제 
+// -- ProductContainer를 어떤 폴더로 보낼것인가
 import React from 'react'
 
 import ProductCard from '@/components/elements/card/ProductCard'

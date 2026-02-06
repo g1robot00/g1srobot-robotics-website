@@ -29,10 +29,11 @@ export const PRODUCT_DETAIL_QUERY = `
   }
 `
 
-// robot 상세 //FIXME slug로 해당 로봇 찾기
-export const ROBOT_DETAIL_QUERY = `
-  *[_type == "robot"][0] {
+// 시스템,로봇,부품 상세 //FIXME slug로 해당 로봇 찾기
+export const UNIVERSAL_DETAIL_QUERY = `
+  *[_type in ["system", "robot", "component"] && slug.current == $slug][0] {
     "id": _id,
+    "type": _type,
     "name": name,
     "description": description,
     "specs": specs,
@@ -41,6 +42,15 @@ export const ROBOT_DETAIL_QUERY = `
     "mainImage": mainImage.asset->url,
     "images": images[].asset->url,
     "videos": videos[].asset->url,
+    
+    // 1. 시스템일 경우 연결된 로봇들을 가져옴
+    "robots": robots[]-> {
+      "id": _id,
+      "name": name,
+      "mainImage": mainImage.asset->url,
+      "href": "/products/" + slug.current
+    },
+
     "components": components[] -> {
       "id": _id,
       "name": name,
@@ -49,6 +59,7 @@ export const ROBOT_DETAIL_QUERY = `
     }
   }
 `
+
 // system 상세 //FIXME slug로 해당 시스템 찾기
 export const SYSTEM_DETAIL_QUERY = `
   *[_type == "system"][0] {
@@ -79,8 +90,9 @@ export const PRODUCT_LINE_QUERY = `
     "href": "/products/" + slug.current,
 
     // 2. 해당 제품군에 속한 제품들을 필터링해서 가져오기(SQL의 JOIN)
-    "kind": *[_type == "product" && references(^._id)] {
+    "kind": *[_type in ["system", "robot", "component" ] && references(^._id)] {
       "id":_id,
+      "type": _type,
       "label": name,
       "href": "/products/" + slug.current,
       "specs": specs,

@@ -7,6 +7,7 @@ export interface ProductSpec {
 
 export interface ProductItemDTO {
     id: string;
+    type: 'system' | 'robot' | 'component';
     label: string;
     href: string;
     specs: ProductSpec[]; // 위에서 정의한 타입 재사용
@@ -17,7 +18,7 @@ export interface RelatedItem {
     name: string;
 }
 
-export interface ComponentItemDTO {
+export interface RelatedProductDTO {
     id: string;
     name: string;
     mainImage: string;
@@ -35,19 +36,10 @@ export interface ProductDTO {
     industries: RelatedItem[];
 }
 
-export interface ProductDetailDTO {
+// 제품상세(시스템, 로봇, 부품)
+export interface UniversalDetailDTO {
     id: string;
-    name: string;
-    description: string;
-    mainImage: string;
-    images: string;
-    specs: ProductSpec[]
-    productLine: string;
-    industries: RelatedItem[];
-}
-
-export interface RobotDetailDTO {
-    id: string;
+    type: 'system' | 'robot' | 'component';
     name: string;
     description: string;
     specs: ProductSpec[]
@@ -56,7 +48,8 @@ export interface RobotDetailDTO {
     mainImage: string;
     images: string[];
     videos: string[],
-    components: ComponentItemDTO[];
+    robots?: RelatedProductDTO[];
+    components?: RelatedProductDTO[];
 }
 
 // 제품군

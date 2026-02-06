@@ -8,10 +8,10 @@ import NavDropbar from '@/components/shared/hero/NavDropbar'
 import ProductGallery from './ProductGallery'
 import Button from '@/components/ui/Button'
 import Badge from '@/components/ui/Badge'
-import { ProductDetailDTO, RobotDetailDTO } from '@/types/respDto'
+import { UniversalDetailDTO } from '@/types/respDto'
 
 interface ProductIntroSectionProps {
-    product: RobotDetailDTO
+    product: UniversalDetailDTO
     onInquiryClick: () => void
 }
 
@@ -45,7 +45,7 @@ export default function ProductIntroSection({ product, onInquiryClick }: Product
                             </div>
                         ))}
                     </div>
-                    <p className='h-35'>
+                    <p className='md:h-35'>
                         {product.description}
                     </p>
                 </div>

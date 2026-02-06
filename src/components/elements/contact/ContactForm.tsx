@@ -16,16 +16,16 @@ export default function ContactForm({ refs, defaultProductName }: ContactFormPro
         <div className='border-y border-gray-200 devide-y divide-gray-200'>
             <div className='w-full border-b border-gray-200 '>
                 {defaultProductName 
-                ? 
-                <Input label='관심 제품'
-                        name='targetProduct'
-                        value={defaultProductName}
-                        readOnly
-                        className='bg-gray-50 font-bold opacity-70'
-                />
-                
-                : 
-                <FormField label="문의유형" required>
+                ?<>
+                    <input type="hidden" name="inquiryType" value="inquiry" />
+                    <Input label='관심 제품'
+                            name='targetProduct'
+                            value={defaultProductName}
+                            readOnly
+                            className='bg-gray-50 font-bold opacity-70'
+                    />
+                </>
+                :<FormField label="문의유형" required>
                     <InquiryTypeSelect ref={inquiryTypeRef}
                                         defaultValue={defaultProductName ? 'inquiry': ''}
                     />
