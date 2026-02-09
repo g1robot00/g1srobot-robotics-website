@@ -64,25 +64,34 @@ export const UNIVERSAL_DETAIL_QUERY = `
 export const PRODUCT_LINE_LIST_QUERY = `
   *[_type == "productLine"] | order(name asc) {
     "id": _id,
-    "name": name,
-    "href": "/products"
-    "description": description,
+    "label": name,
+    "href": "/products",
+    "content": description,
     "kind": *[_type in ["system", "robot", "component" ] && references(^._id)] {
       "id":_id,
       "type": _type,
       "label": name,
       "href": "/products/" + slug.current,
     },
-    "thumbnail": 
+    "thumbnail": coalesce(
+      // 1순위: 현재(productLine) 테이블의 mainImage URL
+      mainImage.asset->url, 
+      
+      // 2순위: 1순위가 없을 경우, 이 제품군을 참조하는 제품들 중 
+      // 참조하는 제품을 찾은 뒤, 그 제품의 [대표이미지] 혹은 [갤러리 첫장] 중 있는 걸 가져옴
+      *[_type in ["system", "robot", "component"] && references(^._id)] | order(_createdAt desc)[0]{
+        "url": coalesce(mainImage.asset->url, images[0].asset->url)
+      }.url
+      )
   }
 `
 
-export const PRODUCT_LINE_QUERY = `
+export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
   *[_type == "productLine"] | order(name asc) {
     "id": _id,
     "label": name,
-    "content": description,
     "href": "/products/" + slug.current,
+    "content": description,
 
     // 2. 해당 제품군에 속한 제품들을 필터링해서 가져오기(SQL의 JOIN)
     "kind": *[_type in ["system", "robot", "component" ] && references(^._id)] {
@@ -95,7 +104,7 @@ export const PRODUCT_LINE_QUERY = `
     },
 
     // 3. 이미지 처리(이미지가 없다면 첫번째 제품의 이미지를 가져오거나 처리)
-    "productImg": *[_type == "product" && references(^._id)]| order(_createdAt asc)[0].images[0].asset->url
+    "thumbnail": *[_type == "product" && references(^._id)]| order(_createdAt asc)[0].images[0].asset->url
   }
 `;
 

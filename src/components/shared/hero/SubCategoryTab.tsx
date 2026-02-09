@@ -1,6 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+
+import { cn } from '@/lib/utils';
 
 interface SubtabItem {
     readonly label: string;
@@ -13,8 +15,18 @@ interface SubCategoryTabProps {
 
 export default function SubCategoryTab({list}: SubCategoryTabProps) {
   const [ activeId, setActiveId ] = useState(list[0]?.id);
+  const [isNavVisible, setIsNavVisible] = useState(true); // 네브바 상태표시
+  const [lastScrollY, setLastScrollY] = useState(0);  // 이전 스크롤 위치
 
+  // 수동 스크롤인지 확인하는 변수(<-> 서브탭 눌러서 이동)
+  const isManualScrolling = useRef(false); //FIXME 서브탭 선택해서 위로 스크롤 시 네브바 안나오게 
+
+   // ✅ 1. [초기화 & Scroll Spy] : 어떤 섹션을 보고 있는지 감지
   useEffect(()=>{
+    // 처음 페이지 들어왔을때 주소창 해시가 있는지 확인
+    const hash = window.location.hash.replace('#', '');
+    if (hash) setActiveId(hash);
+
     const observerOptions = {
       root: null, // 감시 기준을 화면전체로 잡음
       rootMargin: '-20% 0% -60% 0%',
@@ -37,32 +49,55 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
     return () => observer.disconnect();
   }, []);
   
-  const handleScroll = (id: string) => {
+   // ✅ 2. [네브바 방향 감지] : 스크롤 위/아래에 따라 탭의 top 위치 조절
+  useEffect(() => {
+    const updateNavVisibility = () => {
+      if (isManualScrolling.current) return;
+      const currentScrollY = window.scrollY;
+
+      // 네브바 노출 여부와 동일한 로직
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsNavVisible(false);
+      } else {
+        setIsNavVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    }
+
+    window.addEventListener('scroll', updateNavVisibility);
+    return () => window.removeEventListener('scroll', updateNavVisibility);
+  }, [lastScrollY])
+
+
+  // ✅ 3. [클릭 이벤트] : 탭 클릭 시 해당 위치로 스무스하게 이동
+  const handleManualScroll  = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
+      isManualScrolling.current = true;
+      setIsNavVisible(false); 
+
       setActiveId(id);
-
       element.scrollIntoView({behavior: 'smooth'})
-      // const offset = 100; //헤더높이만큼 여백
-      // const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      // const offsetPosition = elementPosition - offset;
-
-      // window.scrollTo({
-      //   top: offsetPosition,
-      //   behavior: 'smooth'
-      // })
     }
-  };
 
+     // 📍 스크롤 애니메이션이 끝날 때쯤(약 0.8초~1초 후) 플래그 OFF
+      setTimeout(() => {
+        isManualScrolling.current = false;
+        // 📍 도착한 지점의 스크롤 값을 lastScrollY에 업데이트해서 오작동 방지
+        setLastScrollY(window.scrollY); 
+      }, 1000); 
+  };
   
   return (
-    <div className='sticky top-0 z-30
-                    h-20 bg-gray-200 px-5 overflow-x-auto scrollbar-hide
-                    flex justify-center items-center gap-10'
+    <div className={cn(
+                    'sticky z-30  h-20 bg-gray-200 px-5 overflow-x-auto scrollbar-hide  flex justify-center items-center gap-10 transition-all duration-500',
+                    isNavVisible ? 'top-15 md: top-20' : 'top-0'
+                    )}
     >
       {list.map(item => (
         <button key={item.id}
-              onClick={() => handleScroll(item.id)}
+              onClick={() => handleManualScroll(item.id)}
               className={`text-base md:text-lg font-bold transition-colors cursor-pointer flex-shrink-0
                         ${activeId === item.id ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
               >

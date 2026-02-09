@@ -1,13 +1,13 @@
 import { client } from "@/lib/sanity";
 
-import { PRODUCT_LINE_QUERY, PRODUCTS_QUERY } from "@/lib/queries";
+import { PRODUCT_LINE_WITH_PRODUCTS_QUERY, PRODUCTS_QUERY } from "@/lib/queries";
 import HeroBanner from "@/components/shared/hero/HeroBanner";
 import SubCategoryTab from "@/components/shared/hero/SubCategoryTab";
 import ProductContainer from "@/components/pages/products/ProductContainer";
-import { ProductLineDTO } from "@/types/respDto";
+import { ProductLineProductsDTO } from "@/types/respDto";
 
 export default async function ProductsPage() {
-    const productLines: ProductLineDTO[] = await client.fetch(PRODUCT_LINE_QUERY);
+    const productLines: ProductLineProductsDTO[] = await client.fetch(PRODUCT_LINE_WITH_PRODUCTS_QUERY);
 
     const tabList = productLines.map(pl => ({
         label: pl.label,

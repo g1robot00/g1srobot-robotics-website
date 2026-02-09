@@ -14,6 +14,9 @@ export interface ProductItemDTO {
     thumbnail: string;
 }
 
+// "ProductItemDTO에서 'specs'와 'thumbnail'만 빼고 다 가져와라"라는 뜻입니다.
+export type ProductItemSimpleDTO = Omit<ProductItemDTO, 'specs' | 'thumbnail'>;
+
 export interface RelatedItem {
     name: string;
 }
@@ -53,16 +56,29 @@ export interface UniversalDetailDTO {
 }
 
 // 제품군
-export interface ProductLineDTO {
-    id: string,
+export interface ProductLineBase {
+    id: string;
     label: string;
-    content: string;
     href: string;
-    kind: ProductItemDTO[],
-    productImg: string;
+    content: string;
+    thumbnail: string;
+}
+
+export interface ProductLineListDTO extends ProductLineBase{
+    kind: ProductItemSimpleDTO[];
+}
+
+export interface ProductLineProductsDTO extends ProductLineBase{   //ProductLineProductsDTO
+    kind: ProductItemDTO[];
 }
 
 // 산업별
+export interface IndustryListDTO {
+    label: string;
+    slug: string;
+    icon: string;
+}
+
 export interface IndustryProductsDTO {
     id: string;
     label: string;
@@ -79,12 +95,6 @@ export interface UseCaseDTO {
     thumbnail?: string; // 이미지를 추가했을 경우
     products: RelatedItem[];
     industries: RelatedItem[];
-}
-
-export interface IndustryListDTO {
-    label: string;
-    slug: string;
-    icon: string;
 }
 
 // 기술자료

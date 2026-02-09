@@ -6,7 +6,7 @@ import ScrollReveal from '@/motions/ScrollReveal'
 interface SectionHeaderProps {
     category: string
     title: string
-    children: React.ReactNode
+    children?: React.ReactNode
     theme?: 'light' | 'dark'
     className?: string
 }

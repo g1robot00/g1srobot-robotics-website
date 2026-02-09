@@ -12,15 +12,17 @@ interface UseCaseCardProps {
 export default function UseCaseCard({useCase}: UseCaseCardProps) {
    const { title, sum, date, products, industries, href, thumbnail } = useCase; // 구조분해 할당
   return (
-    <Link href={href} className='group col-span-1 rounded-xl shadow-md overflow-hidden cursor-pointer'>
-      <div className='relative w-full h-72 overflow-hidden'>
-        {thumbnail
-          ?<Image src={thumbnail} alt={title} fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105" 
-              sizes="(max-width: 768px) 100vw, 33vw" // 성능 최적화
-          />
-          : <div className="w-full h-full bg-gray-200" />
-        }
+    <Link href={href} className='group block h-full p-0.5  bg-white rounded-xl shadow-md cursor-pointer'>
+      <div className='relative w-full rounded-t-xl overflow-hidden'>
+        <div className='w-full h-72 '>
+          {thumbnail
+            ?<Image src={thumbnail} alt={title} fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 33vw" // 성능 최적화
+            />
+            : <div className="w-full h-full bg-gray-200" />
+          }
+        </div>
         <div className='absolute top-3 left-3 z-20 flex flex-wrap gap-1'>
             {industries?.map((i) => (
               <Badge 

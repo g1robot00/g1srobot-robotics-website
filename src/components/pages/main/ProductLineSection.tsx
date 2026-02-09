@@ -2,14 +2,21 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image';
+import Link from 'next/link';
 
-import { PRODUCT_LINE } from '@/constants/productLine';
 import SectionHeader from './SectionHeader';
+import { ProductLineListDTO } from '@/types/respDto';
 import { MoveRight } from 'lucide-react';
 
-export default function ProductSection() {
+interface ProductLineSectionProps {
+    productLines: ProductLineListDTO[];
+}
+
+export default function ProductLineSection({productLines}: ProductLineSectionProps) {
     const [activeId, setActiveId] = useState(0); // 현재 활성화된 아이템 인덱스
     const itemRefs = useRef<(HTMLDivElement | null)[]>([]); // 각 아이템을 참조하기 위한 Ref 배열
+
+    console.log('출력이미지: ', productLines[activeId].thumbnail)
 
     useEffect(() => {
         const observerOptions = {
@@ -41,31 +48,33 @@ export default function ProductSection() {
             <SectionHeader category='Product Lines' 
                         title='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
                         theme='dark'
-                        className='py-30'
+                        className='py-55'
             >
                 <div className='relative flex gap-20'>
                     {/* 왼쪽: 스크롤되는 텍스트 리스트 */}
-                    <div className='flex-1 flex flex-col gap-30 md:gap-70 transition-opacity duration-500 py-10 md:pt-20 md:pb-40'>
-                        {PRODUCT_LINE.map((item, index) => (
+                    <div className='flex-1 flex flex-col gap-30 md:gap-80 xl:gap-100 transition-opacity duration-500 py-10 md:pt-20 md:pb-40'>
+                        {productLines.map((item, index) => (
                             <div key={`${index}_${item.content}`}
                                 data-index = {index}
                                 ref={(el) => (itemRefs.current[index] = el)} //ref 저장
-                                className= {`flex flex-col gap-6 transition-opacity duration-500
+                                className= {`flex flex-col gap-15 transition-opacity duration-500
                                             ${activeId === index ? 'opacity-100' : 'opacity-30'}`}
-                                >
-                                <h3 className='text-2xl md:text-3xl text-white font-bold'>{item.label}</h3>
-                                <p className='text-gray-400 text-lg leading-relaxed'>{item.content}</p>
-                                <div className='flex flex-wrap gap-2'>
-                                    {item.kind.map((sub, i) => (
-                                        <span key={`${i}_${sub}`} className='px-4 py-1.5 bg-main/20 rounded-full text-main text-md'>
-                                            {sub.label}
-                                        </span>
-                                    ))}
+                            >
+                                <div className='flex flex-col gap-2'>
+                                    <h3 className='text-2xl md:text-4xl text-white font-bold'>{item.label}</h3>
+                                    <p className='text-gray-400 text-lg leading-relaxed'>{item.content}</p>
+                                    <div className='flex flex-wrap gap-2'>
+                                        {item.kind.slice(0, 4).map((sub, i) => (
+                                            <Link href={sub.href} key={`${i}_${sub}`} className='px-4 py-1.5 bg-main/20 rounded-full text-sm text-main text-md'>
+                                                {sub.label}
+                                            </Link>
+                                        ))}
+                                    </div>
                                 </div>
-                                <p className='flex items-center gap-2 text-main font-semibold cursor-pointer group'>
+                                <Link href={`${item.href}#${item.id}`} className='flex items-center gap-2 text-main font-semibold cursor-pointer group'>
                                     더 알아보기
                                     <MoveRight size={18} className='group-hover:translate-x-1/2 transition-transform'/>
-                                </p>
+                                </Link>
                             </div>
                         ))}
                     </div>
@@ -73,13 +82,11 @@ export default function ProductSection() {
                     <div className='hidden md:block flex-1 sticky top-1/4 h-[500px]'>
                         <div className='relative w-full h-full bg-gray-800 rounded-xl overflow-hidden'>
                             {/* 현재 activeId에 맞는 이미지 출력 */}
-                            <Image src={PRODUCT_LINE[activeId].ProductImg}
-                                    alt={PRODUCT_LINE[activeId].label}
+                            <Image src={productLines[activeId].thumbnail}
+                                    alt={productLines[activeId].label}
                                     fill
                                     className='object-cover transition-all duration-700 ease-in-out'
                             />
-                            {/* 오버레이 */}
-                            {/* <div className='absolute inset-0 bg-gradient-to-t from-black/40 to-transparent' />// */}
                         </div>
                     </div>
                 </div>
