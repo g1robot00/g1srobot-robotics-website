@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils';
+import { NAV_HEIGHT } from '@/constants/navigation';
 
 interface SubtabItem {
     readonly label: string;
@@ -91,8 +92,9 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
   
   return (
     <div className={cn(
-                    'sticky z-30  h-20 bg-gray-200 px-5 overflow-x-auto scrollbar-hide  flex justify-center items-center gap-10 transition-all duration-500',
-                    isNavVisible ? 'top-15 md: top-20' : 'top-0'
+                    `sticky z-30  h-${NAV_HEIGHT.base} md:h-${NAV_HEIGHT.md} bg-gray-200 px-5 overflow-x-auto scrollbar-hide  
+                    flex justify-center items-center gap-10 transition-all duration-500`,
+                    isNavVisible ? `top-${NAV_HEIGHT.base} md:top-${NAV_HEIGHT.md}` : 'top-0'
                     )}
     >
       {list.map(item => (

@@ -14,15 +14,15 @@ const PARTNERS = [
 
 export default function LogoTicker() {
     return (
-        <div className="py-8 bg-gray-200 border-y border-gray-100 overflow-hidden">
-            <div className="container mx-auto px-4 mb-6">
+        <div className="py-6 md:py-8 bg-gray-200 border-y border-gray-100 overflow-hidden">
+            <div className="hidden md:block container mx-auto px-4 mb-6">
                 <p className="text-center text-gray-400 text-sm font-medium uppercase tracking-widest">
                     Trusted by Innovative Companies
                 </p>
             </div>
             {/* 무한 루프 */}
             <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-                <motion.div className="flex gap-20 flex-none pr-20"
+                <motion.div className="flex gap-15 md:gap-20 flex-none pr-20"
                     animate={{ x: '-50%' }} // 전체 길이의 절반만큼 이동, FIXME 3번반복이면 33.33%이동인데 하면 멈춤
                     transition={{
                         duration: 50, // 속도 조절 (숫자가 클수록 느려짐)
@@ -32,7 +32,7 @@ export default function LogoTicker() {
                     }}
                 >
                     {[...PARTNERS, ...PARTNERS, ...PARTNERS].map((partner, idx) => (
-                        <div key={idx} className="flex-none h-6 w-auto flex items-center justify-center">
+                        <div key={idx} className="flex-none h-5 md:h-6 w-auto flex items-center justify-center">
                             <Image src={partner.logo} alt={partner.name} width={60} height={20}
                                 className="h-full w-auto object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer"
                             />

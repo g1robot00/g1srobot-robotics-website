@@ -84,17 +84,20 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                         <AnimatePresence  mode="wait">
                             <motion.div className='relative w-full h-full bg-gray-800 rounded-xl overflow-hidden'
                                         key={activeId} // activeId가 바뀔때마다 애니메이션 트리거
-                                        initial={{opacity: 0, x: -20}}
-                                        animate={{ opacity: 1, x:0 }} 
-                                        exit={{opacity: 0, x:20}}
-                                        transition={{duration: 0.4, ease: 'easeInOut'}}
+                                        initial={{opacity: 0, y: 20}}
+                                        animate={{ opacity: 1, y:0 }} 
+                                        exit={{opacity: 0, y: -20}}
+                                        transition={{duration: 0.3, ease: 'easeInOut'}}
                             >
                                 {/* 현재 activeId에 맞는 이미지 출력 */}
-                                <Image src={productLines[activeId].thumbnail}
+                                {productLines[activeId].thumbnail
+                                ?<Image src={productLines[activeId].thumbnail}
                                         alt={productLines[activeId].label}
                                         fill
                                         className='object-cover transition-all duration-700 ease-in-out'
                                 />
+                                : <div className='w-full h-full bg-gray-300'></div>
+                                }
                             </motion.div>
                         </AnimatePresence>
                     </div>
