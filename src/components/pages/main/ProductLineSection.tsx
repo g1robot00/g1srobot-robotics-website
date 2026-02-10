@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import SectionHeader from './SectionHeader';
 import { ProductLineListDTO } from '@/types/respDto';
@@ -56,7 +57,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                         {productLines.map((item, index) => (
                             <div key={`${index}_${item.content}`}
                                 data-index = {index}
-                                ref={(el) => (itemRefs.current[index] = el)} //ref 저장
+                                ref={(el) => {itemRefs.current[index] = el;}} //ref 저장
                                 className= {`flex flex-col gap-15 transition-opacity duration-500
                                             ${activeId === index ? 'opacity-100' : 'opacity-30'}`}
                             >
@@ -80,14 +81,22 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                     </div>
                     {/* 오른쪽: 화면에 고정되는 이미지 박스 */}
                     <div className='hidden md:block flex-1 sticky top-1/4 h-[500px]'>
-                        <div className='relative w-full h-full bg-gray-800 rounded-xl overflow-hidden'>
-                            {/* 현재 activeId에 맞는 이미지 출력 */}
-                            <Image src={productLines[activeId].thumbnail}
-                                    alt={productLines[activeId].label}
-                                    fill
-                                    className='object-cover transition-all duration-700 ease-in-out'
-                            />
-                        </div>
+                        <AnimatePresence  mode="wait">
+                            <motion.div className='relative w-full h-full bg-gray-800 rounded-xl overflow-hidden'
+                                        key={activeId} // activeId가 바뀔때마다 애니메이션 트리거
+                                        initial={{opacity: 0, x: -20}}
+                                        animate={{ opacity: 1, x:0 }} 
+                                        exit={{opacity: 0, x:20}}
+                                        transition={{duration: 0.4, ease: 'easeInOut'}}
+                            >
+                                {/* 현재 activeId에 맞는 이미지 출력 */}
+                                <Image src={productLines[activeId].thumbnail}
+                                        alt={productLines[activeId].label}
+                                        fill
+                                        className='object-cover transition-all duration-700 ease-in-out'
+                                />
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
                 </div>
             </SectionHeader>

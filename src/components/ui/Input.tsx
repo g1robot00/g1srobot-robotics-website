@@ -26,7 +26,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(({
             {/* 라벨 영역 */}
             <div className="flex items-center gap-1 font-bold text-gray-800 py-2">
                 {label}
-                {required && <span className="text-main">*</span>}
+                {required && <span className="text-main text-xl font-extra-bold">*</span>}
             </div>
 
             {/* 입력 영역 */}

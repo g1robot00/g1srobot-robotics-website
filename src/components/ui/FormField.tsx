@@ -23,7 +23,7 @@ export default function FormField({
         <div className={cn(INPUT_STYLE.frame, className)}>
             <div className='flex items-center gap-1 font-bold text-gray-800 py-2'>
                 {label}
-                {required && <span className='text-main'>*</span>}
+                {required && <span className='text-main text-xl font-extra-bold'>*</span>}
             </div>
             <div className='w-full'>
                 {children}

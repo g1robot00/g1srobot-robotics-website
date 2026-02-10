@@ -4,9 +4,7 @@ import {useState, useEffect} from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { SLOGANS } from '@/constants/slogan';
-import ScrollReveal from '@/motions/ScrollReveal';
 import { MoveRight } from 'lucide-react';
-import { clearInterval } from 'timers';
 
 
 
@@ -19,12 +17,12 @@ export default function HeroSection() {
       setIndex(prev => (prev+1) % SLOGANS.length)
     }, 15000)
     return () => clearInterval(timer);
-  }, [])
+  }, []);
 
   return (
-    <section className="relative w-full h-screen px-5 md:px-10 lg:px-20 bg-gray-900 bg-grain overflow-hidden 
+    <section className={`relative w-full h-screen px-5 md:px-10 lg:px-20 bg-gray-900 bg-grain overflow-hidden 
                     flex flex-col items-center justify-center
-                    text-white text-center"
+                    text-white text-center`}
     >
         <div className='flex flex-col items-center'>
           <AnimatePresence mode='wait' >
@@ -32,7 +30,7 @@ export default function HeroSection() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity:1, y: 0 }}
                       exit={{opacity: 0, y: -20}}
-                      transition={{duration: 0.8, ease: "easeInOut"}}
+                      transition={{ type: "spring", stiffness: 100, damping: 20}}
                       className='flex flex-col gap-3'>
               <h1 className="font-bold text-2xl md:text-4xl leading-tight">{SLOGANS[index].kr}</h1>
               <p className="text-base md:text-lg text-gray-400 tracking-widest">{SLOGANS[index].en}</p>

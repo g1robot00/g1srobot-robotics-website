@@ -11,6 +11,7 @@ const EmailField = forwardRef<HTMLInputElement>((props, ref) => {
     const onDomainChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         setEmailDomainOpt(value);
+        
         if (value !== 'direct') {
             setInputDomain(value);
         } else {
@@ -37,7 +38,7 @@ const EmailField = forwardRef<HTMLInputElement>((props, ref) => {
                         name="emailDomain"
                         value={inputDomain}
                         onChange={e => setInputDomain(e.target.value.trim())}
-                        disabled={emailDomainOpt !== 'direct'}
+                        readOnly={emailDomainOpt !== 'direct'}
                         className={`${INPUT_STYLE.input} flex-1`}
                 />
                 <select value={emailDomainOpt}

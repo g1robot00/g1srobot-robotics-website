@@ -21,8 +21,8 @@ export default function ProductContainer({ list, type='normal' }: ProductContain
 
                     {/* --- 해당 제품군에 속한 제품(Products) 리스트 --- */}
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        {item.kind.map((product: ProductItemDTO) => (
-                            <ProductCard key={product.href} product={product} />
+                        {item.kind.map((product, idx) => (
+                            <ProductCard key={`${idx}_${product.id}`} product={product} />
                         ))}
                     </div>
                 </section>

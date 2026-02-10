@@ -31,7 +31,32 @@ export function useInquiryForm(): UseInquiryFormReturn {
 
         const emailId = formData.get('emailId') as string;
         const emailDomain = formData.get('emailDomain') as string;
-        const fullEmail = `${emailId}@${emailDomain}`;
+        formData.set('email', `${emailId}@${emailDomain}`);
+
+        // 이메일 정규식 검사
+        const email = formData.get('email') as string;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('올바른 이메일 형식을 입력해주세요.');
+            emailRef.current?.focus();
+            return;
+        }
+
+        // 전화번호 길이 검사
+        const phoneVal = formData.get('phone') as string;
+        if (phoneVal.length < 11) {
+            alert('전화번호를 정확히 입력해주세요');
+            phoneRef.current?.focus();
+            return;
+        }
+
+        // 문의내용 길이검사
+        const content = formData.get('content') as string;
+        if (content.trim().length < 10) {
+            alert('문의 내용을 10자 이상 작성해주세요.');
+            contentRef.current?.focus();
+            return;
+        }
 
         const checkList = [
             { name: 'inquiryType', label: '문의유형', ref: formRefs.inquiryTypeRef },
