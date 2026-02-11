@@ -4,3 +4,9 @@ export const INPUT_STYLE = {
     error: 'border-red-500 focus:border-red-500',
     disabled: 'bg-gray-100 cursor-not-allowed opacity-70'
 }
+
+export const SECTION_PY = {
+    sm: 'py-3 md:py-10',
+    base: 'py-15 md:py-20',
+    lg: 'py-20 md:py-30'
+}

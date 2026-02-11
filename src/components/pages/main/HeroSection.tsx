@@ -3,6 +3,7 @@
 import {useState, useEffect} from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 
+import Container from '@/components/shared/Container';
 import { SLOGANS } from '@/constants/slogan';
 import { MoveRight } from 'lucide-react';
 
@@ -20,13 +21,14 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className={`relative w-full h-screen px-5 md:px-10 lg:px-20 bg-gray-900 bg-grain overflow-hidden 
+    <section className={`relative w-full h-screen bg-gray-900 bg-grain overflow-hidden 
                     flex flex-col items-center justify-center
                     text-white text-center`}
     >
+      <Container>
         <div className='flex flex-col items-center'>
           <AnimatePresence mode='wait' >
-            <motion.div key={index} 
+            <motion.div key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity:1, y: 0 }}
                       exit={{opacity: 0, y: -20}}
@@ -36,7 +38,6 @@ export default function HeroSection() {
               <p className="text-base md:text-lg text-gray-400 tracking-widest">{SLOGANS[index].en}</p>
             </motion.div>
           </AnimatePresence>
-
           {/* <button className="mt-10 px-8 py-4 bg-white/30 rounded-full
                               flex gap-2 items-center text-xs md:text-sm
                               hover:bg-white hover:text-black cursor-pointer"
@@ -51,6 +52,7 @@ export default function HeroSection() {
             ))}
           </div>
         </div>
+      </Container>
     </section>
   )
 }

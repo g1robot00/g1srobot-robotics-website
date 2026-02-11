@@ -1,5 +1,7 @@
 'use client'
 
+import { SECTION_PY } from '@/constants/styles'
+import Container from '@/components/shared/Container'
 import InquiryForm from '@/components/elements/contact/InquiryForm'
 import { useInquiryForm } from '@/hooks/useInquiryForm'
 import ContactHeader from './ContactHeader'
@@ -8,12 +10,12 @@ import ContactHeader from './ContactHeader'
 export default function ContactContainer() {
 
   return (
-    <section className='mx-auto max-w-7xl px-5 md:px-10 lg:px-20 py-20
-                        flex flex-col gap-16'
+    <section className='w-full'
     >
-      <ContactHeader />
-
-      <InquiryForm />
+      <Container className={`${SECTION_PY.base} flex flex-col gap-16`}>
+        <ContactHeader />
+        <InquiryForm />
+      </Container>
     </section>
   )
 }

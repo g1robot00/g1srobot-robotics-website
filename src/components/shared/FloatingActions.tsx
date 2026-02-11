@@ -34,7 +34,8 @@ export default function FloatingActions() {
         <AnimatePresence>
             {/* 상단이동 버튼(조건부) */}
             {showTopBtn && (
-                <motion.button initial={{opacity: 0, y: 20, scale: 0.8}}
+                <motion.button key='top-btn'
+                                initial={{opacity: 0, y: 20, scale: 0.8}}
                                 animate={{opacity: 1, y: 0, scale: 1}}
                                 exit={{opacity: 0, y: 20, scale: 0.8}}
                                 onClick={scrollToTop}
@@ -45,8 +46,11 @@ export default function FloatingActions() {
                 </motion.button>
             )}
             {/* 문의 버튼 (항시 노출) */}
-            <motion.button className="p-3 md:p-4 bg-main rounded-full shadow-lg text-white cursor-pointer"
-                        title="문의하기"
+            <motion.button key='contact-btn'
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="p-3 md:p-4 bg-main rounded-full shadow-lg text-white cursor-pointer"
+                            title="문의하기"
             >   
                 <Link href='/support'>
                     <MessageCircle size={24} strokeWidth={2.5} className=""/>

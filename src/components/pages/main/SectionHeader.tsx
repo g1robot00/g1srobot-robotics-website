@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Container from '@/components/shared/Container'
 import { cn } from '@/lib/utils'
 import ScrollReveal from '@/motions/ScrollReveal'
 
@@ -20,7 +21,7 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
     return (
         <ScrollReveal>
-            <div className={cn("mx-auto max-w-7xl px-5 md:px-10 lg:px-20", className)}>
+            <Container className={className}>
                 <div className='grid grid-cols-1 md:grid-cols-4 mb-20'>
                     <div className='md:col-span-3 flex flex-col gap-5'>
                         <h3 className='text-base md:text-lg text-main '>{category}</h3>
@@ -32,7 +33,7 @@ export default function SectionHeader({
                 <div className=''>
                     {children}
                 </div>
-            </div>
+            </Container>
         </ScrollReveal>
     )
 }

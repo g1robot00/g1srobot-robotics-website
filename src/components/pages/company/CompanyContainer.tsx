@@ -1,20 +1,17 @@
 import React from 'react'
 
+import AboutSection from './AboutSection'
+import BusinessSection from './BusinessSection'
+import ClientSection from './ClientSection'
+import HistorySection from './HistorySection'
+
 export default function CompanyContainer() {
   return (
-    <div className='mx-auto max-w-7xl px-5 md:px-10 lg:px-20 py-20'>
-      <div>
-        <h4>About</h4>
-        <div>
-
-        </div>
-      </div>
-      <div>
-        <h4>성장연혁</h4>
-        <div>
-
-        </div>
-      </div>
+    <div className='w-full '>
+      <AboutSection />
+      <BusinessSection />
+      <ClientSection />
+      <HistorySection />
     </div>
   )
 }

@@ -30,9 +30,10 @@ export default function NavDropbar() {
 
 
     return (
-        <div className='relative py-3 flex items-center
+        <div className={`relative py-3 flex items-center
                         bg-black/40 backdrop-blur-md 
-                        rounded-full cursor-pointer hover:bg-black/60 transition-all'>
+                        rounded-full cursor-pointer hover:bg-black/60 transition-all`}
+        >
             <div className='relative'>
                 <button onClick={() => toggleMenu('parent')}
                     className='px-8 flex items-center gap-1 cursor-pointer whitespace-nowrap'>

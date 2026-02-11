@@ -92,9 +92,9 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
   
   return (
     <div className={cn(
-                    `sticky z-30  h-${NAV_HEIGHT.base} md:h-${NAV_HEIGHT.md} bg-gray-200 px-5 overflow-x-auto scrollbar-hide  
+                    `sticky z-30  ${NAV_HEIGHT.h.base} ${NAV_HEIGHT.h.md} bg-gray-200 px-5 overflow-x-auto scrollbar-hide  
                     flex justify-center items-center gap-10 transition-all duration-500`,
-                    isNavVisible ? `top-${NAV_HEIGHT.base} md:top-${NAV_HEIGHT.md}` : 'top-0'
+                    isNavVisible ? `${NAV_HEIGHT.top.base} ${NAV_HEIGHT.top.md}` : 'top-0'
                     )}
     >
       {list.map(item => (

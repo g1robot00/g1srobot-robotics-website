@@ -44,15 +44,15 @@ export default function Nav() {
   return (
     <>
       <nav onMouseLeave={() => setActiveMenu(null)} // 네브영역 벗어나면 서브네브 닫기
-            className={cn('fixed top-0 left-0 z-[100] w-full transition-all duration-500',
+            className={cn('fixed top-0 left-0 z-[100] w-full border transition-all duration-500',
                 isVisible ? 'translate-y-0' : '-translate-y-full',
                 isTransparent
                 ? 'bg-transparent border-transparent text-white/85 '
-                : 'bg-white border border-b border-gray-200 text-gray-700'
+                : 'bg-white border-b border-gray-200 text-gray-700'
               )}
       >
         {/* 상단 메인 메뉴바 */}
-        <div className={`w-full h-${NAV_HEIGHT.base} md:h-${NAV_HEIGHT.md} flex items-center justify-center`}>
+        <div className={`w-full ${NAV_HEIGHT.h.base} ${NAV_HEIGHT.h.md} flex items-center justify-center`}>
           <div className='w-full max-w-screen-2xl px-4 md:px-8 lg:px-12 flex items-center justify-between '>
             <Link href='/'>
               <Image className="dark:invert "
@@ -68,7 +68,8 @@ export default function Nav() {
                 className='hidden lg:flex gap-6'
             >
               {NAV_ITEMS.map(item => (
-                <li onMouseEnter={() => setActiveMenu(item)}
+                <li key={item.label}
+                    onMouseEnter={() => setActiveMenu(item)}
                     className='p-3'
                 >
                     <Link href={item.href} className='lg:text-lg font-bold hover:text-main hover:cursor-pointer block'>
