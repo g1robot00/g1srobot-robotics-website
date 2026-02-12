@@ -105,3 +105,32 @@ export interface techDocDTO {
     fileName?: string;
     fileSize?: number;
 }
+
+// 회사소개
+export interface SloganItem {
+    kr: string; //whitespace-pre-wrap 데이터 뛰어쓰기 반영
+    en: string;
+}
+
+export interface ClientsItem {
+    name: string;
+    logo: string;
+}
+
+export interface HistoryItem {
+    id: string; 
+    year: string;
+    events: {
+        content: string;
+        month: string;
+    }[];
+}
+
+export interface CompanyDTO {
+    slogan: SloganItem;
+    about: string;
+    business: string[];
+    vision: string;
+    clients: ClientsItem[];
+    history: HistoryItem[];
+}

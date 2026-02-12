@@ -166,3 +166,25 @@ export const TECH_DOC_QUERY = `
     "fileSize": file.asset->size  //파일용량
   }
 `
+
+// 회사소개
+export const COMPANY_QUERY = `
+  *[_type == 'company'][0] {
+    'slogan': slogan,
+    'about': ceoMessage,
+    'business': businessField,
+    'vision': vision,
+    'clients': clients[] {
+      'name': name,
+      'logo': logo.asset->url
+    },
+    'history': timeline[] | order(year desc){
+      'id': _key,
+      year,
+      'events': events[] | order(month desc){
+        month,
+        content
+      }
+    }
+  }
+`

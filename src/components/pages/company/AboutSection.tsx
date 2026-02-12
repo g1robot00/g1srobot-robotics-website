@@ -4,13 +4,20 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
-import { SECTION_PY } from '@/constants/styles'
-import Container from '@/components/shared/Container'
+import Badge from '@/components/ui/Badge'
+import { SloganItem } from '@/types/respDto'
 
-export default function AboutSection() {
+interface AboutSectionProps {
+  slogan: SloganItem
+  about: string
+  business: string[]
+  vision: string
+}
+
+export default function AboutSection({slogan, about, business, vision}: AboutSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   // 📍 1. Image 컴포넌트를 모션용으로 변환합니다.
-  const MotionImage = motion(Image);
+  const MotionImage = motion.create(Image);
 
   // 1. 스크롤 진행도 측정 (0~1)
   const {scrollYProgress} = useScroll({
@@ -19,7 +26,7 @@ export default function AboutSection() {
   });
 
   // 2. 스크롤 값에 따른 스타일 변화 설계 (시작: 0, 끝: 1)
-  // 위치 이동 모션: 100px 내려가 있다가 0으로 올라옴
+  // 위치 이동 모션: 80px 내려가 있다가 0으로 올라옴
   const y = useTransform(scrollYProgress, [0, 0.3], [80, 0]);
   // 너비 70 -> 100
   const width = useTransform(scrollYProgress, [0, 0.3], ['70%', '100%']);
@@ -48,8 +55,9 @@ export default function AboutSection() {
           <motion.div style={{opacity: firstTextOpacity}}
                       className='absolute top-[100px] z-[20] text-center'
           >
-            <h2 className="mb-2 font-bold text-2xl md:text-5xl leading-tight">당신의 성장을 돕는 <br />가장 스마트한 로봇 파트너</h2>
-            <p className="text-xs md:text-xl opacity-60 tracking-widest">The smartest robotic partner for your growth</p>
+            {/* FIXME 뛰어쓰기 반영안됨_whitespace-pre-wrap */}
+            <h2 className="mb-2 font-bold text-2xl md:text-5xl leading-tight whitespace-pre-wrap">{slogan.kr}</h2>  
+            <p className="text-xs md:text-xl opacity-60 tracking-widest">{slogan.en}</p>
           </motion.div>
           {/* 메인 이미지박스 */}
           <motion.div style={{width, height, borderRadius, y}}
@@ -70,24 +78,29 @@ export default function AboutSection() {
 
             {/* 새로운 글씨 (이미지안에 나타남) */}
             <motion.div style= {{opacity: secondTextOpacity}}
-                        className='absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-10'
+                        className='absolute inset-0 z-20 w-full h-full flex flex-col gap-8 items-center justify-center text-center'
             >
-              <p className="mt-6 text-xl text-main font-bold tracking-widest">
+              <p className="mt-6 text-3xl text-main font-bold tracking-widest">
                 About
               </p>
-              <h2 className="text-4xl md:text-7xl font-black text-white leading-tight">
-                about<br />  + 사업분야?
-                {/* G1sRobot이 그리는<br />자율 제조의 미래 */}
-              </h2>
+              <p className="text-lg md:text-2xl text-white whitespace-pre-wrap">
+                {about}
+              </p>
+              <div className='w-2/3 flex gap-2 justify-center flex-wrap'>
+                {business.map(item => (
+                  <Badge key={item} label={item} variant='outline' className='text-lg px-4 py-2 bg-white/20'/>
+                ))}
+              </div>
             </motion.div>
+
             <motion.div style= {{opacity: thirdTextOpacity }}
-                        className='absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-10'
+                        className='absolute inset-0 z-20 flex flex-col gap-8 items-center justify-center text-center px-10'
             >
-              <p className="mt-6 text-xl text-main font-bold tracking-widest">
+              <p className="mt-6 text-3xl text-main font-bold tracking-widest">
                 Vision
               </p>
-              <h2 className="text-4xl md:text-7xl font-black text-white leading-tight">
-                세번째<br />vision넣어야지
+              <h2 className="text-lg md:text-2xl text-white tracking-tight whitespace-pre-wrap ">
+                {vision}
               </h2>
             </motion.div>
           </motion.div>

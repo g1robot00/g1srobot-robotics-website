@@ -30,7 +30,7 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
 
     const observerOptions = {
       root: null, // 감시 기준을 화면전체로 잡음
-      rootMargin: '-20% 0% -60% 0%',
+      rootMargin: '-20% 0% -60% 0%',  // 상단 부근에 왔을 때 감지
       threshold: 0, // 타겟 요소가 1픽셀이라도 들어오면 즉시 실행
     };
 

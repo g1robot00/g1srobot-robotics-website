@@ -87,7 +87,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                         initial={{opacity: 0, y: 20}}
                                         animate={{ opacity: 1, y:0 }} 
                                         exit={{opacity: 0, y: -20}}
-                                        transition={{duration: 0.3, ease: 'easeInOut'}}
+                                        transition={{duration: 0.2, ease: 'easeInOut'}}
                             >
                                 {/* 현재 activeId에 맞는 이미지 출력 */}
                                 {productLines[activeId].thumbnail
