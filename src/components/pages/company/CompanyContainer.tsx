@@ -6,12 +6,20 @@ import ClientsSection from './ClientsSection'
 import HistorySection from './HistorySection'
 import { CompanyDTO } from '@/types/respDto'
 
-export default function CompanyContainer({company}: {company: CompanyDTO}) {
+interface CompanyContainerProps {
+  company: CompanyDTO
+  // list: {
+  //   readonly label: string
+  //   readonly id: string
+  // }[]
+}
+
+export default function CompanyContainer({company}: CompanyContainerProps) {
   const {slogan, about, business, vision, clients, history} = company;
 
   return (
     <div className='w-full '>
-      <AboutSection slogan={slogan} about={about} business={business} vision={vision}/>
+      <AboutSection slogan={slogan} about={about} business={business} vision={vision} />
       {/* <BusinessSection /> */}
       <ClientsSection clients={clients}/>
       <HistorySection history={history}/>

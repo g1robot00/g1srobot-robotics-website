@@ -13,12 +13,16 @@ export default async function page() {
   console.log('연혁 데이터 : ', company);
   
   const tabList = [
-    // {label: 'About', id: }
+    {label: 'About', id: 'about'},
+    {label: 'Vision', id: 'vision'},
+    {label: 'Clients', id: 'clients'},
+    {label: 'History', id: 'history'},
   ]
 
   return (
     <div >
         <HeroBanner />
+        {/* <SubCategoryTab list={tabList} /> */}
         <CompanyContainer company={company}/>
     </div>
   )

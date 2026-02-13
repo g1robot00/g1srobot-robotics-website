@@ -22,7 +22,7 @@ export default function SectionHeader({
     return (
         <ScrollReveal>
             <Container className={className}>
-                <div className='grid grid-cols-1 md:grid-cols-4 mb-20'>
+                <div className='grid grid-cols-1 md:grid-cols-4 mb-15 md:mb-20'>
                     <div className='md:col-span-3 flex flex-col gap-5'>
                         <h3 className='text-base md:text-lg text-main '>{category}</h3>
                         <h2 className={cn('text-3xl md:text-5xl font-bold leading-tight tracking-tight', theme === 'light' ? 'text-gray-900' : 'text-white')}>

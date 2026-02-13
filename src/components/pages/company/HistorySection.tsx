@@ -8,7 +8,7 @@ import { CompanyDTO } from '@/types/respDto'
 import { Circle } from 'lucide-react';
 
 interface HistorySectionProps {
-    history: CompanyDTO['history']
+    history: CompanyDTO['history'] 
 }
 
 export default function HistorySection({history}: HistorySectionProps) {
@@ -93,7 +93,7 @@ export default function HistorySection({history}: HistorySectionProps) {
             >
                 <div className='relative flex flex-col gap-15 md:grid md:grid-cols-[180px_1fr] md:gap-35'>
                     {/* 좌측 네비게이션 */}
-                    <div className='sticky z-10 top-5 md:top-30 md:h-fit bg-gray-100 rounded-full shadow-md'>
+                    <div className='md:sticky z-10 md:top-30 md:h-fit'>
                         <div className='flex gap-5 md:flex-col justify-center '>
                             {yearNav.map((item, idx) => (
                                 <button key={`${idx}_${item}`}
@@ -121,13 +121,13 @@ export default function HistorySection({history}: HistorySectionProps) {
                                             <Circle size={16} className='fill-white text-main'/>
                                         </div>
                                         <div className='flex flex-col gap-8'>
-                                            <h3 className='text-4xl text-main/90 font-bold tracking-tight'>
+                                            <h3 className='text-3xl md:text-4xl text-main/90 font-bold tracking-tight'>
                                                 {yearItem.year}
                                             </h3>
                                             <ul className='flex flex-col gap-4'>
                                                 {yearItem.events.map((event: any, idx: number) => (
                                                     <li key={`${idx}_${event}`}>
-                                                        <span className='text-gray-700 text-xl leading-snug '>
+                                                        <span className='text-gray-700 text-lg md:text-xl  leading-snug  tracking-tight md:tracing-normal'>
                                                             {event.content}
                                                         </span>
                                                     </li>

@@ -127,10 +127,23 @@ export interface HistoryItem {
 }
 
 export interface CompanyDTO {
+    id: string;
     slogan: SloganItem;
     about: string;
     business: string[];
     vision: string;
     clients: ClientsItem[];
-    history: HistoryItem[];
+    history: HistoryItem[] 
+}
+
+// 연락수단
+interface ContactItem {
+    value: string;
+    iconName: string;
+}
+
+export interface ContactDTO {
+    phone: ContactItem;
+    email: ContactItem;
+    address: ContactItem;
 }

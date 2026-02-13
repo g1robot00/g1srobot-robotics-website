@@ -9,9 +9,4 @@ export const CTA = [
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
         href: '/tech-doc'
     },
-    {
-        label: 'FAQ', 
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-        href: '/support/faq'
-    },
 ]

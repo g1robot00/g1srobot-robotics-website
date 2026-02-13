@@ -169,15 +169,12 @@ export const TECH_DOC_QUERY = `
 
 // 회사소개
 export const COMPANY_QUERY = `
-  *[_type == 'company'][0] {
+  *[_type == 'companyConfig'][0] {
     'slogan': slogan,
     'about': ceoMessage,
     'business': businessField,
     'vision': vision,
-    'clients': clients[] {
-      'name': name,
-      'logo': logo.asset->url
-    },
+    'clients': _*[_type == 'siteSettings'][0].clients, // FIXME 참조형태 맞는지 확인
     'history': timeline[] | order(year desc){
       'id': _key,
       year,
@@ -186,5 +183,14 @@ export const COMPANY_QUERY = `
         content
       }
     }
+  }
+`
+
+// 연락수단
+export const CONTACT_QUERY = `
+  *[_id == 'siteSettings'][0].contact {
+    phone { 'value': text, iconName },
+    email { 'value': text, iconName },
+    address { 'value': text, iconName }
   }
 `

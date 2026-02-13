@@ -12,9 +12,16 @@ interface AboutSectionProps {
   about: string
   business: string[]
   vision: string
+  // list: {
+  //   readonly label: string
+  //   readonly id: string
+  // }[]
 }
 
 export default function AboutSection({slogan, about, business, vision}: AboutSectionProps) {
+  const aboutMotion = 'absolute inset-0 z-20 w-full h-full flex flex-col gap-8 items-start md:items-center justify-center text-left md:text-center px-10'
+  const aboutTitle = 'mt-6 text-2xl md:text-4xl text-main font-bold tracking-wide'
+  const aboutContent = 'text-sm md:text-2xl text-white tracking-tight md:whitespace-pre-wrap'
   const containerRef = useRef<HTMLDivElement>(null);
   // 📍 1. Image 컴포넌트를 모션용으로 변환합니다.
   const MotionImage = motion.create(Image);
@@ -48,7 +55,7 @@ export default function AboutSection({slogan, about, business, vision}: AboutSec
   const thirdTextOpacity = useTransform(scrollYProgress, [0.75, 0.9], [0, 1]);
 
   return (
-    <section ref={containerRef} className='relateve h-[400vh] w-full bg-black text-white'>
+    <section ref={containerRef} className='relateve h-[400vh] py-20 w-full bg-black text-white'>
         {/* Sticky: 스크롤 되는동안 화면에 고정되는 영역 */}
         <div className='sticky top-0 w-full h-screen flex flex-col items-center justify-center overflow-hidden'>
           {/* 사라질 텍스트 */}
@@ -64,7 +71,7 @@ export default function AboutSection({slogan, about, business, vision}: AboutSec
                       className='relative rounded-3xl overflow-hidden'
           >
             <MotionImage src='/img/vision.jpg' 
-                  alt='vision' 
+                  alt='vision image' 
                   fill 
                   priority 
                   style={{objectPosition: imagePosition }}
@@ -78,28 +85,28 @@ export default function AboutSection({slogan, about, business, vision}: AboutSec
 
             {/* 새로운 글씨 (이미지안에 나타남) */}
             <motion.div style= {{opacity: secondTextOpacity}}
-                        className='absolute inset-0 z-20 w-full h-full flex flex-col gap-8 items-center justify-center text-center'
+                        className='absolute inset-0 z-20 w-full h-full flex flex-col gap-8 items-start md:items-center justify-center text-left md:text-center px-10'
             >
-              <p className="mt-6 text-3xl text-main font-bold tracking-widest">
+              <h2 className={aboutTitle}>
                 About
-              </p>
-              <p className="text-lg md:text-2xl text-white whitespace-pre-wrap">
+              </h2>
+              <p className={aboutContent}>
                 {about}
               </p>
-              <div className='w-2/3 flex gap-2 justify-center flex-wrap'>
+              <div className='w-2/3 flex gap-2 justify-start md:justify-center flex-wrap'>
                 {business.map(item => (
-                  <Badge key={item} label={item} variant='outline' className='text-lg px-4 py-2 bg-white/20'/>
+                  <Badge key={item} label={item} variant='outline' className='text-xs md:text-lg px-4 py-2 bg-white/20'/>
                 ))}
               </div>
             </motion.div>
 
             <motion.div style= {{opacity: thirdTextOpacity }}
-                        className='absolute inset-0 z-20 flex flex-col gap-8 items-center justify-center text-center px-10'
+                        className={aboutMotion}
             >
-              <p className="mt-6 text-3xl text-main font-bold tracking-widest">
+              <h2 className={aboutTitle}>
                 Vision
-              </p>
-              <h2 className="text-lg md:text-2xl text-white tracking-tight whitespace-pre-wrap ">
+              </h2>
+              <h2 className={aboutContent}>
                 {vision}
               </h2>
             </motion.div>
