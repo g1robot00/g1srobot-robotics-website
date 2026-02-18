@@ -194,3 +194,17 @@ export const CONTACT_QUERY = `
     address { 'value': text, iconName }
   }
 `
+
+// 오시는 길(연락수단 + 위치정보)
+export const LOCATION_QUERY = `
+  *[_id == 'siteSettings'][0].contact {
+    phone { 'value': text, iconName },
+    email { 'value': text, iconName },
+    address {
+      'value': text,
+      lat,
+      lng,
+      iconName
+    }
+  }
+`

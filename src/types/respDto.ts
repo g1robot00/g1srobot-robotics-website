@@ -142,8 +142,20 @@ interface ContactItem {
     iconName: string;
 }
 
+interface LocationItem extends ContactItem{
+    lat: number;
+    lng: number;
+}
+
 export interface ContactDTO {
     phone: ContactItem;
     email: ContactItem;
     address: ContactItem;
+}
+
+// 오시는 길
+export interface LocationDTO{
+    phone: ContactItem;
+    email: ContactItem;
+    address: LocationItem;
 }
