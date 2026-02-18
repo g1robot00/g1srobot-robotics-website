@@ -27,7 +27,7 @@ export default function HeroTitle() {
         >
             <div className='w-full h-full flex flex-col justify-center items-center text-white'>
                 <ScrollReveal>
-                    <h1 className='text-3xl md:text-5xl font-bold '>{currentItem?.label}</h1>
+                    <h1 className='text-3xl md:text-5xl font-bold '>{label}</h1>
                 </ScrollReveal>
                 <PageNav />
             </div>

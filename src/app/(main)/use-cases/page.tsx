@@ -23,12 +23,12 @@ export default async function page() {
 
 
   return (
-    <div className=''>
+    <main className=''>
         <HeroBanner />
         <UseCaseContainer initialUseCases = {useCases}
                           industries = {industries}
                           products = {products}
         />
-    </div>
+    </main>
   )
 }

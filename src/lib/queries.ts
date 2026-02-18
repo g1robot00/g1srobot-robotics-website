@@ -204,6 +204,7 @@ export const LOCATION_QUERY = `
       'value': text,
       lat,
       lng,
+      'link': mapLink,
       iconName
     }
   }

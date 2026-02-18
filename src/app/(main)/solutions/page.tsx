@@ -15,8 +15,6 @@ export default async function page() {
     id: ind.id,
   }))
 
-  console.log('산업군별: ', industries)
-
   return (
     <div>
         <HeroBanner />

@@ -11,7 +11,7 @@ import { NavItem } from '@/types/nav'
 import { Menu } from 'lucide-react';
 
 
-export default function Nav() {
+export default function Nav({noTransparent = false} : {noTransparent?: boolean}) {
   const [isVisible, setIsVisible] = useState(true);
   const [isAtTop, setIsAtTop] = useState(true);
   const [isHoverd, setIsHovered] = useState(false);
@@ -19,7 +19,7 @@ export default function Nav() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
 
-  const isTransparent = isAtTop && !isHoverd && !activeMenu;
+  const isTransparent = isAtTop && !isHoverd && !activeMenu && !noTransparent;
 
   useEffect(() => {
     const handleScroll = () => {

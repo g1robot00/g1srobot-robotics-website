@@ -8,7 +8,6 @@ import { LocationDTO } from '@/types/respDto'
 
 export default async function page() {
     const contact: LocationDTO = await client.fetch(LOCATION_QUERY);
-    console.log('연락수단: ', contact)
 
     return (
         <div >

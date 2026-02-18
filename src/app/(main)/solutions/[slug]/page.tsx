@@ -11,7 +11,6 @@ interface PageProps {
 export default async function page({ params }: PageProps) {
     // url에서 slug 추출(params.slug)
     const { slug } = await params;
-    console.log('추출된 제품이름:', slug);
 
     // cms에 해당 slug를 가진 제품 데이터 요청
     //$slug 자리에 현재 주소의 slug 값을 넣어줌

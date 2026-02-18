@@ -17,8 +17,6 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
     const [activeId, setActiveId] = useState(0); // 현재 활성화된 아이템 인덱스
     const itemRefs = useRef<(HTMLDivElement | null)[]>([]); // 각 아이템을 참조하기 위한 Ref 배열
 
-    console.log('출력이미지: ', productLines[activeId].thumbnail)
-
     useEffect(() => {
         const observerOptions = {
             root: null,

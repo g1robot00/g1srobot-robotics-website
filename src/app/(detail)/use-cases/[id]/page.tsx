@@ -11,7 +11,6 @@ interface PageProps {
 
 export default async function page({params}: PageProps) {
     const {id} = await params;
-    console.log('추출된 이름: ', id)
 
     // FIXME USE_CASE_DETAIL_QUERY문으로 필터없이!!
     const useCases: UseCaseDTO[] = await client.fetch(USE_CASES_QUERY);

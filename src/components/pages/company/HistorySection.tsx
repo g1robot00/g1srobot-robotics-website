@@ -48,7 +48,6 @@ export default function HistorySection({history}: HistorySectionProps) {
 
         return Object.entries(groups).sort((a, b) => b[0].localeCompare(a[0])); //최신 연대순 정리
     }, [history]);
-    console.log('연대별로 그룹화된 리스트: ', groupedHistory)
 
     
     const [activeDecade, setActiveDecade] = useState(yearNav[0]);

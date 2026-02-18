@@ -143,6 +143,7 @@ interface ContactItem {
 }
 
 interface LocationItem extends ContactItem{
+    link: string;
     lat: number;
     lng: number;
 }

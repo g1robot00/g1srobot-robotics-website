@@ -11,7 +11,6 @@ interface PageProps {
 export default async function page({ params }: PageProps) {
     // url에서 slug 추출(params.slug)
     const { slug } = await params;
-    console.log('추출된 제품이름:', slug);
 
     const product = await client.fetch(UNIVERSAL_DETAIL_QUERY, { slug }); // (기존)제품
 
