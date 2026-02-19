@@ -32,12 +32,12 @@ export default function ProductIntroSection({ product, onInquiryClick }: Product
                 <div className='flex flex-col gap-5 md:gap-10 '>
                     <div className='pb-2 md:pb-5 border-b border-gray-200 flex flex-col gap-2 md:gap-5'>
                         <span className='text-main font-bold tracking-widest uppercase text-xs md:text-sm'>{product.productLine}</span>
-                        <h4 className='text-2xl md:text-4xl font-bold text-white'>{product.name}</h4>
+                        <h4 className='text-2xl md:text-4xl font-bold'>{product.name}</h4>
                     </div>
                     <div className='flex justify-between'>
                         {mainSpecs.map(spec => (
                             <div key={spec.label} className='flex flex-col'>
-                                <div className='text-lg md:text-2xl font-semibold text-white'>
+                                <div className='text-lg md:text-2xl font-semibold'>
                                     <span>{spec.value}</span>
                                     <span>{spec.unit}</span>
                                 </div>
@@ -45,7 +45,7 @@ export default function ProductIntroSection({ product, onInquiryClick }: Product
                             </div>
                         ))}
                     </div>
-                    <p className='md:h-35 text-white'>
+                    <p className='md:h-35'>
                         {product.description}
                     </p>
                 </div>

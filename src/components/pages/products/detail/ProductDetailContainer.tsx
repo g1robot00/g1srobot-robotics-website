@@ -22,7 +22,7 @@ export default function ProductDetailContainer({ product }: ProductDetailContain
     return (
         <section className='mx-auto '>
             <div className='flex flex-col gap-20 md:gap-30 '>
-                <div className='flex flex-col px-5 md:px-10 lg:px-30 py-20 md:pb-30 md:pt-40 bg-gray-900'
+                <div className='flex flex-col px-5 md:px-10 lg:px-30 py-20 md:pb-30 md:pt-40'
                 >
                     <ProductIntroSection product={product} onInquiryClick={scrollToInquiry} />
                 </div>

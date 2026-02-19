@@ -4,15 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils';
 import { NAV_HEIGHT } from '@/constants/navigation';
-
-interface SubtabItem {
-    readonly label: string;
-    readonly id: string;
-}
-
-interface SubCategoryTabProps {
-  list: SubtabItem[];
-}
+import { SubCategoryTabProps } from '@/types/nav';
 
 export default function SubCategoryTab({list}: SubCategoryTabProps) {
   const [ activeId, setActiveId ] = useState(list[0]?.id);

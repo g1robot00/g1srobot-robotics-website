@@ -18,8 +18,7 @@ export default async function ProductsPage() {
 
     return(
         <div>
-            <HeroBanner />
-            <SubCategoryTab list={tabList} />
+            <HeroBanner heroData={heroData} subTabs={tabList}/>
             <ProductContainer list={productLines} type="filter"/>
         </div>
     )
