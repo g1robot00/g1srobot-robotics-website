@@ -81,9 +81,9 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
     return (
         <section className='w-full bg-black'>
             <SectionHeader category='Product Lines' 
-                        title='혁신적인 라인업'
+                        title='혁신적인 라인업으로 자동화의 한계를 넘다ㅇㅇㅇㅇㅇㅇㅇㅇ'
                         theme='dark'
-                        className='py-55'
+                        className='py-20 md:py-55'
             >
                 <div className='relative flex gap-20'>
                     {/* 왼쪽: 아코디언 스타일 */}

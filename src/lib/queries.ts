@@ -35,6 +35,7 @@ export const UNIVERSAL_DETAIL_QUERY = `
     "id": _id,
     "type": _type,
     "name": name,
+    "href": '/products/' + slug.current,
     "description": description,
     "specs": specs,
     "productLine": productLine->name,
@@ -108,6 +109,19 @@ export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
   }
 `;
 
+// _제품상세 네브 리스트 
+export const PRODUCT_LINE_NAV_QUERY = `
+  *[_type == "productLine"] | order(name asc) {
+    "id": _id,
+    'name': name,
+    'products': *[_type in ["system", "robot", "component" ] && references(^._id)] | order(name asc){
+      'id': _id,
+      'name': name,
+      'href': '/products/' + slug.current
+    }
+  }
+`
+
 // 적용 사례
 export const USE_CASES_QUERY = `
   *[_type == "useCase"] | order(endDate desc) {
@@ -151,9 +165,16 @@ export const INDUSTRY_WITH_PRODUCTS_QUERY = `
     }
   }
 `
-
-export const INDUSTRY_DETAIL_QUERY = `
-
+export const INDUSTRY_NAV_QUERY = `
+*[_type == "industry"] | order(name asc) {
+    "id": _id,
+    'name': name,
+    'products': *[_type in ["system", "robot", "component" ] && references(^._id)] | order(name asc){
+      'id': _id,
+      'name': name,
+      'href': '/products/' + slug.current
+    }
+  }
 `
 
 //기술자료

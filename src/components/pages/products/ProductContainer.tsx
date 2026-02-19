@@ -10,6 +10,7 @@ import { group } from 'console';
 
 
 interface ProductContainerProps {
+    from: 'industry' | 'productLine'
     list: ProductLineProductsDTO[] | IndustryProductsDTO[]
     type?: 'filter' | 'normal' // FIXME 제품페이지엔 시스템/로봇 필터 --type === 'detail'
 }
@@ -20,7 +21,7 @@ const PRODUCT_TYPES = [
     {name: 'component', label: '부품'}, 
 ]
 
-export default function ProductContainer({ list, type='normal' }: ProductContainerProps) {
+export default function ProductContainer({ from, list, type='normal' }: ProductContainerProps) {
     const [selectedFilters, setSelectedFilters] = useState<string[]>(PRODUCT_TYPES.map(item => item.name));
     const [filteredList, setFilteredList] = useState<ProductLineProductsDTO[] | IndustryProductsDTO[]>(list);
 
@@ -64,18 +65,18 @@ export default function ProductContainer({ list, type='normal' }: ProductContain
                         </div>
                     </div>
                 }
-                { filteredList.length > 0
+                {filteredList.length > 0
                     ?filteredList.map((item: ProductLineProductsDTO | IndustryProductsDTO ) => (
                         <section key={item.id} id={item.id} className="mb-30 scroll-mt-28">
                             {/* --- 제품군(Product Line) 헤더 --- */}
                             <div className="flex flex-col mb-10">
                                 <h2 className="text-2xl md:text-3xl font-bold mb-4">{item.label}</h2>
-                                {('content' in item) && item.content && <p className="text-sm md:text-base text-gray-600">{item.content}</p>}
+                                {('content' in item) && item.content && <p className="text-sm md:text-base text-gray-600 whitespace-pre-wrap">{item.content}</p>}
                             </div>
                             {/* --- 해당 제품군에 속한 제품(Products) 리스트 --- */}
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-10">
                                 {item.kind.map((product, idx) => (
-                                    <ProductCard key={`${idx}_${product.id}`} product={product} />
+                                    <ProductCard key={`${idx}_${product.id}`} product={product} from={from} id={product.id}/>
                                 ))}
                             </div>
                         </section>

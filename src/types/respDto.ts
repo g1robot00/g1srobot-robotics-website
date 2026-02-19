@@ -2,7 +2,7 @@
 export interface ProductSpec {
     label: string;
     value: string;
-    unit?: string; // 단위는 없을 수도 있으니 ? 추가
+    unit?: string;
 }
 
 export interface ProductItemDTO {
@@ -10,7 +10,7 @@ export interface ProductItemDTO {
     type: 'system' | 'robot' | 'component';
     label: string;
     href: string;
-    specs: ProductSpec[]; // 위에서 정의한 타입 재사용
+    specs: ProductSpec[];
     thumbnail: string;
 }
 
@@ -44,6 +44,7 @@ export interface UniversalDetailDTO {
     id: string;
     type: 'system' | 'robot' | 'component';
     name: string;
+    href: string;
     description: string;
     specs: ProductSpec[]
     productLine: string;
@@ -70,6 +71,16 @@ export interface ProductLineListDTO extends ProductLineBase{
 
 export interface ProductLineProductsDTO extends ProductLineBase{   //ProductLineProductsDTO
     kind: ProductItemDTO[];
+}
+
+export interface DetailNavDTO {
+    id: string;
+    name: string;
+    products: {
+        id: string;
+        name: string;
+        href: string;
+    }[];
 }
 
 // 산업별

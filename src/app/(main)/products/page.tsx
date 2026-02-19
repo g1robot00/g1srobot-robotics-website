@@ -19,7 +19,7 @@ export default async function ProductsPage() {
     return(
         <div>
             <HeroBanner heroData={heroData} subTabs={tabList}/>
-            <ProductContainer list={productLines} type="filter"/>
+            <ProductContainer from='productLine' list={productLines} type="filter"/>
         </div>
     )
 }

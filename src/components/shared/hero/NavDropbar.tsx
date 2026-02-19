@@ -38,7 +38,7 @@ export default function NavDropbar() {
                 <button onClick={() => toggleMenu('parent')}
                     className='px-8 flex items-center gap-1 cursor-pointer whitespace-nowrap'>
                     {parentItem.label}
-                    {openMenu ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                    {openMenu === 'parent' ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                 </button>
                 {openMenu === 'parent' &&
                     <ul className='absolute top-[calc(100%+15px)] left-0 z-50

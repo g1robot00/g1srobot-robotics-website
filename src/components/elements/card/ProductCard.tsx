@@ -6,11 +6,14 @@ import Badge from '@/components/ui/Badge'
 import { ProductItemDTO, ProductSpec } from '@/types/respDto'
 
 interface ProductCardProps {
-    product: ProductItemDTO 
+    product: ProductItemDTO ,
+    from?: 'industry' | 'productLine',
+    id?: string,
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, from, id }: ProductCardProps) {
     const {label, type, href, specs, thumbnail} = product
+    console.log(href)
     const typeConfig = {
         system: {label: '시스템', color: 'bg-blue-500'},
         robot: {label: '로봇', color: 'bg-main'},
@@ -21,7 +24,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     const specToShow = specs?.slice(0,3);
 
     return (
-        <Link href={href} key={label} className="group block flex flex-col gap-3">
+        <Link href={`${href}?from=${from}&id=${id}`} key={label} className="group block flex flex-col gap-3">
             <div className='relative w-full aspect-square md:aspect-10/9  rounded-xl overflow-hidden'>
                 {thumbnail
                     ? <Image src={thumbnail} alt={label} fill 
