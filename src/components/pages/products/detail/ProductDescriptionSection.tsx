@@ -6,9 +6,10 @@ import { ImageOff } from 'lucide-react';
 
 interface DescriptionSectionProps {
     product: UniversalDetailDTO
+    from?: 'industry' | 'productLine'
 }
 
-export default function ProductDescriptionSection({product}: DescriptionSectionProps) {
+export default function ProductDescriptionSection({product, from}: DescriptionSectionProps) {
     const {productLine, industries, specs, robots, components} = product
 
     const RelatedItems = robots || components || [];
@@ -25,12 +26,12 @@ export default function ProductDescriptionSection({product}: DescriptionSectionP
 
   return (
     <div className='grid grid-cols-1 gap-15 md:gap-25 '>
-        <div className='flex flex-col gap-5 md:gap-10'>
+        {/* <div className='flex flex-col gap-5 md:gap-10'>
             <h3 className='font-bold text-base md:text-lg text-gray-700'>적용산업</h3>
             <div>
                 <span className='text-gray-500'>{industryJoin}</span>
             </div>
-        </div>
+        </div> */}
         { specs && specs.length > 0 &&
             <div className='flex flex-col gap-10'>
                 <h3 className='font-bold text-base md:text-lg text-gray-700'>제품 사양</h3>
@@ -51,13 +52,13 @@ export default function ProductDescriptionSection({product}: DescriptionSectionP
         }
         { RelatedItems && RelatedItems.length > 0 &&
             <div className='flex flex-col gap-10'>
-                <h3 className='font-bold text-base md:text-lg text-gray-700'>구성 핵심 부품</h3>
+                <h3 className='font-bold text-base md:text-lg text-gray-700'>구성 핵심 제품</h3>
                 <div className='grid gap-3 grid-cols-4 md:grid-cols-8'>
                     {RelatedItems?.map((item,idx) => (
                         <div key={`${idx}_${item.id}`} className='flex flex-col gap-2'>
                             <div className='relative flex-1 h-full w-full overflow-hidden aspect-square'>
                                 {item.mainImage 
-                                    ?<Link href={item.href}>
+                                    ?<Link href={`${item.href}?from=${from}`}>
                                         <Image src={item.mainImage} alt={item.name} fill className="object-cover"/>
                                     </Link>
                                     :<div className='w-full h-full bg-gray-200 text-gray-400 text-[9px]  flex flex-col gap-2 justify-center items-center'>

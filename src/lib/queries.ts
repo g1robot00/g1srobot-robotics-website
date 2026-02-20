@@ -35,6 +35,7 @@ export const UNIVERSAL_DETAIL_QUERY = `
     "id": _id,
     "type": _type,
     "name": name,
+    "nameEn": nameEn,
     "href": '/products/' + slug.current,
     "description": description,
     "specs": specs,
@@ -66,6 +67,7 @@ export const PRODUCT_LINE_LIST_QUERY = `
   *[_type == "productLine"] | order(name asc) {
     "id": _id,
     "label": name,
+    "nameEn": nameEn,
     "href": "/products",
     "content": description,
     "kind": *[_type in ["system", "robot", "component" ] && references(^._id)] {
@@ -99,6 +101,7 @@ export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
       "id":_id,
       "type": _type,
       "label": name,
+      "nameEn": nameEn,
       "href": "/products/" + slug.current,
       "specs": specs,
       "thumbnail": coalesce(mainImage.asset->url, images[0].asset->url)
@@ -159,6 +162,7 @@ export const INDUSTRY_WITH_PRODUCTS_QUERY = `
       "id": _id,
       "type": _type,
       "label": name,
+      "nameEn": nameEn,
       "href": "/products/" + slug.current,
       "specs": specs,
       "thumbnail": coalesce(mainImage.asset->url, images[0].asset->url)

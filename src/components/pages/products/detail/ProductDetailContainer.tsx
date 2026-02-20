@@ -30,7 +30,7 @@ export default function ProductDetailContainer({ product, contextList, from }: P
                 </div>
 
                 <div className='px-5 md:px-10 lg:px-30 '>
-                    <ProductDescriptionSection product={product} />
+                    <ProductDescriptionSection product={product} from={from}/>
                 </div>
 
                 <div ref={inquiryRef} className='px-5 md:px-10 lg:px-30 bg-gray-200 py-20 md:pt-30 md:pb-40'>

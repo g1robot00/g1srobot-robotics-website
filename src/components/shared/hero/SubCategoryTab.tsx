@@ -84,20 +84,25 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
   
   return (
     <div className={cn(
-                    `sticky z-30  ${NAV_HEIGHT.h.base} ${NAV_HEIGHT.h.md} px-10 bg-gray-200 px-5 overflow-x-auto scrollbar-hide  
-                    flex justify-center items-center gap-15 transition-all duration-500`,
-                    isNavVisible ? `${NAV_HEIGHT.top.base} ${NAV_HEIGHT.top.md}` : 'top-0'
+                    `sticky z-30 w-full transition-all duration-500 ${NAV_HEIGHT.h} bg-gray-200`,  
+                    isNavVisible ? NAV_HEIGHT.top : 'top-0',
                     )}
     >
-      {list.map(item => (
-        <button key={item.id}
-              onClick={() => handleManualScroll(item.id)}
-              className={`text-base md:text-lg font-bold transition-colors cursor-pointer flex-shrink-0
-                        ${activeId === item.id ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
-              >
-          {item.label}
-        </button>
-      ))}
+      <div className="absolute left-0 top-0 bottom-0 w-8 z-40 bg-gradient-to-r from-gray-200 to-transparent pointer-events-none md:w-20" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 z-40 bg-gradient-to-l from-gray-200 to-transparent pointer-events-none md:w-20" />
+      <div className={cn('flex items-center gap-6 md:gap-10 overflow-x-auto scrollbar-hide px-6 md:px-20 ',
+                        NAV_HEIGHT.h, 'justify-start md:justify-center'
+      )}>
+        {list.map(item => (
+          <button key={item.id}
+                onClick={() => handleManualScroll(item.id)}
+                className={`text-base md:text-lg font-bold transition-colors cursor-pointer flex-shrink-0 whitespace-nowrap
+                          ${activeId === item.id ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
+                >
+            {item.label}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }

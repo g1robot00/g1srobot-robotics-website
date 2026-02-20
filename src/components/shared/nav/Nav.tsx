@@ -52,7 +52,7 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
               )}
       >
         {/* 상단 메인 메뉴바 */}
-        <div className={`w-full ${NAV_HEIGHT.h.base} ${NAV_HEIGHT.h.md} flex items-center justify-center`}>
+        <div className={`w-full ${NAV_HEIGHT.h} flex items-center justify-center`}>
           <div className='w-full max-w-screen-2xl px-4 md:px-8 lg:px-12 flex items-center justify-between '>
             <Link href='/'>
               <Image className="dark:invert "

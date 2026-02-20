@@ -76,7 +76,7 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
                             {/* --- 해당 제품군에 속한 제품(Products) 리스트 --- */}
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-10">
                                 {item.kind.map((product, idx) => (
-                                    <ProductCard key={`${idx}_${product.id}`} product={product} from={from} id={product.id}/>
+                                    <ProductCard key={product.id} product={product} from={from} id={product.id}/>
                                 ))}
                             </div>
                         </section>

@@ -9,12 +9,12 @@ export interface ProductItemDTO {
     id: string;
     type: 'system' | 'robot' | 'component';
     label: string;
+    nameEn: string;
     href: string;
     specs: ProductSpec[];
     thumbnail: string;
 }
 
-// "ProductItemDTO에서 'specs'와 'thumbnail'만 빼고 다 가져와라"라는 뜻입니다.
 export type ProductItemSimpleDTO = Omit<ProductItemDTO, 'specs' | 'thumbnail'>;
 
 export interface RelatedItem {
@@ -44,6 +44,7 @@ export interface UniversalDetailDTO {
     id: string;
     type: 'system' | 'robot' | 'component';
     name: string;
+    nameEn: string;
     href: string;
     description: string;
     specs: ProductSpec[]
