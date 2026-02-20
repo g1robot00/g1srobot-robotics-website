@@ -1,5 +1,6 @@
 import Image from 'next/image'
 
+import Container from '@/components/shared/Container';
 import SectionHeader from '../main/SectionHeader'
 import { ClientsItem } from '@/types/respDto';
 
@@ -23,18 +24,19 @@ const PARTNERS = [
 export default function ClientsSection({clients,}: ClientsSectionProps) {
     return (
         <section className='w-full h-screen bg-black text-white py-20 md:py-30 ' >
-            <SectionHeader category='Our Clients' 
-                            title='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-                            theme= 'dark'
-            >   
-                <div className='grid gap-2 md:gap-0 grid-cols-2 md:grid-cols-5 place-items-center'>
-                    {[...PARTNERS, ...PARTNERS, ...PARTNERS].map((item, idx) => (
-                        <div key={idx} className='h-10 md:h-20 opacity-90'>
-                            <Image src={item.logo} alt={item.name} width={130} height={50}/>
-                        </div>
-                    ))}
-                </div>
-            </SectionHeader>
+            <Container>
+                <SectionHeader category='Our Clients'
+                                title='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+                                theme= 'dark'
+                />
+                    <div className='grid gap-2 md:gap-0 grid-cols-2 md:grid-cols-5 place-items-center'>
+                        {[...PARTNERS, ...PARTNERS, ...PARTNERS].map((item, idx) => (
+                            <div key={idx} className='h-10 md:h-20 opacity-90'>
+                                <Image src={item.logo} alt={item.name} width={130} height={50}/>
+                            </div>
+                        ))}
+                    </div>
+            </Container>
         </section>
     )
 }

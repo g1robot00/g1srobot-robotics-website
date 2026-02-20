@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
+import { SECTION_PY } from '@/constants/styles';
+import Container from '@/components/shared/Container';
 import SectionHeader from './SectionHeader';
 import Badge from '@/components/ui/Badge';
 import { ProductLineListDTO } from '@/types/respDto';
@@ -79,83 +81,83 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
     }, []);
 
     return (
-        <section className='w-full bg-black'>
-            <SectionHeader category='Product Lines' 
-                        title='혁신적인 라인업으로 자동화의 한계를 넘다ㅇㅇㅇㅇㅇㅇㅇㅇ'
-                        theme='dark'
-                        className='py-20 md:py-55'
-            >
-                <div className='relative flex gap-20'>
-                    {/* 왼쪽: 아코디언 스타일 */}
-                    <div className='flex-1 flex flex-col   '>
-                        {productLines.map((item, index) => {
-                            const isActive = activeId === index;
-                            return(
-                                <div key={item.id}
-                                    data-index = {index}
-                                    ref={(el) => {itemRefs.current[index] = el;}} //ref 저장
-                                    className= {`border-b border-gray-800 py-10 transition-opacity duration-500
-                                                ${activeId === index ? 'opacity-100' : 'opacity-30'}`}
-                                >
-                                    <h3 onClick={() => scrollToSection(index)}
-                                        className={cn(
-                                            'text-2xl md:text-4xl font-bold cursor-pointer transition-all duration-500',
-                                            isActive ? 'text-white mb-6' : 'text-gray-600 hover:text-gray-400'
-                                        )}
+        <section className='w-full bg-black py-10'>
+            <Container className={SECTION_PY.lg}>
+                <SectionHeader category='Product Lines'
+                            title='혁신적인 라인업으로 자동화의 한계를 넘다ㅇㅇㅇㅇㅇㅇㅇㅇ'
+                            theme='dark'
+                />
+                    <div className='relative flex gap-20'>
+                        {/* 왼쪽: 아코디언 스타일 */}
+                        <div className='flex-1 flex flex-col py-20'>
+                            {productLines.map((item, index) => {
+                                const isActive = activeId === index;
+                                return(
+                                    <div key={item.id}
+                                        data-index = {index}
+                                        ref={(el) => {itemRefs.current[index] = el;}} //ref 저장
+                                        className= {`border-b border-gray-800 py-15 transition-opacity duration-500
+                                                    ${activeId === index ? 'opacity-100' : 'opacity-30'}`}
                                     >
-                                        {item.label}
-                                    </h3>
-                                    <AnimatePresence>
-                                        {isActive &&
-                                            <motion.div initial={{height: 0, opacity: 0}}
-                                                        animate={{height: 'auto', opacity: 1}}
-                                                        exit={{height: 0, opacity: 0}}
-                                                        transition={{duration: 0.4, ease: 'circOut'}}
-                                                        className='flex flex-col gap-2'
-                                            >
-                                                <p className='text-gray-400 text-lg leading-relaxed'>{item.content}</p>
-                                                {/* <div className='flex flex-wrap gap-2'>
-                                                    {item.kind.slice(0, 4).map((sub, i) => (
-                                                        <Link href={sub.href} key={`${i}_${sub}`} className='px-4 py-1.5 bg-main/20 rounded-full text-sm text-main text-md'>
-                                                            {sub.label}
-                                                        </Link>
-                                                    ))}
-                                                </div> */}
-                                            <Link href={`${item.href}#${item.id}`} className='flex items-center gap-2 text-main font-semibold cursor-pointer group'>
-                                                더 알아보기
-                                                <MoveRight size={18} className='group-hover:translate-x-1/2 transition-transform'/>
-                                            </Link>
-                                        </motion.div>
-                                        }
-                                    </AnimatePresence>
-                                </div>
-                            )
-                        })}
+                                        <h3 onClick={() => scrollToSection(index)}
+                                            className={cn(
+                                                'text-2xl md:text-4xl font-bold cursor-pointer transition-all duration-500',
+                                                isActive ? 'text-white mb-6' : 'text-gray-600 hover:text-gray-400'
+                                            )}
+                                        >
+                                            {item.label}
+                                        </h3>
+                                        <AnimatePresence>
+                                            {isActive &&
+                                                <motion.div initial={{height: 0, opacity: 0}}
+                                                            animate={{height: 'auto', opacity: 1}}
+                                                            exit={{height: 0, opacity: 0}}
+                                                            transition={{duration: 0.4, ease: 'circOut'}}
+                                                            className='flex flex-col gap-2'
+                                                >
+                                                    <p className='text-gray-400 text-lg leading-relaxed whitespace-pre-wrap'>{item.content}</p>
+                                                    {/* <div className='flex flex-wrap gap-2'>
+                                                        {item.kind.slice(0, 4).map((sub, i) => (
+                                                            <Link href={sub.href} key={`${i}_${sub}`} className='px-4 py-1.5 bg-main/20 rounded-full text-sm text-main text-md'>
+                                                                {sub.label}
+                                                            </Link>
+                                                        ))}
+                                                    </div> */}
+                                                <Link href={`${item.href}#${item.id}`} className='flex items-center gap-2 text-main font-semibold cursor-pointer group'>
+                                                    더 알아보기
+                                                    <MoveRight size={18} className='group-hover:translate-x-1/2 transition-transform'/>
+                                                </Link>
+                                            </motion.div>
+                                            }
+                                        </AnimatePresence>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        {/* 오른쪽: 화면에 고정되는 이미지 박스 */}
+                        <div className='hidden md:block flex-1 sticky top-1/4 h-[500px]'>
+                            <AnimatePresence  mode="wait">
+                                <motion.div className='relative w-full h-full bg-gray-800 rounded-xl overflow-hidden'
+                                            key={activeId} // activeId가 바뀔때마다 애니메이션 트리거
+                                            initial={{opacity: 0, y: 20}}
+                                            animate={{ opacity: 1, y:0 }}
+                                            exit={{opacity: 0, y: -20}}
+                                            transition={{duration: 0.2, ease: 'easeInOut'}}
+                                >
+                                    {/* 현재 activeId에 맞는 이미지 출력 */}
+                                    {productLines[activeId].thumbnail
+                                    ?<Image src={productLines[activeId].thumbnail}
+                                            alt={productLines[activeId].label}
+                                            fill
+                                            className='object-cover transition-all duration-700 ease-in-out'
+                                    />
+                                    : <div className='w-full h-full bg-gray-300'></div>
+                                    }
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
                     </div>
-                    {/* 오른쪽: 화면에 고정되는 이미지 박스 */}
-                    <div className='hidden md:block flex-1 sticky top-1/4 h-[500px]'>
-                        <AnimatePresence  mode="wait">
-                            <motion.div className='relative w-full h-full bg-gray-800 rounded-xl overflow-hidden'
-                                        key={activeId} // activeId가 바뀔때마다 애니메이션 트리거
-                                        initial={{opacity: 0, y: 20}}
-                                        animate={{ opacity: 1, y:0 }} 
-                                        exit={{opacity: 0, y: -20}}
-                                        transition={{duration: 0.2, ease: 'easeInOut'}}
-                            >
-                                {/* 현재 activeId에 맞는 이미지 출력 */}
-                                {productLines[activeId].thumbnail
-                                ?<Image src={productLines[activeId].thumbnail}
-                                        alt={productLines[activeId].label}
-                                        fill
-                                        className='object-cover transition-all duration-700 ease-in-out'
-                                />
-                                : <div className='w-full h-full bg-gray-300'></div>
-                                }
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
-                </div>
-            </SectionHeader>
+            </Container>
         </section>
     )
 }
