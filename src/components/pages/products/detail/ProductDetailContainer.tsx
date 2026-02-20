@@ -24,7 +24,7 @@ export default function ProductDetailContainer({ product, contextList, from }: P
     return (
         <section className='mx-auto '>
             <div className='flex flex-col gap-20 md:gap-30 '>
-                <div className='flex flex-col px-5 md:px-10 lg:px-30 py-20 md:pb-30 md:pt-40'
+                <div className='flex flex-col px-5 md:px-10 lg:px-30 pt-20 pb-0 md:pb-30 md:pt-40'
                 >
                     <ProductIntroSection product={product} onInquiryClick={scrollToInquiry} contextList={contextList} from={from}/>
                 </div>
@@ -34,7 +34,7 @@ export default function ProductDetailContainer({ product, contextList, from }: P
                 </div>
 
                 <div ref={inquiryRef} className='px-5 md:px-10 lg:px-30 bg-gray-200 py-20 md:pt-30 md:pb-40'>
-                    <ProductInquirySection productName={product.name} />
+                    <ProductInquirySection productName={`${product.name} _ ${product.nameEn}`} />
                 </div>
             </div>
         </section>

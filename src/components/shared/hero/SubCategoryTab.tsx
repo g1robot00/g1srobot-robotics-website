@@ -5,14 +5,19 @@ import { useState, useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils';
 import { NAV_HEIGHT } from '@/constants/navigation';
 import { SubCategoryTabProps } from '@/types/nav';
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function SubCategoryTab({list}: SubCategoryTabProps) {
   const [ activeId, setActiveId ] = useState(list[0]?.id);
   const [isNavVisible, setIsNavVisible] = useState(true); // 네브바 상태표시
-  const [lastScrollY, setLastScrollY] = useState(0);  // 이전 스크롤 위치
+  // const [lastScrollY, setLastScrollY] = useState(0);  // 이전 스크롤 위치
+  const lastScrollY = useRef(0); // ✨ lastScrollY를 Ref로 변경 (재렌더링 방지 및 값 동기화)
+  const gradientStyle = 'absolute top-0 bottom-0 w-8 md:w-20 z-40 from-gray-200 to-transparent pointer-events-none '
 
   // 수동 스크롤인지 확인하는 변수(<-> 서브탭 눌러서 이동)
-  const isManualScrolling = useRef(false); //FIXME 서브탭 선택해서 위로 스크롤 시 네브바 안나오게 
+  const isManualScrolling = useRef(false); //FIXME 서브탭 선택해서 위로 스크롤 시 네브바 안나오게
+  const scrollRef = useRef<HTMLDivElement>(null); // 탭 스크롤 영역 ref
+  const burronRefs = useRef<Map<string, HTMLButtonElement>>(new Map()); // 각버튼 ref
 
    // ✅ 1. [초기화 & Scroll Spy] : 어떤 섹션을 보고 있는지 감지
   useEffect(()=>{
@@ -49,24 +54,25 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
       const currentScrollY = window.scrollY;
 
       // 네브바 노출 여부와 동일한 로직
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsNavVisible(false);
       } else {
         setIsNavVisible(true);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     }
 
     window.addEventListener('scroll', updateNavVisibility);
     return () => window.removeEventListener('scroll', updateNavVisibility);
-  }, [lastScrollY])
+  }, [])
 
 
   // ✅ 3. [클릭 이벤트] : 탭 클릭 시 해당 위치로 스무스하게 이동
   const handleManualScroll  = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
+      window.dispatchEvent(new CustomEvent('manualScrollLock', { detail: true }));  // ✨ 네브바에게 잠금 신호 전송
       isManualScrolling.current = true;
       setIsNavVisible(false); 
 
@@ -76,32 +82,34 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
 
      // 📍 스크롤 애니메이션이 끝날 때쯤(약 0.8초~1초 후) 플래그 OFF
       setTimeout(() => {
-        isManualScrolling.current = false;
+        // ✨ 이동이 끝난 후 잠금 해제 신호 전송
+      window.dispatchEvent(new CustomEvent('manualScrollLock', { detail: false }));
         // 📍 도착한 지점의 스크롤 값을 lastScrollY에 업데이트해서 오작동 방지
-        setLastScrollY(window.scrollY); 
+        lastScrollY.current = window.scrollY; 
+        isManualScrolling.current = false;
       }, 1000); 
   };
   
   return (
-    <div className={cn(
-                    `sticky z-30 w-full transition-all duration-500 ${NAV_HEIGHT.h} bg-gray-200`,  
-                    isNavVisible ? NAV_HEIGHT.top : 'top-0',
-                    )}
+    <div className={cn(`sticky top-0 z-30 w-full transition-all duration-500 bg-gray-200`,  
+                    isNavVisible && NAV_HEIGHT.top)}
     >
-      <div className="absolute left-0 top-0 bottom-0 w-8 z-40 bg-gradient-to-r from-gray-200 to-transparent pointer-events-none md:w-20" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 z-40 bg-gradient-to-l from-gray-200 to-transparent pointer-events-none md:w-20" />
-      <div className={cn('flex items-center gap-6 md:gap-10 overflow-x-auto scrollbar-hide px-6 md:px-20 ',
-                        NAV_HEIGHT.h, 'justify-start md:justify-center'
-      )}>
-        {list.map(item => (
-          <button key={item.id}
-                onClick={() => handleManualScroll(item.id)}
-                className={`text-base md:text-lg font-bold transition-colors cursor-pointer flex-shrink-0 whitespace-nowrap
-                          ${activeId === item.id ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
-                >
-            {item.label}
-          </button>
-        ))}
+      {/* 양옆 그라데이션 */}
+      <div className="absolute inset-y-0 left-0 top-0 bottom-0 w-10 md:w-20 z-40 bg-gradient-to-r from-gray-200 to-transparent pointer-events-none " />
+      <div className="absolute right-0 top-0 bottom-0 w-10 md:w-20 z-40 bg-gradient-to-l from-gray-200 to-transparent pointer-events-none " />
+      {/* 스크롤 영역 */}
+      <div className='relative z-10 overflow-x-auto scrollbar-hide flex'>
+        <div className={cn('flex items-center gap-6 md:gap-10', NAV_HEIGHT.h, 'px-8 md:px-20', 'justify-start md:justify-center')}>
+          {list.map(item => (
+            <button key={item.id}
+                  onClick={() => handleManualScroll(item.id)}
+                  className={`text-base md:text-lg font-bold transition-colors cursor-pointer flex-shrink-0 whitespace-nowrap
+                            ${activeId === item.id ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
+                  >
+              {item.label}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 'use client'
 
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -19,10 +19,19 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showMenu, setShowMenu] = useState(false);
 
+  const isLocked = useRef(false); // 수동 스크롤 감지(서브탭)
   const isTransparent = isAtTop && !isHoverd && !activeMenu && !noTransparent;
 
   useEffect(() => {
+    const handleLock = (e:any) => { // 서브탭의 수동 스크롤 상태를 제어하는 이벤트 리스너
+      isLocked.current = e.detail; //true 또는 false를 전달받음
+      if(e.detail === true) setIsVisible(false);
+    }
+
+    window.addEventListener('manualScrollLock', handleLock);
+
     const handleScroll = () => {
+      if (isLocked.current) return; // ✨ 잠겨있으면 아래 로직 아예 실행 안함!
       const currentScrollY = window.scrollY;
 
       // 1. 투명도 감지(맨 위 50px)
@@ -38,7 +47,10 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('manualScrollLock', handleLock);
+    }
   },[lastScrollY])
 
   return (

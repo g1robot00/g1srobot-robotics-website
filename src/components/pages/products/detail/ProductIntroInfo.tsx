@@ -22,7 +22,7 @@ export default function ProductIntroInfo({product,contextList, from}: ProductInt
                     <p className='text-base md:text-lg font-bold text-gray-500'>{product.nameEn}</p>
                 </div>
             </div>
-            <div className='flex justify-between px-2'>
+            <div className='hidden md:flex justify-between px-2'>
                 {mainSpecs.map(spec => (
                     <div key={spec.label} className='flex flex-col'>
                         <div className='text-lg md:text-2xl font-semibold'>
@@ -34,15 +34,17 @@ export default function ProductIntroInfo({product,contextList, from}: ProductInt
                 ))}
             </div>
             <div className='flex-1 p-5 bg-gray-100 rounded-lg oveflow-y-auto'>
-                <p className='text-gray-800 whitespace-pre-wrap '>
+                <div className='text-gray-800 whitespace-pre-wrap '>
                     <div className='font-bold text-lg'>
                         {from === 'industry'
-                        ? `[제품군] ${product.productLine}`
-                        : `[적용산업] ${industryJoin}`
+                        ? `[제품군] ${product.productLine}
+                        `
+                        : `[적용산업] ${industryJoin}
+                        `
                         }
                     </div>
                     {product.description}
-                </p>
+                </div>
             </div>
         </div>
     )

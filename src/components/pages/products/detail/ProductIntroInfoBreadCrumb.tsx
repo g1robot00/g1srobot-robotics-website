@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils'
 import { UniversalDetailDTO, DetailNavDTO } from '@/types/respDto'
@@ -16,34 +16,49 @@ interface ProductIntroInfoBreadCrumbProps {
 export default function ProductIntroInfoBreadCrumb({ product, contextList, from }: ProductIntroInfoBreadCrumbProps) {
     const [openMenu, setOpenMenu] = useState(false);
     const [openInnerMenuId, setOpenInnerMenuId] = useState<string | null>(null);
-    const industryJoin = product.industries.map(i => i).join(' / ')
+    const menuRef = useRef<HTMLDivElement>(null); // 메뉴 감싸는 영역에 연결
+    const industryJoin = product.industries.map(i => i).join(' / ');
 
     // 외부클릭시 닫음
-    // useEffect(() => {
-    //     if (!openMenu) return;
-    //     const closeMenu = () => setOpenMenu(false);
-    //     window.addEventListener('click', closeMenu);
-    //     return () => window.removeEventListener('click', closeMenu);
-    // }, [openMenu]);
+    useEffect(() => {
+        if (!openMenu) return;
+
+        const handleOutsideClick = (e: MouseEvent) => {
+            // 클릭된 요소가 menuRef내부에 포함되어있지 않으면 닫음
+            if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                setOpenMenu(false);
+            }
+        };
+
+        if (openMenu) {
+            // ✨ mousedown이 click보다 반응이 빠르고 정확할 때가 많습니다.
+            window.addEventListener('mousedown', handleOutsideClick);
+        }
+
+        return () => {
+            window.removeEventListener('mousedown', handleOutsideClick);
+        };
+    }, [openMenu]);
 
     return (
         <div className="flex items-center gap-1 text-sm font-medium text-gray-400 mb-2">
-            <span>{from === 'industry' ? '산업별 솔루션' : '제품 및 서비스'}</span>
+            <span className='flex-shrink-0'>{from === 'industry' ? '산업별 솔루션' : '제품 및 서비스'}</span>
             <ChevronRight size={12} />
             {/* 클릭하면 해당 카테고리의 다른 제품들을 보여주는 드롭다운 */}
-            <div className="relative">
+            <div ref={menuRef} className="relative min-w-0 flex-shrink-1">
                 <button onClick={() => setOpenMenu(prev => !prev)}
-                    className="flex items-center gap-1 text-main font-bold cursor-pointer"
+                    className="flex items-center gap-1 text-main font-bold cursor-pointer max-w-full"
                 >
-                    {from === 'industry' ? industryJoin : product.productLine}
-                    <ChevronDown size={14} className={cn("transition-transform", openMenu === true && "rotate-180")} />
+                    {/* FIXME truncate 적용안됨 */}
+                    <span className='truncate min-w-0'>{from === 'industry' ? industryJoin : product.productLine}</span>
+                    <ChevronDown size={14} className={cn("flex-shrink-0 transition-transform", openMenu === true && "rotate-180")} />
                 </button>
 
                 {/* 드롭다운 리스트 */}
                 {openMenu &&
                     <ul className={cn(
                         "absolute top-full z-50 left-0 mt-2 py-3 bg-white border border-gray-100 rounded-xl shadow-2xl",
-                        "w-max min-w-[200px] max-w-[300px]",
+                        "w-max min-w-[200px] max-w-[240px] md:max-w-[300px]",
                         "max-h-[350px] overflow-y-auto"
                     )}
                     >
