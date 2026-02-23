@@ -8,7 +8,7 @@ import ProductContainer from "@/components/pages/products/ProductContainer";
 import { ProductLineProductsDTO } from "@/types/respDto";
 
 export default async function ProductsPage() {
-    const productLines: ProductLineProductsDTO[] = await client.fetch(PRODUCT_LINE_WITH_PRODUCTS_QUERY);
+    let productLines: ProductLineProductsDTO[] = await client.fetch(PRODUCT_LINE_WITH_PRODUCTS_QUERY);
 
     const heroData = getHeroDataByPath('/products');
     const tabList = productLines.map(pl => ({

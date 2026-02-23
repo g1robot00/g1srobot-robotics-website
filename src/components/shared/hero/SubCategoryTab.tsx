@@ -5,23 +5,20 @@ import { useState, useEffect, useRef } from 'react'
 import { cn } from '@/lib/utils';
 import { NAV_HEIGHT } from '@/constants/navigation';
 import { SubCategoryTabProps } from '@/types/nav';
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function SubCategoryTab({list}: SubCategoryTabProps) {
   const [ activeId, setActiveId ] = useState(list[0]?.id);
   const [isNavVisible, setIsNavVisible] = useState(true); // 네브바 상태표시
   // const [lastScrollY, setLastScrollY] = useState(0);  // 이전 스크롤 위치
   const lastScrollY = useRef(0); // ✨ lastScrollY를 Ref로 변경 (재렌더링 방지 및 값 동기화)
-  const gradientStyle = 'absolute top-0 bottom-0 w-8 md:w-20 z-40 from-gray-200 to-transparent pointer-events-none '
-
+  const scrollContainerRef = useRef<HTMLDivElement>(null); //스크롤 컨테이너 잡는 ref
   // 수동 스크롤인지 확인하는 변수(<-> 서브탭 눌러서 이동)
   const isManualScrolling = useRef(false); //FIXME 서브탭 선택해서 위로 스크롤 시 네브바 안나오게
-  const scrollRef = useRef<HTMLDivElement>(null); // 탭 스크롤 영역 ref
-  const burronRefs = useRef<Map<string, HTMLButtonElement>>(new Map()); // 각버튼 ref
+  
 
    // ✅ 1. [초기화 & Scroll Spy] : 어떤 섹션을 보고 있는지 감지
   useEffect(()=>{
-    // 처음 페이지 들어왔을때 주소창 해시가 있는지 확인
+    // [랜딩페이지에서 왔을때] 처음 페이지 들어왔을때 주소창 해시가 있는지 확인
     const hash = window.location.hash.replace('#', '');
     if (hash) setActiveId(hash);
 
@@ -46,6 +43,20 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if(!activeId || !scrollContainerRef.current) return;
+
+    const activeTab = scrollContainerRef.current.querySelector(`[data-tab-id='${activeId}']`);
+
+    if (activeTab) {
+      activeTab.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest' //세로 방향은 건드리지 않음
+      })
+    }
+  }, [activeId])
   
    // ✅ 2. [네브바 방향 감지] : 스크롤 위/아래에 따라 탭의 top 위치 조절
   useEffect(() => {
@@ -98,10 +109,11 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
       <div className="absolute inset-y-0 left-0 top-0 bottom-0 w-10 md:w-20 z-40 bg-gradient-to-r from-gray-200 to-transparent pointer-events-none " />
       <div className="absolute right-0 top-0 bottom-0 w-10 md:w-20 z-40 bg-gradient-to-l from-gray-200 to-transparent pointer-events-none " />
       {/* 스크롤 영역 */}
-      <div className='relative z-10 overflow-x-auto scrollbar-hide flex'>
-        <div className={cn('flex items-center gap-6 md:gap-10', NAV_HEIGHT.h, 'px-8 md:px-20', 'justify-start md:justify-center')}>
+      <div ref={scrollContainerRef} className='relative z-10 w-full flex overflow-x-auto scrollbar-hide '>
+        <div className={cn('flex items-center gap-6 md:gap-10 md:min-w-full ', NAV_HEIGHT.h, 'px-8 md:px-20', 'justify-start md:justify-center')}>
           {list.map(item => (
             <button key={item.id}
+                    data-tab-id={item.id}
                   onClick={() => handleManualScroll(item.id)}
                   className={`text-base md:text-lg font-bold transition-colors cursor-pointer flex-shrink-0 whitespace-nowrap
                             ${activeId === item.id ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}

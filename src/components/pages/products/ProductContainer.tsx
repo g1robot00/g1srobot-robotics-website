@@ -42,7 +42,7 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
         const filtered = list.map(pl => ({
             ...pl,
             kind: pl.kind.filter(product => selectedFilters.includes(product.type))
-        })).filter(pl => pl.kind.length > 0); //FIXME 제품이 하나도 안 남은 제품군은 섹션 자체를 숨김
+        }));
         
         setFilteredList(filtered);
     }, [selectedFilters, list]);

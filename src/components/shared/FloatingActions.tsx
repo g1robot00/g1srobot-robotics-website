@@ -10,22 +10,48 @@ import { ArrowUp, MessageCircle } from 'lucide-react'
 
 export default function FloatingActions() {
     const [showTopBtn, setShowTopBtn] = useState(false);
+    const [bottom, setBottom] = useState(20);
     const pathname = usePathname();
 
-    const isProductDetaiilPage = pathname.startsWith('/products/')
+    const isProductDetailPage = pathname.startsWith('/products/');
 
     // 스크롤 감지
     useEffect(() => {
         const handleScroll = () => {
-            if(window.scrollY > 400) { // 400px이상 내려오면
-                setShowTopBtn(true);
+            // 상단 이동버튼
+            setShowTopBtn(window.scrollY > 400); // 400px이상 내려오면
+
+            // 푸터 밀림계산
+            const footer = document.querySelector('footer');
+            if(!footer) return;
+
+            const footerRect = footer.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+
+            // 기기별 높이계산
+            let baseBottom = 20;
+            if (window.innerWidth >= 768) {
+                baseBottom = 60; // md:bottom-15 (3.75rem = 60px)
+            } else if (isProductDetailPage) {
+                baseBottom = 96; // max-md:bottom-24 (6rem = 96px)
+            }
+            const overlap = viewportHeight - footerRect.top;
+
+            if(overlap > 0) {
+                setBottom(baseBottom + overlap);
             } else {
-                setShowTopBtn(false);
+                setBottom(baseBottom);
             }
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        // ✨ 화면 크기가 바뀔 때도 기준점이 변해야 하므로 resize 이벤트 추가
+        window.addEventListener('resize', handleScroll);
+        handleScroll(); //초기 1회 실행
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
+        }
     }, []);
 
     // 상단 이동 함수
@@ -34,36 +60,43 @@ export default function FloatingActions() {
     }
 
     return (
-    <div className={cn('sticky bottom-5 md:bottom-15 mb-10 ml-auto mr-5 md:mr-10 z-[90]', 
-                        'w-fit h-fit flex flex-col gap-3 md:gap-4',
-                        isProductDetaiilPage && 'max-md: bottom-24'
-                    )}>
-        <AnimatePresence>
-            {/* 상단이동 버튼(조건부) */}
-            {showTopBtn && (
-                <motion.button key='top-btn'
-                                initial={{opacity: 0, y: 20, scale: 0.8}}
-                                animate={{opacity: 1, y: 0, scale: 1}}
-                                exit={{opacity: 0, y: 20, scale: 0.8}}
-                                onClick={scrollToTop}
+        <motion.div animate={{ bottom }} 
+                    transition={{
+                        type: 'spring',
+                        stiffness: 300,
+                        damping: 30
+                    }}
+            className={cn('fixed right-5 md:right-10 z-[90]',
+                            'w-fit h-fit flex flex-col gap-3 md:gap-4',
+                            // isProductDetailPage && 'max-md: bottom-24',
+                        )}
+        >
+            <AnimatePresence>
+                {/* 상단이동 버튼(조건부) */}
+                {showTopBtn && (
+                    <motion.button key='top-btn'
+                                    initial={{opacity: 0, y: 20, scale: 0.8}}
+                                    animate={{opacity: 1, y: 0, scale: 1}}
+                                    exit={{opacity: 0, y: 20, scale: 0.8}}
+                                    onClick={scrollToTop}
+                                    className='p-3 md:p-4 bg-main rounded-full shadow-lg text-white cursor-pointer'
+                                    title='맨 위로'
+                    >
+                        <ArrowUp size={24} strokeWidth={2.5} className=''/>
+                    </motion.button>
+                )}
+                {/* 문의 버튼 (항시 노출) */}
+                <motion.button key='contact-btn'
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 className='p-3 md:p-4 bg-main rounded-full shadow-lg text-white cursor-pointer'
-                                title='맨 위로'
-                >   
-                    <ArrowUp size={24} strokeWidth={2.5} className=''/>
+                                title='문의하기'
+                >
+                    <Link href='/support'>
+                        <MessageCircle size={24} strokeWidth={2.5} className=''/>
+                    </Link>
                 </motion.button>
-            )}
-            {/* 문의 버튼 (항시 노출) */}
-            <motion.button key='contact-btn'
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className='p-3 md:p-4 bg-main rounded-full shadow-lg text-white cursor-pointer'
-                            title='문의하기'
-            >   
-                <Link href='/support'>
-                    <MessageCircle size={24} strokeWidth={2.5} className=''/>
-                </Link>
-            </motion.button>
-        </AnimatePresence>
-    </div>
+            </AnimatePresence>
+        </motion.div>
     )
 }

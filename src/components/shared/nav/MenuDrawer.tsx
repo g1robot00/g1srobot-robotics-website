@@ -56,7 +56,7 @@ export default function MenuDrawer({isOpen, onClose}: MenuDrawerProps) {
                             </div>
                             <ul className="flex flex-col gap-8 md:gap-13">
                                 {NAV_ITEMS.map( item => (
-                                    <li className="grid grid-cols-1 lg:grid-cols-[1fr_3fr]">
+                                    <li key={item.label} className="grid grid-cols-1 lg:grid-cols-[1fr_3fr]">
                                         <Link href={item.href} className="text-lg md:text-xl font-bold hover:text-main cursor-pointer">{item.label}</Link>
                                         {item.items && item.items.length > 0 && (
                                             <div className="mt-4 md:mt-7 lg:mt-0 grid gap-3 grid-cols-1 lg:grid-cols-4">

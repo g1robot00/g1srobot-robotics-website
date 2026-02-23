@@ -12,8 +12,8 @@ export default function layout({children}: {children: React.ReactNode}) {
         <Nav />
         <main className='flex-1 relative'>
           {children}
-          <FloatingActions />
         </main>
+        <FloatingActions />
         <Footer />
     </div>
   )

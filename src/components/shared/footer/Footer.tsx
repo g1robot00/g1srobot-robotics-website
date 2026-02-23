@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
+import { cn } from '@/lib/utils'
 import { CONTACT_LIST } from '@/constants/contact'
 import { NAV_ITEMS } from '@/constants/navigation'
 import ContactItem from './ContactItem'
@@ -10,9 +11,9 @@ export default function Footer() {
   const allContacts = [CONTACT_LIST.MAIL, CONTACT_LIST.PHONE, CONTACT_LIST.ADDRESS];
 
   return (
-    <div className='w-full h-full md:h-100 py-10 md:py-20 px-5 md:px-10 lg:px-20 bg-black
-                    grid grid-cols-1 gap-10 md:grid-cols-2
-                    text-white/80'
+    <footer className={cn('w-full h-full md:h-100 py-10 md:py-20 px-5 md:px-10 lg:px-20 bg-black',
+                    'grid grid-cols-1 gap-10 md:grid-cols-2',
+                    'text-white/80')}
     >
         <div className='flex flex-col gap-9 md:justify-between'>
             <h2 className='text-2xl md:text-4xl font-bold text-main'>LOGOROBOT</h2>
@@ -37,6 +38,6 @@ export default function Footer() {
               <span>@Copyright 2026 G1SRobot, All Rights Reserved</span>
             </div>
         </div>
-    </div>
+    </footer>
   )
 }

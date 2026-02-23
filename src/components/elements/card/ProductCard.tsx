@@ -64,9 +64,7 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
                 <div className='flex flex-wrap'>
                     {specToShow.map((spec, idx) => (
                         <div key={`${idx}_${spec.label}`}
-                            className='text-gray-500 text-xs md:text-sm 
-                                        before:mr-1 after:content-["/"] after:ml-1 last:after:content-none'
-                        >
+                            className='text-gray-500 text-xs md:text-sm  before:mr-1 after:content-["/"] after:ml-1 last:after:content-none'>
                             <span className='mr-1'>{spec.label}</span>
                             {spec.value}{spec.unit}
                         </div>

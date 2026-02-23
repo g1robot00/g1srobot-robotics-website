@@ -90,7 +90,7 @@ export const PRODUCT_LINE_LIST_QUERY = `
 `
 
 export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
-  *[_type == "productLine"] | order(name asc) {
+  *[_type == "productLine" && count(*[_type in ["system", "robot", "component"] && references(^._id)]) > 0] | order(name asc) { // 해당제품 없으면 목록 삭제
     "id": _id,
     "label": name,
     "href": "/products/" + slug.current,
@@ -108,7 +108,7 @@ export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
     },
 
     // 3. 이미지 처리(이미지가 없다면 첫번째 제품의 이미지를 가져오거나 처리)
-    "thumbnail": *[_type == "product" && references(^._id)]| order(_createdAt asc)[0].images[0].asset->url
+    "thumbnail": *[_type in ["system", "robot", "component"] && references(^._id)]| order(_createdAt asc)[0].images[0].asset->url
   }
 `;
 
@@ -155,7 +155,7 @@ export const INDUSTRY_LIST_QUERY = `
 `;
 
 export const INDUSTRY_WITH_PRODUCTS_QUERY = `
-  *[_type == 'industry'] {
+  *[_type == 'industry'&& count(*[_type in ["system", "robot", "component"] && references(^._id)]) > 0] { // 해당제품 없으면 목록 삭제
     "id": _id,
     "label": name,
     "kind": *[_type in ["system", "robot", "component" ] && references(^._id)] {
