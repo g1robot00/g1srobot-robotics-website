@@ -107,6 +107,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                         >
                                             {item.label}
                                         </h3>
+                                        <p>{item.nameEn}</p>
                                         <AnimatePresence>
                                             {isActive &&
                                                 <motion.div initial={{height: 0, opacity: 0}}

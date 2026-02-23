@@ -147,9 +147,9 @@ export const USE_CASES_QUERY = `
 // 산업
 export const INDUSTRY_LIST_QUERY = `
   *[_type == "industry"] {
+    "id": _id,
     "label": name,
-    "slug": slug.current,
-    "href": "/solutions/" + slug.current,
+    "href": "/solutions/",
     "icon": iconName
   }
 `;

@@ -86,8 +86,9 @@ export interface DetailNavDTO {
 
 // 산업별
 export interface IndustryListDTO {
+    id: string;
     label: string;
-    slug: string;
+    href: string;
     icon: string;
 }
 
