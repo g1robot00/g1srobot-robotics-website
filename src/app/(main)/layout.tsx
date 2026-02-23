@@ -8,13 +8,12 @@ import FloatingActions from '@/components/shared/FloatingActions';
 
 export default function layout({children}: {children: React.ReactNode}) {
   return (
-    <div>
-        {/* <Script src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&libraries=services,clusterer`} 
-                strategy="beforeInteractive"
-        /> */}
+    <div className='flex flex-col min-h-screen relative'>
         <Nav />
-        {children}
-        <FloatingActions />
+        <main className='flex-1 relative'>
+          {children}
+          <FloatingActions />
+        </main>
         <Footer />
     </div>
   )

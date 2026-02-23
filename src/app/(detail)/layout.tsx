@@ -6,10 +6,12 @@ import FloatingActions from '@/components/shared/FloatingActions';
 
 export default function layout({children}: {children: React.ReactNode}) {
   return (
-    <div>
+    <div className='flex flex-col min-h-screen relative'>
       <Nav noTransparent/>
-      {children}
-      <FloatingActions />
+      <main className='flex-1 relative'>
+        {children}
+        <FloatingActions />
+      </main>
       <Footer />
     </div>
   )
