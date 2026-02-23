@@ -1,17 +1,18 @@
 import React from 'react'
 
-import { ContactInfo } from '@/types/support'
+import IconRenderer from '@/components/ui/IconRenderer';
+import type { ContactItem } from '@/types/respDto'
 
 interface ContactItemProps {
-  info: ContactInfo
+  info: ContactItem
 }
 
 export default function ContactItem({info}: ContactItemProps) {
-  const {icon: Icon, value, href} = info;
+  const {iconName, value} = info;
   
   return (
     <div className='flex gap-7 text-xs font-bold md:text-base md:font-normal'>
-      <Icon size={20}/>
+      <IconRenderer iconName={iconName} size={20}/>
       <span>{value}</span>
     </div>
   )

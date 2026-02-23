@@ -1,3 +1,5 @@
+'use client'
+
 import { useInquiryForm } from '@/hooks/useInquiryForm'
 import ContactForm from './ContactForm'
 import PolicySection from './PolicySection'

@@ -149,7 +149,7 @@ export interface CompanyDTO {
 }
 
 // 연락수단
-interface ContactItem {
+export interface ContactItem {
     value: string;
     iconName: string;
 }

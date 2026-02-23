@@ -34,16 +34,19 @@ export default function ProductIntroInfo({product,contextList, from}: ProductInt
                 ))}
             </div>
             <div className='flex-1 p-5 bg-gray-100 rounded-lg oveflow-y-auto'>
-                <div className='text-gray-800 whitespace-pre-wrap '>
-                    <div className='font-bold text-lg'>
+                <div className='flex flex-col gap-6'>
                         {from === 'industry'
-                        ? `[제품군] ${product.productLine}
-                        `
-                        : `[적용산업] ${industryJoin}
-                        `
+                        ? <span className='w-fit px-3 py-2 bg-main/20 rounded-full text-main text-sm font-bold'>{product.productLine}</span>
+                        
+                        :<div className='flex gap-1'> 
+                            {product.industries.map(i =>
+                                <span key={i} className='w-fit px-3 py-2 bg-main/20 rounded-full text-main text-sm font-bold'>{i}</span>
+                            )}
+                        </div>
                         }
-                    </div>
+                    <div className='text-gray-800 whitespace-pre-wrap '>
                     {product.description}
+                    </div>
                 </div>
             </div>
         </div>

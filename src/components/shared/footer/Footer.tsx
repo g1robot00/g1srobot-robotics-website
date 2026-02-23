@@ -1,14 +1,19 @@
 import React from 'react'
 import Link from 'next/link'
+import { client } from '@/lib/sanity'
 
 import { cn } from '@/lib/utils'
-import { CONTACT_LIST } from '@/constants/contact'
+import { CONTACT_QUERY } from '@/lib/queries'
 import { NAV_ITEMS } from '@/constants/navigation'
 import ContactItem from './ContactItem'
-import FooterNav from './FooterNav'
+import { ContactDTO } from '@/types/respDto'
 
-export default function Footer() {
-  const allContacts = [CONTACT_LIST.MAIL, CONTACT_LIST.PHONE, CONTACT_LIST.ADDRESS];
+export default async function Footer() {
+  const contacts: ContactDTO = await client.fetch(CONTACT_QUERY);
+  const allContacts = [
+    {id: 'email', ...contacts.email}, 
+    {id: 'phone', ...contacts.phone}, 
+    {id: 'address', ...contacts.address}];
 
   return (
     <footer className={cn('w-full h-full md:h-100 py-10 md:py-20 px-5 md:px-10 lg:px-20 bg-black',
