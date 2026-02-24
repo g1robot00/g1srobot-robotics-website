@@ -20,7 +20,17 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
   useEffect(()=>{
     // [랜딩페이지에서 왔을때] 처음 페이지 들어왔을때 주소창 해시가 있는지 확인
     const hash = window.location.hash.replace('#', '');
-    if (hash) setActiveId(hash);
+    if (hash) {
+      window.dispatchEvent(new CustomEvent('showNavbar'));
+      setIsNavVisible(true);
+
+      setTimeout(() => {
+        setActiveId(hash);
+        // 📍 2. 브라우저의 기본 점프를 무시하고 우리가 원하는 위치로 재조정
+        const element = document.getElementById(hash);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
 
     const observerOptions = {
       root: null, // 감시 기준을 화면전체로 잡음

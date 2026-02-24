@@ -27,21 +27,21 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
 
             scrollRef.current.scrollTo({
                 left: direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
-                behavior: 'smooth' 
+                behavior: 'smooth'
             })
         }
     }
 
     return (
-        <section className='relative w-full h-screen flex flex-col gap-5 items-center  bg-grain overflow-hidden'>
+        <section className='relative w-full h-screen 3xl:h-fit 3xl:py-50 flex flex-col gap-5 items-center  bg-grain overflow-hidden'>
             {/* 배경 */}
             {bgImage && (
                 <div className='absolute inset-0 z-[-2]'>
-                    <Image src={bgImage} alt='background' fill className='object-cover scale-110'/>
+                    <Image src={bgImage} alt='useCaseBg' fill className='object-cover scale-110'/>
                 </div>
             )}
             <div className="absolute inset-0 z-[-1] bg-black/60 backdrop-blur-xl" />
-            <Container className='h-screen py-30 flex flex-col'>
+            <Container className='h-screen 3xl:h-fit py-30 flex flex-col'>
                 {/* 헤더 */}
                 <div className='flex justify-between items-end'>
                     <SectionHeader category='Use Cases'
@@ -90,13 +90,12 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                                     </>
                                 ))}
                             </div>
-                            : (
-                                <div className='flex-1 w-full min-h-[380px] flex items-center justify-center rounded-lg bg-white/20'>
-                                    <p className='font-bold text-gray-400'>
-                                        공개사례 준비중입니다.
-                                    </p>
-                                </div>
-                            )
+                            : 
+                            <div className='flex-1 w-full min-h-[380px] 3xl:h-[700px] flex items-center justify-center rounded-lg bg-white/20'>
+                                <p className='font-bold text-gray-400'>
+                                    공개사례 준비중입니다.
+                                </p>
+                            </div>
                         }
                 </div>
             </Container>

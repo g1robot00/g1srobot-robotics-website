@@ -1,6 +1,7 @@
 'use client'
 
 import {useState, useEffect} from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion'
 
 import Container from '@/components/shared/Container';
@@ -25,6 +26,10 @@ export default function HeroSection() {
                     flex flex-col items-center justify-center
                     text-white text-center`}
     >
+      <div className='absolute inset-0 z-[-2] overflow-hidden'>
+        <Image src={SLOGANS[index].bg} alt={`heroBg ${index}`} fill className='object-cover scale-105 '/>
+      </div>
+      <div className="absolute inset-0 z-[-1] bg-black/70 " />
       <Container>
         <div className='flex flex-col items-center'>
           <AnimatePresence mode='wait' >
@@ -34,17 +39,11 @@ export default function HeroSection() {
                       exit={{opacity: 0, y: -20}}
                       transition={{ type: "spring", stiffness: 100, damping: 20}}
                       className='flex flex-col gap-3'>
-              <h1 className="font-bold text-2xl md:text-4xl leading-tight">{SLOGANS[index].kr}</h1>
-              <p className="text-base md:text-lg text-gray-400 tracking-widest">{SLOGANS[index].en}</p>
+              {/* FIXME 3xl 글자크기 변경안됨 - !지우기 */}
+              <h1 className="font-bold text-2xl md:text-4xl 3xl:!text-6xl leading-tight">{SLOGANS[index].kr}</h1> 
+              <p className="text-base md:text-lg 3xl:!text-2xl text-gray-400 tracking-widest">{SLOGANS[index].en}</p>
             </motion.div>
           </AnimatePresence>
-          {/* <button className="mt-10 px-8 py-4 bg-white/30 rounded-full
-                              flex gap-2 items-center text-xs md:text-sm
-                              hover:bg-white hover:text-black cursor-pointer"
-          >
-            G1sRobot과 함께 상상을 실현해 보세요
-            <MoveRight size={14} />
-          </button> */}
           {/* 하단 인디케이터 */}
           <div className='absolute bottom-10 flex gap-2'>
             {SLOGANS.map((_, i) => (

@@ -67,7 +67,7 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
                 }
                 {filteredList.length > 0
                     ?filteredList.map((item: ProductLineProductsDTO | IndustryProductsDTO ) => (
-                        <section key={item.id} id={item.id} className="mb-30 scroll-mt-28">
+                        <section key={item.id} id={item.id} className="mb-30 scroll-mt-42">
                             {/* --- 제품군(Product Line) 헤더 --- */}
                             <div className="flex flex-col mb-10">
                                 <h2 className="text-2xl md:text-3xl font-bold mb-4">{item.label}</h2>

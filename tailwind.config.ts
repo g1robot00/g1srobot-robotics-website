@@ -12,10 +12,14 @@ const config: Config = {
         extend: {
             colors: {
                 // 기존에 사용하시던 'main' 컬러가 있다면 여기서 정의해야 합니다.
-                main: "#0070f3", // 예시 색상입니다. 실제 브랜드 색상 코드로 바꾸세요.
+                main: "var(--main)", // 예시 색상입니다. 실제 브랜드 색상 코드로 바꾸세요.
+            },
+            screens: {
+                '3xl': '1720px',
             },
         },
     },
     plugins: [],
 };
 export default config;
+

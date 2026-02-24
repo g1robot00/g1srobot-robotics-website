@@ -27,8 +27,10 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
       isLocked.current = e.detail; //true 또는 false를 전달받음
       if(e.detail === true) setIsVisible(false);
     }
-
     window.addEventListener('manualScrollLock', handleLock);
+
+    const showNav = () => setIsVisible(true); // 랜딩페이지에서 넘어올때 무조건 true로 설정
+    window.addEventListener('showNavbar', showNav);
 
     const handleScroll = () => {
       if (isLocked.current) return; // ✨ 잠겨있으면 아래 로직 아예 실행 안함!
@@ -50,6 +52,7 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('manualScrollLock', handleLock);
+      window.removeEventListener('showNavbar', showNav);
     }
   },[lastScrollY])
 

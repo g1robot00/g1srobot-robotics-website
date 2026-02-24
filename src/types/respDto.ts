@@ -9,7 +9,7 @@ export interface ProductItemDTO {
     id: string;
     type: 'system' | 'robot' | 'component';
     label: string;
-    nameEn: string;
+    // nameEn: string;
     href: string;
     specs: ProductSpec[];
     thumbnail: string;
@@ -61,6 +61,7 @@ export interface UniversalDetailDTO {
 export interface ProductLineBase {
     id: string;
     label: string;
+    nameEn: string;
     href: string;
     content: string;
     thumbnail: string;
