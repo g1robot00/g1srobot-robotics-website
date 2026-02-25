@@ -15,6 +15,7 @@ interface ProductThumbnailsProps {
 
 export default function ProductThumbnails({ allMedia, name, activeIndex, setActiveIndex }: ProductThumbnailsProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const showButton = allMedia.length > 5
     
     // 버튼클릭 시 스크롤 이동(데스트탑)
     const handleScroll = (direction: 'left' | 'right') => {
@@ -31,12 +32,14 @@ export default function ProductThumbnails({ allMedia, name, activeIndex, setActi
 
     return (
         <div className='w-full mt-5 md:mt-10 px-5 flex gap-2 md:gap-4 items-center justify-center '>
-            <button onClick={() => handleScroll('left')}
-                className={`hidden md:block p-3 hover:bg-gray-200 rounded-full text-gray-700 cursor-pointer transition-colors 
-                            disabled:text-gray-400 disabled:cursor-not-allowed disabled:bg-transparent`}
-            >
-                <ChevronLeft />
-            </button>
+            {showButton &&
+                <button onClick={() => handleScroll('left')}
+                    className={`hidden md:block p-3 hover:bg-gray-200 rounded-full text-gray-700 cursor-pointer transition-colors 
+                                disabled:text-gray-400 disabled:cursor-not-allowed disabled:bg-transparent`}
+                >
+                    <ChevronLeft />
+                </button>
+            }
             <div ref={scrollRef} 
                 className="flex gap-1 md:gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
                 style={{ maxWidth: 'min(100%, 600px)' }} // 썸네일 영역 최대 너비 제한
@@ -60,12 +63,14 @@ export default function ProductThumbnails({ allMedia, name, activeIndex, setActi
                     )
                 )}
             </div>
-            <button onClick={() => handleScroll('right')}
-                className={`hidden md:block p-3 hover:bg-gray-200 rounded-full text-gray-700 cursor-pointer transition-colors 
-                            disabled:text-gray-400 disabled:cursor-not-allowed disabled:bg-transparent`}
-            >
-                <ChevronRight />
-            </button>
+            {showButton &&
+                <button onClick={() => handleScroll('right')}
+                    className={`hidden md:block p-3 hover:bg-gray-200 rounded-full text-gray-700 cursor-pointer transition-colors 
+                                disabled:text-gray-400 disabled:cursor-not-allowed disabled:bg-transparent`}
+                >
+                    <ChevronRight />
+                </button>
+            }
         </div>
     )
 }

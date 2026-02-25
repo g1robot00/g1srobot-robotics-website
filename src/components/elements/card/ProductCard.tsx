@@ -4,7 +4,8 @@ import Image from 'next/image'
 
 import { cn } from '@/lib/utils'
 import Badge from '@/components/ui/Badge'
-import { ProductItemDTO, ProductSpec } from '@/types/respDto'
+import { ProductItemDTO } from '@/types/respDto'
+import { ArrowUpRight } from 'lucide-react'
 
 interface ProductCardProps {
     product: ProductItemDTO ,
@@ -39,23 +40,9 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
                 {/* 호버 검정레이어 */}
                 <div className={cn('absolute inset-0 px-10 bg-black/60  text-white',
                                 'opacity-0 group-hover:opacity-100 transition-opacity duration-300',
-                                'flex flex-col justify-center')}
+                                'flex flex-col justify-center items-center')}
                 >
-                    <div className='w-full'>
-                        {/* <h4 className='flex justify-center text-lg font-bold'>제품사양</h4> */}
-                        {specToShow.map((spec, idx) => (
-                                <div key={`${idx}_${spec.label}`} 
-                                    className={`w-full py-4 ${idx !== 0 && 'border-t border-white/20'}` +
-                                                ` flex items-center justify-between`}>
-                                    <span className=''>{spec.label}</span>
-                                    <span className='text-base md:text-lg font-semibold'>
-                                        {spec.value}/
-                                        {spec.unit}
-                                    </span>
-                                </div>
-                            )
-                        )}
-                    </div>
+                    <div className='flex justify-center text-white font-bold'>상세정보 보기<ArrowUpRight/></div>
                 </div>
             </div>
             <div className='flex flex-col gap-2'>
@@ -69,7 +56,7 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
                     </h3>
                 </div>
                 {/* 모바일 스펙 요약 */}
-                <div className='flex flex-col gap-y-2 md:gap-y-4 bg-gray-100 p-3 rounded-lg divide-y divide-gray-200 '>
+                <div className='flex flex-col gap-y-2 md:gap-y-4 p-3 bg-gray-100  rounded-lg divide-y divide-gray-200 '>
                     {specToShow.map((spec, idx) => (
                         <div key={`${idx}_${spec.label}`} className='flex flex-col md:flex-row md:justify-between text-xs md:text-sm truncate'>
                             <span className='mr-1 text-gray-500'>{spec.label}</span>

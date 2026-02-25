@@ -38,7 +38,7 @@ export default function LocationContainer({ contact }: { contact: LocationDTO })
     }
 
     return (
-        <Container className={`${SECTION_PY.base} grid grid-cols-1 md:grid-cols-2 `}>
+        <Container className={`${SECTION_PY.base} grid gap-7 grid-cols-1 md:grid-cols-2 `}>
             {/* <div className='py-10 px-5 md:px-10 lg:px-20 border border-gray-300 rounded-2xl '> */}
                 <div className='flex flex-col gap-10 justify-center'>
                     <div className='flex items-center gap-2'>

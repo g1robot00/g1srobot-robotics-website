@@ -22,12 +22,12 @@ export default function ProductIntroInfo({product,contextList, from}: ProductInt
                     <p className='text-base md:text-lg font-bold text-gray-500'>{product.nameEn}</p>
                 </div>
             </div>
-            <div className='hidden md:flex justify-between px-2'>
+            <div className='hidden lg:flex lg:justify-between md:gap-2 px-2'>
                 {mainSpecs.map(spec => (
                     <div key={spec.label} className='flex flex-col'>
                         <div className='text-lg md:text-2xl font-semibold'>
                             <span>{spec.value}</span>
-                            <span>{spec.unit}</span>
+                            <span className='ml-1'>{spec.unit}</span>
                         </div>
                         <span className='text-sm text-gray-400'>{spec.label}</span>
                     </div>

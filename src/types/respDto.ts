@@ -175,3 +175,10 @@ export interface LocationDTO{
     email: ContactItem;
     address: LocationItem;
 }
+
+
+// 고객사 로고
+export interface ClientsDTO {
+    name: string;
+    logo: string
+}

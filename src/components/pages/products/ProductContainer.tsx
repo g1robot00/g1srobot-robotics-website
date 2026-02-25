@@ -51,7 +51,7 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
         <section className='w-full'>
             <Container className={SECTION_PY.base}>
                 { type === 'filter' &&
-                    <div className='flex gap-4 items-center border-b border-gray-200 pb-8 mb-12'>
+                    <div className='flex gap-4 items-center border-b border-gray-200 pb-8 mb-12 md:mb-20'>
                         <span className="text-sm font-bold text-gray-400 mr-2 uppercase">Filter</span>
                         <div className='flex gap-2'>
                             {PRODUCT_TYPES.map(item => (
@@ -67,7 +67,7 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
                 }
                 {filteredList.length > 0
                     ?filteredList.map((item: ProductLineProductsDTO | IndustryProductsDTO ) => (
-                        <section key={item.id} id={item.id} className="mb-30 scroll-mt-42">
+                        <section key={item.id} id={item.id} className="max-sm:last:mb-0 mb-30 scroll-mt-42">
                             {/* --- 제품군(Product Line) 헤더 --- */}
                             <div className="flex flex-col mb-5 md:mb-10 ">
                                 <div className={cn('mb-4 flex flex-col gap-1', 'pl-3 md:pl-5 border-l-6 md:border-l-8 border-l-main rounded-sm md:rounded-md')}>

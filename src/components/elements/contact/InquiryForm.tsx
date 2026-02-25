@@ -16,7 +16,7 @@ export default function InquiryForm({ productName }: { productName?: string }) {
             <div className='flex justify-center'>
                 <Button type='submit'
                     label='문의하기'
-                    className='md:min-w-80 md:h-16 text-base md:text-xl shadow-lg shadow-main/20 '
+                    className='min-w-50 h-12 md:min-w-80 md:h-16 text-base md:text-xl shadow-lg shadow-main/20 '
                 />
             </div>
         </form>

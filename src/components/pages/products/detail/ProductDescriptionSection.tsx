@@ -53,7 +53,7 @@ export default function ProductDescriptionSection({product, from}: DescriptionSe
         { RelatedItems && RelatedItems.length > 0 &&
             <div className='flex flex-col gap-10'>
                 <h3 className='font-bold text-base md:text-lg text-gray-700'>핵심 구성 제품</h3>
-                <div className='grid gap-3 grid-cols-4 md:grid-cols-8'>
+                <div className='grid gap-3 grid-cols-3 md:grid-cols-6'>
                     {RelatedItems?.map((item,idx) => (
                         <div key={`${idx}_${item.id}`} className='flex flex-col gap-2'>
                             <div className='relative flex-1 h-full w-full overflow-hidden aspect-square'>

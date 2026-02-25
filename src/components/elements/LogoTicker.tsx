@@ -3,6 +3,8 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
 
+import { ClientsDTO } from "@/types/respDto"
+
 const PARTNERS = [
     { name: 'Partner 1', logo: '/next.svg' }, // 임시로 넥스트 로고 사용
     { name: 'Partner 2', logo: '/next.svg' },
@@ -12,9 +14,9 @@ const PARTNERS = [
     { name: 'Partner 6', logo: '/next.svg' },
 ]
 
-export default function LogoTicker() {
+export default function LogoTicker({clients}: {clients: ClientsDTO[]}) {
     return (
-        <div className="py-6 md:py-8 bg-gray-200 border-y border-gray-100 overflow-hidden">
+        <div className="py-6 md:py-8 bg-gray-800 overflow-hidden">
             <div className="hidden md:block container mx-auto px-4 mb-6">
                 <p className="text-center text-gray-400 text-sm font-medium uppercase tracking-widest">
                     Trusted by Innovative Companies
@@ -31,8 +33,8 @@ export default function LogoTicker() {
                         repeatType: 'loop'
                     }}
                 >
-                    {[...PARTNERS, ...PARTNERS, ...PARTNERS].map((partner, idx) => (
-                        <div key={idx} className="flex-none h-5 md:h-6 w-auto flex items-center justify-center">
+                    {[...clients, ...clients, ...clients].map((partner, idx) => (
+                        <div key={idx} className="flex-none h-5 md:h-10 w-auto flex items-center justify-center">
                             <Image src={partner.logo} alt={partner.name} width={60} height={20}
                                 className="h-full w-auto object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer"
                             />

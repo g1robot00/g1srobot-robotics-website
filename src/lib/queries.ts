@@ -235,3 +235,11 @@ export const LOCATION_QUERY = `
     }
   }
 `
+
+//고객사 로고 # FIXME 고객사의 경우 상업적이용/변형 동의를 받아야함, 저작물임
+export const CLIENTS_QUERY = `
+*[_id == 'siteSettings'][0].clients[]-> {
+  'name': 'name',
+  'logo': logo.asset->url,
+}
+`
