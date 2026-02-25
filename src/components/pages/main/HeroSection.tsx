@@ -40,8 +40,8 @@ export default function HeroSection() {
                       transition={{ type: "spring", stiffness: 100, damping: 20}}
                       className='flex flex-col gap-3'>
               {/* FIXME 3xl 글자크기 변경안됨 - !지우기 */}
-              <h1 className="font-bold text-2xl md:text-4xl 3xl:!text-6xl leading-tight">{SLOGANS[index].kr}</h1> 
-              <p className="text-base md:text-lg 3xl:!text-2xl text-gray-400 tracking-widest">{SLOGANS[index].en}</p>
+              <h1 className="font-bold text-2xl md:text-5xl 3xl:!text-6xl leading-tight">{SLOGANS[index].kr}</h1> 
+              <p className="text-base md:text-xl 3xl:!text-2xl text-gray-400 tracking-widest">{SLOGANS[index].en}</p>
             </motion.div>
           </AnimatePresence>
           {/* 하단 인디케이터 */}

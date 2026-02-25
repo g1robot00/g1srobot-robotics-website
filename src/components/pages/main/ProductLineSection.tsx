@@ -85,14 +85,15 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
             <div className='absolute inset-0 z-[-2] overflow-hidden'>
                 <Image src='/img/productLineBg/bg10.jpg' alt='background' fill className='object-cover scale-105'/>
             </div>
-            <Container className={cn(SECTION_PY.lg, '3xl:max-w-[1680px] transition-all duration-500')}>
+            <Container className={cn(SECTION_PY.lg, 'transition-all duration-500')}>
                 <SectionHeader category='Product Lines'
-                            title='혁신적인 라인업으로 자동화의 한계를 넘다'
+                            title={`정밀한 제어와 성능을 갖춘\n로봇 라인업`}    //현장의 기준이 되는\n자동화 제품군을 소개합니다
                             theme='dark'
+                            href='/products'
                 />
                     <div className='relative flex flex-col md:flex-row gap-10 md:gap-20 3xl:gap-32 '>
                         {/* 왼쪽: 아코디언 스타일 */}
-                        <div className='flex-1 flex flex-col py-20'>
+                        <div className='flex-1 flex flex-col py-0 lg:py-20 '>
                             {productLines.map((item, index) => {
                                 const isActive = activeId === index;
                                 return(

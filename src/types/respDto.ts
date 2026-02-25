@@ -96,6 +96,7 @@ export interface IndustryListDTO {
 export interface IndustryProductsDTO {
     id: string;
     label: string;
+    nameEn: string;
     kind: ProductItemDTO[];
 }
 

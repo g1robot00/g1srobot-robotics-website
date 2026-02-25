@@ -45,7 +45,7 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                 {/* 헤더 */}
                 <div className='flex justify-between items-end'>
                     <SectionHeader category='Use Cases'
-                                    title=' 혁신적인 로봇 도입을 통해 Lorem ipsum dolor 세요.'
+                                    title={`파트너와 함께 달성한\n자동화 성공 경험을 공유합니다`}   //로봇 도입으로 변화한\n실제 현장의 공정 사례
                                     className='w-full max-w-full'
                                     theme='dark'
                     />

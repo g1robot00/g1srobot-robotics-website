@@ -93,6 +93,7 @@ export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
   *[_type == "productLine" && count(*[_type in ["system", "robot", "component"] && references(^._id)]) > 0] | order(name asc) { // 해당제품 없으면 목록 삭제
     "id": _id,
     "label": name,
+    "nameEn": nameEn,
     "href": "/products/" + slug.current,
     "content": description,
 

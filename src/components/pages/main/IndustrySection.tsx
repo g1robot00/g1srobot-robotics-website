@@ -17,22 +17,20 @@ export default function IndustrySection({industries}: IndustrySectionProps) {
     return (
         <section className='relative w-full py-20 3xl:py-40 overflow-hidden'>
             {/* ✨ 배경 데코레이션 */}
-            <div className="absolute -top-20 -left-10 text-gray-100 font-black text-[15rem] leading-none opacity-40 select-none">
+            <div className="absolute -top-20 -left-10 z-[-2] text-gray-100 font-black text-[15rem] leading-none opacity-40 select-none">
                 01
             </div>
 
             <Container>
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20">
-                    <SectionHeader 
-                        category='Solutions'
-                        title='산업별 최적의 솔루션을 제안드립니다'
-                        className="mb-0 md:mb-0" // 여백 미세조정
-                    />
-                    {/* ✨ 우측에 전체보기 링크 등을 두어 균형을 맞춤 */}
-                    <Link href="/solutions" className="flex-shrink-0 text-gray-400 hover:text-main transition-colors font-bold">
-                        View All Solutions →
-                    </Link>
-                </div>
+                <SectionHeader 
+                    category='Solutions'
+                    title={`비즈니스 효율을 높이는\n산업별 공정 솔루션`} //다양한 산업 현장에 필요한\n자동화 시스템을 확인하세요
+                    href='/solutions'
+                />
+                {/* ✨ 우측에 전체보기 링크 등을 두어 균형을 맞춤 */}
+                {/* <Link href="/solutions" className="flex-shrink-0 text-gray-400 hover:text-main transition-colors font-bold">
+                    View All Solutions →
+                </Link> */}
 
                 {/* ✨ 그리드 레이아웃으로 변경 */}
                 {/* FIXME 3xl 적용안됨 */}

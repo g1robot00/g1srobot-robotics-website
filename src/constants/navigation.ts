@@ -7,10 +7,10 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { label: '기술 자료', href: '/tech-doc', heroBg: '/img/HeroBg/techdoc1.jpg' },
   { label: '회사 소개', 
     href: '/company', 
-    heroBg: '/img/HeroBg/company.jpg',
+    heroBg: '/img/HeroBg/g1s_high1.jpg',
     items: [
-      { label: '기업 정보', href: '/company', heroBg: '/img/HeroBg/company.jpg' },
-      { label: '오시는 길', href: '/company/location', heroBg: '/img/HeroBg/company.jpg' }, 
+      { label: '기업 정보', href: '/company', heroBg: '/img/HeroBg/g1s_high1.jpg' },
+      { label: '오시는 길', href: '/company/location', heroBg: '/img/HeroBg/g1s_high1.jpg' }, 
       { label: 'Contact Us', href: '/support', heroBg: '/img/HeroBg/contact1.jpg' }
     ] 
   },

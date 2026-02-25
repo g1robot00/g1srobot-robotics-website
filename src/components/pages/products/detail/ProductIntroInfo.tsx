@@ -38,7 +38,7 @@ export default function ProductIntroInfo({product,contextList, from}: ProductInt
                         {from === 'industry'
                         ? <span className='w-fit px-3 py-2 bg-main/20 rounded-full text-main text-sm font-bold'>{product.productLine}</span>
                         
-                        :<div className='flex gap-1'> 
+                        :<div className='flex gap-1 flex-wrap'> 
                             {product.industries.map(i =>
                                 <span key={i} className='w-fit px-3 py-2 bg-main/20 rounded-full text-main text-sm font-bold'>{i}</span>
                             )}
