@@ -186,10 +186,17 @@ export const INDUSTRY_NAV_QUERY = `
 export const TECH_DOC_QUERY = `
   *[_type == 'techDoc'] {
     "id": _id,
-    "title": title,
-    "fileUrl": file.asset->url, // PDF 주소
-    "fileName": file.asset->originalFilename, //원래 파일이름 
-    "fileSize": file.asset->size  //파일용량
+    title,
+    category,
+    language,
+    releaseDate,
+    "files": file[] {
+      "key": _key,
+      "url": asset->url, // PDF 주소
+      "name": asset->originalFilename, //원래 파일이름 
+      "size": asset->size,  //파일용량
+      "extension": asset->extension //확장자(.pdf ...)
+    }
   }
 `
 

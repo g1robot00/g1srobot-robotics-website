@@ -73,7 +73,7 @@ export interface ProductLineListDTO extends ProductLineBase{
 
 export interface ProductLineProductsDTO extends ProductLineBase{   //ProductLineProductsDTO
     kind: ProductItemDTO[];
-}
+}0
 
 export interface DetailNavDTO {
     id: string;
@@ -116,9 +116,16 @@ export interface UseCaseDTO {
 export interface techDocDTO {
     id: string;
     title: string;
-    fileUrl: string;       
-    fileName?: string;
-    fileSize?: number;
+    category: string;
+    language: string;
+    releaseDate: string;
+    files: {
+        key: string;
+        url: string;
+        name: string;
+        size: string;
+        extention: string;
+    }[];
 }
 
 // 회사소개

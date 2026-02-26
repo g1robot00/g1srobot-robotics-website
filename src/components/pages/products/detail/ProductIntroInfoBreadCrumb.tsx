@@ -44,12 +44,11 @@ export default function ProductIntroInfoBreadCrumb({ product, contextList, from 
         <div className="flex items-center gap-1 text-sm font-medium text-gray-400 mb-2">
             <span className='flex-shrink-0'>{from === 'industry' ? '산업별 솔루션' : '제품 및 서비스'}</span>
             <ChevronRight size={12} />
-            {/* 클릭하면 해당 카테고리의 다른 제품들을 보여주는 드롭다운 */}
+            
             <div ref={menuRef} className="relative min-w-0 flex-shrink-1">
                 <button onClick={() => setOpenMenu(prev => !prev)}
                     className="flex items-center gap-1 text-main font-bold cursor-pointer max-w-full"
                 >
-                    {/* FIXME truncate 적용안됨 */}
                     <span className='truncate min-w-0'>{from === 'industry' ? industryJoin : product.productLine}</span>
                     <ChevronDown size={14} className={cn("flex-shrink-0 transition-transform", openMenu === true && "rotate-180")} />
                 </button>

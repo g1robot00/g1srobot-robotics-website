@@ -10,7 +10,7 @@ export async function sendInquiry(formData: FormData) {
     // 1. 폼 데이터 추출
     
     const type= formData.get('inquiryType') as string;
-    const displayType = INQUIRY_TYPES[type as InquiryTypeCode]?.label || type;
+    const displayType = INQUIRY_TYPES[type as InquiryTypeCode] || type;
     
     // const product= formData.get('targetProduct') as string;
     const company= formData.get('company') as string;

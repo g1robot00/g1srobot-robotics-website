@@ -17,7 +17,7 @@ const InquiryTypeSelect = forwardRef<HTMLSelectElement, InquiryTypeSelectProps>(
             >
                 <option value='' disabled>문의유형을 선택해주세요.</option>
                 {Object.entries(INQUIRY_TYPES).map(([key, value]) => (
-                    <option key={key} value={key}>{value.label}</option>
+                    <option key={key} value={key}>{INQUIRY_TYPES[key]}</option>
                     
                 ))}
             </select>
