@@ -16,7 +16,7 @@ const PARTNERS = [
 
 export default function LogoTicker({clients}: {clients: ClientsDTO[]}) {
     return (
-        <div className="py-6 md:py-8 bg-gray-800 overflow-hidden">
+        <div className="py-6 md:py-8 bg-gray-900 overflow-hidden">
             <div className="hidden md:block container mx-auto px-4 mb-6">
                 <p className="text-center text-gray-400 text-sm font-medium uppercase tracking-widest">
                     Trusted by Innovative Companies

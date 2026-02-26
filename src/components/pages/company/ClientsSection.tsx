@@ -2,35 +2,24 @@ import Image from 'next/image'
 
 import Container from '@/components/shared/Container';
 import SectionHeader from '../main/SectionHeader'
-import { ClientsItem } from '@/types/respDto';
+import { ClientsDTO } from '@/types/respDto';
+import { SubtabItem } from '@/types/nav';
 
 interface ClientsSectionProps {
-    clients: ClientsItem[]
-//     list: {
-//     readonly label: string
-//     readonly id: string
-//   }
+    clients: ClientsDTO[]
+    id: string
 }
 
-const PARTNERS = [
-    { name: 'Partner 1', logo: '/img/logo_lg.png' }, // 임시로 넥스트 로고 사용
-    { name: 'Partner 2', logo: '/img/logo_lg.png' },
-    { name: 'Partner 3', logo: '/img/logo_lg.png' },
-    { name: 'Partner 4', logo: '/img/logo_lg.png' },
-    { name: 'Partner 5', logo: '/img/logo_lg.png' },
-    { name: 'Partner 6', logo: '/img/logo_lg.png' },
-]
-
-export default function ClientsSection({clients,}: ClientsSectionProps) {
+export default function ClientsSection({clients, id}: ClientsSectionProps) {
     return (
-        <section className='w-full h-screen bg-black text-white py-20 md:py-30 ' >
+        <section id={id} className='w-full h-full lg:h-screen bg-black text-white py-20 md:py-30  croll-mt-[120px]' >
             <Container>
                 <SectionHeader category='Our Clients'
                                 title='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
                                 theme= 'dark'
                 />
-                    <div className='grid gap-2 md:gap-0 grid-cols-2 md:grid-cols-5 place-items-center'>
-                        {[...PARTNERS, ...PARTNERS, ...PARTNERS].map((item, idx) => (
+                    <div className='grid gap-x-5 gap-y-10 md:gap-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 place-items-center'>
+                        {[...clients, ...clients, ...clients, ...clients, ...clients].map((item, idx) => (
                             <div key={idx} className='h-10 md:h-20 opacity-90'>
                                 <Image src={item.logo} alt={item.name} width={130} height={50}/>
                             </div>

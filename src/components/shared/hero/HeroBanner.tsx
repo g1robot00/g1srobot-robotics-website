@@ -11,8 +11,6 @@ interface HeroBannerProps {
 }
 
 export default function HeroBanner({heroData, subTabs}: HeroBannerProps) {
-  console.log('히어로 배경:', heroData.heroBg);
-  
   return (
         <>
           <div className='w-full h-[75vh]'>

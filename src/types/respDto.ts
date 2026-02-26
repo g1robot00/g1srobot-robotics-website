@@ -127,11 +127,6 @@ export interface SloganItem {
     en: string;
 }
 
-export interface ClientsItem {
-    name: string;
-    logo: string;
-}
-
 export interface HistoryItem {
     id: string; 
     year: string;
@@ -147,7 +142,7 @@ export interface CompanyDTO {
     about: string;
     business: string[];
     vision: string;
-    clients: ClientsItem[];
+    clients: ClientsDTO[];
     history: HistoryItem[] 
 }
 

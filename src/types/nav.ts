@@ -19,7 +19,7 @@ export type HeroData= Pick<NavItem, 'label' | 'heroBg'>;
 export interface SubtabItem {
     readonly label: string;
     readonly id: string;
-}
+} 
 
 export interface SubCategoryTabProps {
     list: SubtabItem[];

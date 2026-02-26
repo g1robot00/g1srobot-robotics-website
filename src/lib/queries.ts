@@ -200,7 +200,10 @@ export const COMPANY_QUERY = `
     'about': ceoMessage,
     'business': businessField,
     'vision': vision,
-    'clients': _*[_type == 'siteSettings'][0].clients, // FIXME 참조형태 맞는지 확인
+    'clients': *[_id == 'siteSettings'][0].clients[]-> {
+      'name': 'name',
+      'logo': logo.asset->url,
+    }, 
     'history': timeline[] | order(year desc){
       'id': _key,
       year,

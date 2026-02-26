@@ -10,9 +10,10 @@ import { Circle } from 'lucide-react';
 
 interface HistorySectionProps {
     history: CompanyDTO['history'] 
+    id: string;
 }
 
-export default function HistorySection({history}: HistorySectionProps) {
+export default function HistorySection({history, id}: HistorySectionProps) {
     // 1. nav 목록
     const yearNav = useMemo(() => {
         if (!history || history.length === 0) return [];
@@ -86,7 +87,7 @@ export default function HistorySection({history}: HistorySectionProps) {
     };
 
     return (
-        <div className='w-full'>
+        <section id={id} className='w-full'>
             <Container className='py-30 flex flex-col md:gap-5'>
                 <SectionHeader category='History'
                             title='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
@@ -141,6 +142,6 @@ export default function HistorySection({history}: HistorySectionProps) {
                         </div>
                     </div>
             </Container>
-        </div>
+        </section>
     )
 }

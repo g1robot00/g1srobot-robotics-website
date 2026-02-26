@@ -23,7 +23,6 @@ export default function LocationContainer({ contact }: { contact: LocationDTO })
         {nameEn: 'Email.', value: contact.email},
     ];
 
-    console.log(contact.address)
     const { lat, lng, link } = contact.address;
     const [loading, error] = useKakaoLoader({
         appkey: process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY as string, // 환경 변수

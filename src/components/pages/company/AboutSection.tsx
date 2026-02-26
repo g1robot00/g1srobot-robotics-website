@@ -12,13 +12,11 @@ interface AboutSectionProps {
   about: string
   business: string[]
   vision: string
-  // list: {
-  //   readonly label: string
-  //   readonly id: string
-  // }[]
+  idAbout: string
+  idVision: string
 }
 
-export default function AboutSection({slogan, about, business, vision}: AboutSectionProps) {
+export default function AboutSection({slogan, about, business, vision, idAbout, idVision}: AboutSectionProps) {
   const aboutMotion = 'absolute inset-0 z-20 w-full h-full flex flex-col gap-8 items-start md:items-center justify-center text-left md:text-center px-10'
   const aboutTitle = 'mt-6 text-2xl md:text-4xl text-main font-bold tracking-wide'
   const aboutContent = 'text-sm md:text-2xl text-white tracking-tight md:whitespace-pre-wrap'
@@ -52,17 +50,20 @@ export default function AboutSection({slogan, about, business, vision}: AboutSec
   // 두번째 글씨 투명도: 나타남
   const secondTextOpacity = useTransform(scrollYProgress, [0.3, 0.4, 0.55, 0.65], [0, 1, 1, 0]);
   // 세번째 글씨 나타남
-  const thirdTextOpacity = useTransform(scrollYProgress, [0.75, 0.9], [0, 1]);
+  const thirdTextOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
 
   return (
     <section ref={containerRef} className='relateve h-[400vh] py-20 w-full bg-black text-white'>
+        {/* 📍 앵커 1: About 감지용 (섹션 상단) */}
+        <div id={idAbout} className="absolute top-[220vh] h-[120vh] w-full pointer-events-none scroll-mt-[150px]" />
+        {/* 📍 앵커 2: Vision 감지용 (섹션 절반 지점) */}
+        <div id={idVision} className="absolute top-[340vh] h-[60vh] w-full pointer-events-none scroll-mt-[150px]" />
         {/* Sticky: 스크롤 되는동안 화면에 고정되는 영역 */}
         <div className='sticky top-0 w-full h-screen flex flex-col items-center justify-center overflow-hidden'>
           {/* 사라질 텍스트 */}
           <motion.div style={{opacity: firstTextOpacity}}
                       className='absolute top-[100px] z-[20] text-center'
           >
-            {/* FIXME 뛰어쓰기 반영안됨_whitespace-pre-wrap */}
             <h2 className="mb-2 font-bold text-2xl md:text-5xl leading-tight whitespace-pre-wrap">{slogan.kr}</h2>  
             <p className="text-xs md:text-xl opacity-60 tracking-widest">{slogan.en}</p>
           </motion.div>
@@ -84,6 +85,7 @@ export default function AboutSection({slogan, about, business, vision}: AboutSec
             />
 
             {/* 새로운 글씨 (이미지안에 나타남) */}
+            
             <motion.div style= {{opacity: secondTextOpacity}}
                         className='absolute inset-0 z-20 w-full h-full flex flex-col gap-8 items-start md:items-center justify-center text-left md:text-center px-10'
             >
@@ -99,7 +101,7 @@ export default function AboutSection({slogan, about, business, vision}: AboutSec
                 ))}
               </div>
             </motion.div>
-
+            
             <motion.div style= {{opacity: thirdTextOpacity }}
                         className={aboutMotion}
             >
