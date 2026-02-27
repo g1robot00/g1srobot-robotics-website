@@ -14,15 +14,6 @@ export default function ProductDescriptionSection({product, from}: DescriptionSe
 
     const RelatedItems = robots || components || [];
     const industryJoin = industries.map(i => i).join(' / ')
-    const detailList = [
-        // ...(productLine ? [{title: '제품군', content: productLine}] : []),
-
-        // ...(industries?.length > 0
-        //     ?[{title: '적용 산업', content: industries.map(i => i.name).join(', ')}]
-        //     : []
-        // )
-        // specs?.length > 0 
-    ]
 
   return (
     <div className='grid grid-cols-1 gap-15 md:gap-25 '>
@@ -67,7 +58,9 @@ export default function ProductDescriptionSection({product, from}: DescriptionSe
                                     </div>
                                 }
                             </div>
-                            <span className='text-sm md:text-base text-gray-500'>{item.name}</span>
+                            <span className='text-sm md:text-base text-gray-700 line-clamp-2 break-keep min-h-[2.5rem] md:min-h-[3rem]'>
+                                {item.name}
+                            </span>
                         </div>
                     ))}
                 </div>

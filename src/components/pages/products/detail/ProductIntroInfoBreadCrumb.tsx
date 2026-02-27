@@ -2,8 +2,10 @@ import React from 'react'
 
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { cn } from '@/lib/utils'
+import { ACCORDION_VARIANTS } from '@/constants/motion'
 import { UniversalDetailDTO, DetailNavDTO } from '@/types/respDto'
 import { ChevronRight, ChevronDown } from 'lucide-react'
 
@@ -27,18 +29,21 @@ export default function ProductIntroInfoBreadCrumb({ product, contextList, from 
             // 클릭된 요소가 menuRef내부에 포함되어있지 않으면 닫음
             if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
                 setOpenMenu(false);
+                setOpenInnerMenuId(null);
             }
         };
 
         if (openMenu) {
             // ✨ mousedown이 click보다 반응이 빠르고 정확할 때가 많습니다.
             window.addEventListener('mousedown', handleOutsideClick);
-        }
+        };
 
         return () => {
             window.removeEventListener('mousedown', handleOutsideClick);
         };
     }, [openMenu]);
+
+
 
     return (
         <div className="flex items-center gap-1 text-sm font-medium text-gray-400 mb-2">
@@ -46,7 +51,7 @@ export default function ProductIntroInfoBreadCrumb({ product, contextList, from 
             <ChevronRight size={12} />
             
             <div ref={menuRef} className="relative min-w-0 flex-shrink-1">
-                <button onClick={() => setOpenMenu(prev => !prev)}
+                <button onClick={() => {setOpenMenu(prev => !prev); openMenu === false && setOpenInnerMenuId(null);}}
                     className="flex items-center gap-1 text-main font-bold cursor-pointer max-w-full"
                 >
                     <span className='truncate min-w-0'>{from === 'industry' ? industryJoin : product.productLine}</span>
@@ -55,11 +60,16 @@ export default function ProductIntroInfoBreadCrumb({ product, contextList, from 
 
                 {/* 드롭다운 리스트 */}
                 {openMenu &&
-                    <ul className={cn(
-                        "absolute top-full z-50 left-0 mt-2 py-3 bg-white border border-gray-100 rounded-xl shadow-2xl",
-                        "w-max min-w-[200px] max-w-[240px] md:max-w-[300px]",
-                        "max-h-[350px] overflow-y-auto"
-                    )}
+                    <motion.ul
+                        variants={ACCORDION_VARIANTS}
+                        initial="initial" 
+                        animate="animate"
+                        exit="exit"
+                        transition= {ACCORDION_VARIANTS.transition}
+                        className={cn(
+                            "absolute top-full z-50 left-0 mt-2 py-3 bg-white border border-gray-100 rounded-xl shadow-2xl",
+                            "w-max min-w-[200px] max-w-[240px] md:max-w-[300px]",
+                            "max-h-[350px] overflow-y-auto")}
                     >
                         {contextList.map(item => (
                             <li key={item.id} className='block px-5 py-2'>
@@ -86,7 +96,7 @@ export default function ProductIntroInfoBreadCrumb({ product, contextList, from 
                                     </div>}
                             </li>
                         ))}
-                    </ul>
+                    </motion.ul>
                 }
             </div>
         </div>

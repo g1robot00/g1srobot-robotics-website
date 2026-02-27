@@ -23,7 +23,7 @@ export default function ProductIntroSection({ product, onInquiryClick, contextLi
             {/* 제품 설명 */}
             <div className='col-span-1 h-full flex flex-col gap-6 justify-between'>
                 <ProductIntroInfo product={product} contextList={contextList} from={from}/>
-                <ProductIntroButton onInquiryClick={onInquiryClick} />
+                <ProductIntroButton onInquiryClick={onInquiryClick} productId = {product.id}/>
             </div>
         </div>
     )

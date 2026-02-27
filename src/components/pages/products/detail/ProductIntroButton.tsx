@@ -5,9 +5,10 @@ import Button from '@/components/ui/Button'
 
 interface ProductIntroButtonProps {
     onInquiryClick: () => void
+    productId: string
 }
 
-export default function ProductIntroButton({onInquiryClick}: ProductIntroButtonProps) {
+export default function ProductIntroButton({onInquiryClick, productId}: ProductIntroButtonProps) {
     const buttonStyle = 'flex-1 justify-start text-md h-15';
   return (
     <div className={cn(
@@ -15,7 +16,7 @@ export default function ProductIntroButton({onInquiryClick}: ProductIntroButtonP
                 'md:relative md:bottom-auto md:left-auto md:z-0   md:p-0 md:bg-transparent md:border-none '
                 )}>
         <Button label='제품 문의하기' onClick={onInquiryClick} className={buttonStyle} showArrow />
-        <Button href='/tech-doc' label='다운로드' className={buttonStyle} showArrow/>
+        <Button href={`/tech-doc?productId=${productId}`} label='다운로드' className={buttonStyle} showArrow/>
     </div>
   )
 }

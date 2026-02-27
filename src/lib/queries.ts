@@ -1,4 +1,7 @@
-// 제품 (적용사례에서 사용)
+const PRODUCT_FILTER_LOGIC = `*[_type in ["system", "robot", "component"] && references(^._id)]`;
+
+
+// 제품 (적용사례에서 사용) // FIXME 삭제
 export const PRODUCTS_QUERY = `
   *[_type == "product" && defined(slug.current)]{
     "id":_id,
@@ -15,7 +18,7 @@ export const PRODUCTS_QUERY = `
   }
 `;
 
-// 제품(제품 상세)
+// 제품(제품 상세)  // FIXME 삭제
 export const PRODUCT_DETAIL_QUERY = `
   *[_type == "product" && slug.current == $slug][0] {
     "id": _id,
@@ -90,7 +93,7 @@ export const PRODUCT_LINE_LIST_QUERY = `
 `
 
 export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
-  *[_type == "productLine" && count(*[_type in ["system", "robot", "component"] && references(^._id)]) > 0] | order(name asc) { // 해당제품 없으면 목록 삭제
+  *[_type == "productLine" && count(${PRODUCT_FILTER_LOGIC}) > 0] | order(name asc) { // 해당제품 없으면 목록 삭제
     "id": _id,
     "label": name,
     "nameEn": nameEn,
@@ -109,13 +112,13 @@ export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
     },
 
     // 3. 이미지 처리(이미지가 없다면 첫번째 제품의 이미지를 가져오거나 처리)
-    "thumbnail": *[_type in ["system", "robot", "component"] && references(^._id)]| order(_createdAt asc)[0].images[0].asset->url
+    "thumbnail": ${PRODUCT_FILTER_LOGIC}| order(_createdAt asc)[0].images[0].asset->url
   }
 `;
 
 // _제품상세 네브 리스트 
 export const PRODUCT_LINE_NAV_QUERY = `
-  *[_type == "productLine"] | order(name asc) {
+  *[_type == "productLine" && count(${PRODUCT_FILTER_LOGIC}) > 0] | order(name asc) {
     "id": _id,
     'name': name,
     'products': *[_type in ["system", "robot", "component" ] && references(^._id)] | order(name asc){
@@ -156,7 +159,7 @@ export const INDUSTRY_LIST_QUERY = `
 `;
 
 export const INDUSTRY_WITH_PRODUCTS_QUERY = `
-  *[_type == 'industry'&& count(*[_type in ["system", "robot", "component"] && references(^._id)]) > 0] { // 해당제품 없으면 목록 삭제
+  *[_type == 'industry'&& count(${PRODUCT_FILTER_LOGIC}) > 0] { // 해당제품 없으면 목록 삭제
     "id": _id,
     "label": name,
     "kind": *[_type in ["system", "robot", "component" ] && references(^._id)] {
@@ -171,7 +174,7 @@ export const INDUSTRY_WITH_PRODUCTS_QUERY = `
   }
 `
 export const INDUSTRY_NAV_QUERY = `
-*[_type == "industry"] | order(name asc) {
+*[_type == "industry" && count(${PRODUCT_FILTER_LOGIC}) > 0] | order(name asc) {
     "id": _id,
     'name': name,
     'products': *[_type in ["system", "robot", "component" ] && references(^._id)] | order(name asc){
@@ -196,7 +199,27 @@ export const TECH_DOC_QUERY = `
       "name": asset->originalFilename, //원래 파일이름 
       "size": asset->size,  //파일용량
       "extension": asset->extension //확장자(.pdf ...)
-    }
+    },
+    "relatedProducts": relatedProducts[] -> {
+      "id": _id,
+      name
+    },
+    // 필터용 제품 목록
+    "filterOption": *[_type == "productLine" 
+      // ✨ 조건 1: 이 제품군 아래에 있는 제품들 중 techDoc이 존재하는 제품이 하나라도 있는가?
+      && count(*[_type in ['system', 'robot', 'component'] && references(^._id)
+      && count(*[_type == 'techDoc' && references(^._id)]) >0 ]) >0
+      ] | order(name asc) {
+        'id': _id,
+        'name': name,
+        'products' : *[_type in ["system", "robot", "component"] && references(^._id)
+          // ✨ 조건 2: 이 개별 제품을 참조하는 techDoc이 존재하는가?
+          && count(*[_type == 'techDoc' && references(^._id)]) > 0 ] | order(name asc) {
+            'id': _id,
+            'name': name
+          }
+      }
+    
   }
 `
 

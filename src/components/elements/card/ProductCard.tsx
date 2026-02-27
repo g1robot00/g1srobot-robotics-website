@@ -50,7 +50,7 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
                     <Badge label={currentType.label} className={`${currentType.color} flex-shrink-0 w-fit h-fit shadow-none mr-2`}/>
                     {/* <span  className={`${currentType.color} font-bold text-xs flex-shrink-0 w-fit h-fit shadow-none mr-2`}>{currentType.label}</span> */}
                     <h3 className={cn('text-lg md:text-xl font-bold leading-snug group-hover:text-main transition-colors', 
-                                    'line-clamp-2 break-keep min-h-[3rem] md:min-h-[3.5rem]')} //FIXME rem이 무슨단위
+                                    'line-clamp-2 break-keep min-h-[3rem] md:min-h-[3.5rem]')} 
                     >
                         {label}
                     </h3>

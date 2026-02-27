@@ -33,6 +33,24 @@ export function useInquiryForm(): UseInquiryFormReturn {
         const emailDomain = formData.get('emailDomain') as string;
         formData.set('email', `${emailId}@${emailDomain}`);
 
+        const checkList = [
+            { name: 'inquiryType', label: '문의유형', ref: formRefs.inquiryTypeRef },
+            { name: 'company', label: '회사명', ref: formRefs.companyRef },
+            { name: 'name', label: '이름', ref: formRefs.nameRef },
+            { name: 'emailId', label: '이메일', ref: formRefs.emailRef },
+            { name: 'phone', label: '전화번호', ref: formRefs.phoneRef },
+            { name: 'content', label: '문의내용', ref: formRefs.contentRef },
+        ]
+
+        for (const item of checkList) {
+            const value = formData.get(item.name) as string;
+            if (!value || !value.trim()) {
+                alert(`${item.label}을(를) 입력해주세요.`);
+                item.ref.current?.focus();
+                return;
+            }
+        };
+        
         // 이메일 정규식 검사
         const email = formData.get('email') as string;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -58,23 +76,6 @@ export function useInquiryForm(): UseInquiryFormReturn {
             return;
         }
 
-        const checkList = [
-            { name: 'inquiryType', label: '문의유형', ref: formRefs.inquiryTypeRef },
-            { name: 'company', label: '회사명', ref: formRefs.companyRef },
-            { name: 'name', label: '이름', ref: formRefs.nameRef },
-            { name: 'emailId', label: '이메일', ref: formRefs.emailRef },
-            { name: 'phone', label: '전화번호', ref: formRefs.phoneRef },
-            { name: 'content', label: '문의내용', ref: formRefs.contentRef },
-        ]
-
-        for (const item of checkList) {
-            const value = formData.get(item.name) as string;
-            if (!value || !value.trim()) {
-                alert(`${item.label}을(를) 입력해주세요.`);
-                item.ref.current?.focus();
-                return;
-            }
-        };
 
         if (!isAgreed) {
             alert('개인정보 수집에 동의해주세요.');

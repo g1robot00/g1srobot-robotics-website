@@ -1,16 +1,20 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
-import Link from 'next/link';
+import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 
-import { NAV_ITEMS } from '@/constants/navigation';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ACCORDION_VARIANTS } from '@/constants/motion'
+import { cn } from '@/lib/utils'
+import { NAV_ITEMS } from '@/constants/navigation'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 export default function NavDropbar() {
     const pathname = usePathname(); // 현재경로
-    const currentMenu = NAV_ITEMS.find(item => pathname.startsWith(item.href)) || NAV_ITEMS[0]; // 현재경로와 일치하는 메뉴찾기
+    // const currentMenu = NAV_ITEMS.find(item => pathname.startsWith(item.href)) || NAV_ITEMS[0]; // 현재경로와 일치하는 메뉴찾기
     const [openMenu, setOpenMenu] = useState<'parent' | 'child' | null>(null);
+    const menuRef = useRef<HTMLDivElement>(null);
 
     // 1. 부모 찾기
     const parentItem = NAV_ITEMS.find(item =>
@@ -28,31 +32,60 @@ export default function NavDropbar() {
         setOpenMenu(prev => prev === menu ? null : menu);
     };
 
+    // 외부클릭시 닫음
+    useEffect(() => {
+        if(!openMenu) return;
+
+        const handleOutsideClick = (e: MouseEvent) => {
+            if(menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                setOpenMenu(null);
+            }
+        };
+
+        window.addEventListener('mousedown', handleOutsideClick);
+        return () => {
+            window.removeEventListener('mousedown', handleOutsideClick);
+        }
+
+    }, [openMenu]);
+
 
     return (
-        <div className={`relative py-3 flex items-center
-                        bg-black/40 backdrop-blur-md 
-                        rounded-full cursor-pointer hover:bg-black/60 transition-all`}
+        <div ref={menuRef} 
+            className={cn('relative py-3 flex items-center',
+                'bg-black/40 backdrop-blur-md ',
+                'rounded-full cursor-pointer hover:bg-black/60 transition-all')}
         >
             <div className='relative'>
                 <button onClick={() => toggleMenu('parent')}
-                    className='px-8 flex items-center gap-1 cursor-pointer whitespace-nowrap'>
+                    className='block px-8 flex items-center gap-1 cursor-pointer whitespace-nowrap'>
                     {parentItem.label}
-                    {openMenu === 'parent' ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                    <ChevronDown size={14} className={`transition-transform ${openMenu === 'parent' && 'rotate-180'}`}/>
                 </button>
-                {openMenu === 'parent' &&
-                    <ul className='absolute top-[calc(100%+15px)] left-0 z-50
-                                min-w-full w-max py-2 bg-white shadow-xl rounded-xl  
-                                text-black'>
-                        {NAV_ITEMS.map(item => (
-                            <li key={item.href} className='hover:bg-gray-100'>
-                                <Link href={item.href} className={`block px-5 py-2 ${pathname.startsWith(item.href) ? 'text-main font-bold' : ''}`}>
-                                    {item.label}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                }
+                <AnimatePresence>
+                    {openMenu === 'parent' &&
+                        <motion.ul
+                            variants={ACCORDION_VARIANTS}
+                            initial="initial" 
+                            animate="animate"
+                            exit="exit"
+                            transition= {ACCORDION_VARIANTS.transition}
+                            className='absolute top-[calc(100%+15px)] left-0 z-50
+                                min-w-full w-max px-2 py-4 bg-white shadow-xl rounded-xl overflow-hidden
+                                text-black'
+                        >
+                            {NAV_ITEMS.map(item => (
+                                <li key={item.href} 
+                                    className='rounded-lg hover:bg-gray-100'
+                                >
+                                    <Link href={item.href} className={`block px-5 py-2 ${pathname.startsWith(item.href) ? 'text-main font-bold' : ''}`}>
+                                        {item.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </motion.ul>
+                    }
+                </AnimatePresence>
             </div>
 
             {parentItem.items && parentItem.items.length > 0 && (
@@ -61,13 +94,21 @@ export default function NavDropbar() {
                     <div className='relative'>
                         <button
                             onClick={() => toggleMenu('child')}
-                            className='px-8 flex items-center gap-1 cursor-pointer whitespace-nowrap'
+                            className='block px-8 flex items-center gap-1 cursor-pointer whitespace-nowrap'
                         >
                             {currentChild?.label || parentItem.label}
-                            {openMenu === 'child' ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                            <ChevronDown size={14} className={`transition-transform ${openMenu === 'child' && 'rotate-180'}`}/>
                         </button>
                         {openMenu === 'child' && (
-                            <ul className='absolute top-[calc(100%+15px)] left-0 min-w-full w-max bg-white text-black shadow-xl rounded-xl py-2 z-50'>
+                            <motion.ul
+                                variants={ACCORDION_VARIANTS}
+                                initial="initial" 
+                                animate="animate"
+                                exit="exit"
+                                transition= {ACCORDION_VARIANTS.transition}
+                                className='absolute top-[calc(100%+15px)] left-0 z-50 
+                                    min-w-full w-max px-2 py-4 bg-white shadow-xl rounded-xl overflow-hidden  text-black '
+                            >
                                 {parentItem.items.map(sub => (
                                     <li key={sub.href} className='hover:bg-gray-100'>
                                         <Link href={sub.href} className={`block px-5 py-2 ${pathname === sub.href ? 'text-main font-bold' : ''}`}>
@@ -75,7 +116,7 @@ export default function NavDropbar() {
                                         </Link>
                                     </li>
                                 ))}
-                            </ul>
+                            </motion.ul>
                         )}
                     </div>
                 </>

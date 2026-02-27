@@ -1,29 +1,32 @@
-import { notFound } from "next/navigation"
-import { client } from "@/lib/sanity"
+// FIXME 사용안함 삭제하기
 
-import { PRODUCT_DETAIL_QUERY } from "@/lib/queries"
-import ProductDetailContainer from "@/components/pages/products/detail/ProductDetailContainer"
+// import { notFound } from "next/navigation"
+// import { client } from "@/lib/sanity"
 
-interface PageProps {
-    params: Promise<{ slug: string }>
-}
+// import { PRODUCT_DETAIL_QUERY } from "@/lib/queries"
+// import ProductDetailContainer from "@/components/pages/products/detail/ProductDetailContainer"
+// import { UniversalDetailDTO } from "@/types/respDto"
 
-export default async function page({ params }: PageProps) {
-    // url에서 slug 추출(params.slug)
-    const { slug } = await params;
+// interface PageProps {
+//     params: Promise<{ slug: string }>
+// }
 
-    // cms에 해당 slug를 가진 제품 데이터 요청
-    //$slug 자리에 현재 주소의 slug 값을 넣어줌
-    const product = await client.fetch(PRODUCT_DETAIL_QUERY, { slug });
+// export default async function page({ params }: PageProps) {
+//     // url에서 slug 추출(params.slug)
+//     const { slug } = await params;
 
-    // 데이터없으면 404페이지
-    if (!product) {
-        notFound();
-    }
+//     // cms에 해당 slug를 가진 제품 데이터 요청
+//     //$slug 자리에 현재 주소의 slug 값을 넣어줌
+//     const product: UniversalDetailDTO = await client.fetch(PRODUCT_DETAIL_QUERY, { slug });
 
-    return (
-        <main>
-            <ProductDetailContainer product={product}/>
-        </main>
-    )
-}
+//     // 데이터없으면 404페이지
+//     if (!product) {
+//         notFound();
+//     }
+
+//     return (
+//         <main>
+//             <ProductDetailContainer product={product}/>
+//         </main>
+//     )
+// }
