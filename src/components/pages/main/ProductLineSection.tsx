@@ -152,7 +152,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                         </div>
                         {/* 오른쪽: 화면에 고정되는 이미지 박스 */}
                         {/* FIXME 3xl flex-1.5 적용 안되는 듯, md 이상에서 flex-[1.5]를 주어 텍스트보다 더 넓은 영역 차지, 3xl에서 높이 증가 */}
-                        <div className='hidden lg:block lg:flex-[1.2] 3xl:flex-[1.5] sticky top-1/5 3xl:top-1/6 h-[600px] 3xl:h-[800px]'> 
+                        <div className='hidden lg:block lg:flex-[1.2] 3xl:flex-[1.5] sticky top-1/5 3xl:top-1/6 h-[600px] 3xl:h-[80vh]'> 
                             <AnimatePresence  mode="wait">
                                 <motion.div className='relative w-full h-full bg-gray-800 rounded-2xl overflow-hidden'
                                             key={activeId} // activeId가 바뀔때마다 애니메이션 트리거

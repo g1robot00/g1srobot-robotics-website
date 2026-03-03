@@ -62,6 +62,7 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                         </button>
                     </div>
                 </div>
+            </Container>
                 {/* 카드영역 */}
                 <div className='w-full flex-1 flex gap-20'>
                         {useCases.length > 0
@@ -92,7 +93,6 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                             <MoveRight />
                         </Link>
                 </div>
-            </Container>
         </section>
     )
 }

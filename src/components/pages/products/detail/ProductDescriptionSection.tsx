@@ -29,13 +29,16 @@ export default function ProductDescriptionSection({product, from}: DescriptionSe
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-20 '>
                     {specs.map((item, idx) => (
                         <div key={`${idx}_${item}`}
-                            className='flex justify-between border-b border-gray-200 '
+                            className='flex justify-between gap-2 border-b border-gray-200 '
                         >
                             <span className='text-sm md:text-base text-gray-500'>{item.label}</span>
-                            <span className='text-base md:text-lg font-semibold'>
-                                {item.value}
-                                {item.unit}
-                            </span>
+                            {item.value
+                                ?<span className='text-base md:text-lg font-semibold text-right'>
+                                    {item.value}
+                                    {item.unit}
+                                </span>
+                                : <span className='text-base md:text-lg font-semibold text-right'>-</span>
+                            }
                         </div>
                     ))}
                 </div>

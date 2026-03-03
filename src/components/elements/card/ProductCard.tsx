@@ -58,9 +58,12 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
                 {/* 모바일 스펙 요약 */}
                 <div className='flex flex-col gap-y-2 md:gap-y-4 p-3 bg-gray-100  rounded-lg divide-y divide-gray-200 '>
                     {specToShow.map((spec, idx) => (
-                        <div key={`${idx}_${spec.label}`} className='flex flex-col md:flex-row md:justify-between text-xs md:text-sm truncate'>
-                            <span className='mr-1 text-gray-500'>{spec.label}</span>
-                            <span className='font-bold text-gray-700'>{spec.value}{spec.unit}</span>
+                        <div key={`${idx}_${spec.label}`} className='flex flex-col gap-1 md:flex-row md:justify-between text-xs md:text-sm'>
+                            <span className='flex-shrink-0 mr-1 text-gray-500'>{spec.label}</span>
+                            {spec.value
+                                ? <span className='font-bold text-gray-700 truncate'>{spec.value}{spec.unit}</span>
+                                : <span className='font-bold text-gray-700'>-</span>
+                            }
                         </div>
                     ))}
                 </div>

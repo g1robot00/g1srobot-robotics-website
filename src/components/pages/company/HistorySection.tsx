@@ -32,8 +32,8 @@ export default function HistorySection({history, id}: HistorySectionProps) {
 
         // UI표시할 문자열로 변환
         return uniqueDecades.map(startYear => {
-            if (startYear === 2000) return "2000's";
-            return `${startYear}'s`
+            // if (startYear === 2000) return "2009 - 2000";
+            return `${startYear + 9} - ${startYear}`
         })
     },[history])
     
@@ -43,7 +43,7 @@ export default function HistorySection({history, id}: HistorySectionProps) {
         
         history.forEach(item => {
             const year = parseInt(item.year);
-            const decade = year <= 2000 ? "2000's": `${Math.floor(year/10) * 10}'s`;
+            const decade = year <= 2000 ? "2009 - 2000": `${Math.floor(year/10) * 10 + 9} - ${Math.floor(year/10) * 10}`;
             if (!groups[decade]) groups[decade] = [];
             groups[decade].push(item);
         });
@@ -94,7 +94,7 @@ export default function HistorySection({history, id}: HistorySectionProps) {
                 />
                     <div className='relative flex flex-col gap-15 md:grid md:grid-cols-[180px_1fr] md:gap-35'>
                         {/* 좌측 네비게이션 */}
-                        <div className='md:sticky z-10 md:top-30 md:h-fit'>
+                        <div className='md:sticky z-10 md:top-50 md:h-fit'>
                             <div className='flex gap-5 md:flex-col justify-center '>
                                 {yearNav.map((item, idx) => (
                                     <button key={`${idx}_${item}`}
@@ -114,7 +114,7 @@ export default function HistorySection({history, id}: HistorySectionProps) {
                         <div className='flex flex-col gap-32 border-l-2 border-gray-400'>
                             {/* 각 연대(Decade)를 하나의 section으로 묶고 ID를 부여합니다. */}
                             {groupedHistory.map(([decade, items]) => (
-                                <section key={decade} id={decade} className='scroll-mt-40'>
+                                <section key={decade} id={decade} className='scroll-mt-50'>
                                     {items.map(yearItem => (
                                         <div key={yearItem.id} className='relative pl-12 pb-20 last:pb-0'>
                                             {/* 타임라인 포인트 */}
