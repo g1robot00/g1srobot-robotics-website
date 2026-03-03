@@ -65,38 +65,32 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                 {/* 카드영역 */}
                 <div className='w-full flex-1 flex gap-20'>
                         {useCases.length > 0
-                            ? 
-                            <div ref={scrollRef}
+                            ? <div ref={scrollRef}
                                 className={cn('flex-1 flex gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-5',
                                             'pl-[5%]  md:pl-[calc((100vw-1280px)/2+40px)] pr-10')}
                             >
                                 {useCases.map(item => (
-                                    <>
-                                        <div key={item.title}
-                                            className={cn(
-                                                        'flex-shrink-0 snap-center',
-                                                        // 모바일: 화면 너비의 85% (다음 카드가 살짝 보여야 스크롤 유도가 됨)
-                                                        // 데스크탑(md): 3개가 딱 맞게 보이기 위해 (100% / 3) - 여백(gap) 계산
-                                                        'w-[85%] md:w-[calc((100%-40px)/3.8)]'
-                                                    )}
-                                        >
-                                            <UseCaseCard key={item.title}
-                                                useCase={item}
-                                            />
-                                        </div>
-                                        <Link href='/use-cases' className='flex flex-col  text-white mx-10 p-5 border border-gray-200 rounded-full hover:bg-gray-300/30 cursor-pointer '>
-                                            <MoveRight />
-                                        </Link>
-                                    </>
+                                    <div key={item.title}
+                                        className={cn(
+                                                    'flex-shrink-0 snap-center',
+                                                    // 모바일: 화면 너비의 85% (다음 카드가 살짝 보여야 스크롤 유도가 됨)
+                                                    // 데스크탑(md): 3개가 딱 맞게 보이기 위해 (100% / 3) - 여백(gap) 계산
+                                                    'w-[85%] md:w-[calc((100%-40px)/3.8)]'
+                                                )}
+                                    >
+                                        <UseCaseCard useCase={item} />
+                                    </div>
                                 ))}
                             </div>
-                            : 
-                            <div className='flex-1 w-full min-h-[380px] 3xl:h-[700px] flex items-center justify-center rounded-lg bg-white/20'>
+                            : <div className='flex-1 w-full min-h-[380px] 3xl:h-[700px] flex items-center justify-center rounded-lg bg-white/20'>
                                 <p className='font-bold text-gray-400'>
                                     공개사례 준비중입니다.
                                 </p>
                             </div>
                         }
+                        <Link href='/use-cases' className='flex flex-col  text-white h-fit p-5 border border-gray-200 rounded-full hover:bg-gray-300/30 cursor-pointer '>
+                            <MoveRight />
+                        </Link>
                 </div>
             </Container>
         </section>
