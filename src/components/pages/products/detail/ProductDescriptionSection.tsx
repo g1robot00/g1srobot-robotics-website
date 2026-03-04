@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import {  UniversalDetailDTO } from '@/types/respDto'
+import ProductDescriptionSpecsTable from './ProductDescriptionSpecsTable';
 import { ImageOff } from 'lucide-react';
 
 interface DescriptionSectionProps {
@@ -10,38 +11,20 @@ interface DescriptionSectionProps {
 }
 
 export default function ProductDescriptionSection({product, from}: DescriptionSectionProps) {
-    const {productLine, industries, specs, robots, components} = product
+    const { name, nameEn, specs, specsImg, robots, components} = product;
 
+    const showSpecsImg = specsImg && ( !specs || specs.length <= 3) ;
     const RelatedItems = robots || components || [];
-    const industryJoin = industries.map(i => i).join(' / ')
 
   return (
     <div className='grid grid-cols-1 gap-15 md:gap-25 '>
-        {/* <div className='flex flex-col gap-5 md:gap-10'>
-            <h3 className='font-bold text-base md:text-lg text-gray-700'>적용산업</h3>
-            <div>
-                <span className='text-gray-500'>{industryJoin}</span>
-            </div>
-        </div> */}
-        { specs && specs.length > 0 &&
+        { ((specs && specs.length > 0) || (specsImg && typeof specsImg === 'string')) &&
             <div className='flex flex-col gap-10'>
                 <h3 className='font-bold text-base md:text-lg text-gray-700'>제품 사양</h3>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-x-20 '>
-                    {specs.map((item, idx) => (
-                        <div key={`${idx}_${item}`}
-                            className='flex justify-between gap-2 border-b border-gray-200 '
-                        >
-                            <span className='text-sm md:text-base text-gray-500'>{item.label}</span>
-                            {item.value
-                                ?<span className='text-base md:text-lg font-semibold text-right'>
-                                    {item.value}
-                                    {item.unit}
-                                </span>
-                                : <span className='text-base md:text-lg font-semibold text-right'>-</span>
-                            }
-                        </div>
-                    ))}
-                </div>
+                {showSpecsImg 
+                    ? <Image src={specsImg} alt={`${name}(${nameEn}) 상세 사양표`} width={1000} height={800} />
+                    : <ProductDescriptionSpecsTable specs={specs}/>
+                }
             </div>
         }
         { RelatedItems && RelatedItems.length > 0 &&

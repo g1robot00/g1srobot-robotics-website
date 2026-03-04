@@ -1,5 +1,6 @@
 // 공통 및 하위타입
 export interface ProductSpec {
+    _key: string;
     label: string;
     value: string;
     unit?: string;
@@ -9,7 +10,6 @@ export interface ProductItemDTO {
     id: string;
     type: 'system' | 'robot' | 'component';
     label: string;
-    // nameEn: string;
     href: string;
     specs: ProductSpec[];
     thumbnail: string;
@@ -47,7 +47,8 @@ export interface UniversalDetailDTO {
     nameEn: string;
     href: string;
     description: string;
-    specs: ProductSpec[]
+    specs: ProductSpec[];
+    specsImg: string;
     productLine: string;
     industries: string[];
     mainImage: string;

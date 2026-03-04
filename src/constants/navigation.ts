@@ -16,7 +16,3 @@ export const NAV_ITEMS: readonly NavItem[] = [
   },
 ] as const;
 
-export const NAV_HEIGHT = {
-  h: 'h-15 md:h-20',
-  top: 'top-15 md:top-20'
-}

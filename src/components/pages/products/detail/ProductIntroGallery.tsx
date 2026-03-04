@@ -6,13 +6,13 @@ import Image from "next/image"
 import ProductThumbnails from "./ProductThumbnails"
 import { PlayCircle } from "lucide-react"
 
-interface ProductGalleryProps {
+interface ProductIntroGalleryProps {
     imgUrls: string[],
     videoUrls: string[],
     name: string
 }
 
-export default function ProductGallery({ imgUrls, videoUrls, name }: ProductGalleryProps) {
+export default function ProductIntroGallery({ imgUrls, videoUrls, name }: ProductIntroGalleryProps) {
     const allMedia = [
         ...(imgUrls?.map(url => ({ type: 'image', url })) ?? []),
         ...(videoUrls?.map(url => ({ type: 'video', url })) ?? [])
@@ -28,7 +28,7 @@ export default function ProductGallery({ imgUrls, videoUrls, name }: ProductGall
     )}
 
     return (
-        <div className='flex flex-col items-center h-full w-full'>
+        <div className='flex flex-col items-center justify-center h-full w-full'>
             <div className="flex-1 w-full min-h-0 flex items-center jutify-center">
                 <div className='relative w-full h-full md:max-w-[95%] max-h-full aspect-[4/3] bg-gray-50 overflow-hidden'>
                     {currentMedia.type === 'image'

@@ -5,7 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
-import { NAV_ITEMS, NAV_HEIGHT } from '@/constants/navigation'
+import { NAV_ITEMS } from '@/constants/navigation'
+import { NAV_LAYOUT } from '@/constants/styles'
 import MenuDrawer from './MenuDrawer'
 import { NavItem } from '@/types/nav'
 import { Menu } from 'lucide-react';
@@ -67,7 +68,7 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
               )}
       >
         {/* 상단 메인 메뉴바 */}
-        <div className={`w-full ${NAV_HEIGHT.h} flex items-center justify-center`}>
+        <div className={`w-full ${NAV_LAYOUT.h} flex items-center justify-center`}>
           <div className='w-full max-w-screen-2xl px-4 md:px-8 lg:px-12 flex items-center justify-between '>
             <Link href='/'>
               <Image className="dark:invert "

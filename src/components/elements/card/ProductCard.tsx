@@ -22,7 +22,10 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
     }
     const currentType = typeConfig[type];
 
-    const specToShow = specs?.slice(0,3);
+    const displaySpecs = [...(specs || [])].slice(0, 3);
+    while (displaySpecs.length < 3) {
+        displaySpecs.push({_key: `empty-slot-${displaySpecs.length}`, label: '', value: '', unit: ''}); //빈객체 추가
+    }
 
     return (
         <Link href={`${href}?from=${from}&id=${id}`} key={label} 
@@ -57,12 +60,12 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
                 </div>
                 {/* 모바일 스펙 요약 */}
                 <div className='flex flex-col gap-y-2 md:gap-y-4 p-3 bg-gray-100  rounded-lg divide-y divide-gray-200 '>
-                    {specToShow.map((spec, idx) => (
-                        <div key={`${idx}_${spec.label}`} className='flex flex-col gap-1 md:flex-row md:justify-between text-xs md:text-sm'>
+                    {displaySpecs.map((spec, idx) => (
+                        <div key={spec._key} className='flex flex-col gap-1 md:flex-row md:justify-between text-xs md:text-sm'>
                             <span className='flex-shrink-0 mr-1 text-gray-500'>{spec.label}</span>
                             {spec.value
                                 ? <span className='font-bold text-gray-700 truncate'>{spec.value}{spec.unit}</span>
-                                : <span className='font-bold text-gray-700'>-</span>
+                                : <span className={`font-bold text-gray-700 ${!spec.label && 'invisible'}`}>-</span>
                             }
                         </div>
                     ))}

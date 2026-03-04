@@ -18,20 +18,6 @@ export const PRODUCTS_QUERY = `
   }
 `;
 
-// 제품(제품 상세)  // FIXME 삭제
-export const PRODUCT_DETAIL_QUERY = `
-  *[_type == "product" && slug.current == $slug][0] {
-    "id": _id,
-    "name": name,
-    "description": description,
-    "mainImage": mainImage.asset->url,
-    "images": images[].asset->url,
-    "specs": specs,
-    "productLine": productLine-> name,
-    "industries": industries[]->name
-  }
-`
-
 // 시스템,로봇,부품 상세
 export const UNIVERSAL_DETAIL_QUERY = `
   *[_type in ["system", "robot", "component"] && slug.current == $slug][0] {
@@ -42,6 +28,7 @@ export const UNIVERSAL_DETAIL_QUERY = `
     "href": '/products/' + slug.current,
     "description": description,
     "specs": specs,
+    "specsImg": specsImg.asset->url,
     "productLine": productLine->name,
     "industries": industries[]->name,
     "mainImage": mainImage.asset->url,

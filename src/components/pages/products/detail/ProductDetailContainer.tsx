@@ -2,9 +2,12 @@
 
 import { useRef } from 'react'
 
+import { cn } from '@/lib/utils'
+import { NAV_LAYOUT } from '@/constants/styles'
 import ProductIntroSection from './ProductIntroSection'
 import ProductDescriptionSection from './ProductDescriptionSection'
 import ProductInquirySection from './ProductInquirySection'
+import Container from '@/components/shared/Container'
 import { UniversalDetailDTO, DetailNavDTO } from '@/types/respDto'
 
 interface ProductDetailContainerProps {
@@ -22,19 +25,23 @@ export default function ProductDetailContainer({ product, contextList, from }: P
 
 
     return (
-        <section className='mx-auto '>
-            <div className='flex flex-col gap-20 md:gap-30 '>
-                <div className='flex flex-col px-5 md:px-10 lg:px-30 pt-20 pb-0 md:pb-30 md:pt-40'
+        <section className='mx-auto'>
+            <div className='flex flex-col gap-20 md:gap-30'>
+                <Container className={ `${NAV_LAYOUT.pt}`}
                 >
-                    <ProductIntroSection product={product} onInquiryClick={scrollToInquiry} contextList={contextList} from={from}/>
-                </div>
+                    <div className={`flex flex-col ${NAV_LAYOUT.screenH} pt-5 md:py-15`}>
+                        <ProductIntroSection product={product} onInquiryClick={scrollToInquiry} contextList={contextList} from={from}/>
+                    </div>
+                </Container>
 
-                <div className='px-5 md:px-10 lg:px-30 '>
+                <Container>
                     <ProductDescriptionSection product={product} from={from}/>
-                </div>
+                </Container>
 
-                <div ref={inquiryRef} className='px-5 md:px-10 lg:px-30 bg-gray-200 py-20 md:pt-30 md:pb-40'>
-                    <ProductInquirySection productName={`${product.name} _ ${product.nameEn}`} />
+                <div ref={inquiryRef} className='bg-gray-200 py-20 md:pt-30 md:pb-40'>
+                    <Container>
+                        <ProductInquirySection productName={`${product.name} _ ${product.nameEn}`} />
+                    </Container>
                 </div>
             </div>
         </section>

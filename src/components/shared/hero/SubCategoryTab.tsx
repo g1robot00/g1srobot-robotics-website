@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 import { cn } from '@/lib/utils';
-import { NAV_HEIGHT } from '@/constants/navigation';
+import { NAV_LAYOUT } from '@/constants/styles';
 import { SubCategoryTabProps } from '@/types/nav';
 
 export default function SubCategoryTab({list}: SubCategoryTabProps) {
@@ -113,14 +113,14 @@ export default function SubCategoryTab({list}: SubCategoryTabProps) {
   
   return (
     <div className={cn(`sticky top-0 z-30 w-full transition-all duration-500 bg-gray-200`,  
-                    isNavVisible && NAV_HEIGHT.top)}
+                    isNavVisible && NAV_LAYOUT.top)}
     >
       {/* 양옆 그라데이션 */}
       <div className="absolute inset-y-0 left-0 top-0 bottom-0 w-10 md:w-20 z-40 bg-gradient-to-r from-gray-200 to-transparent pointer-events-none " />
       <div className="absolute right-0 top-0 bottom-0 w-10 md:w-20 z-40 bg-gradient-to-l from-gray-200 to-transparent pointer-events-none " />
       {/* 스크롤 영역 */}
       <div ref={scrollContainerRef} className='relative z-10 w-full flex overflow-x-auto scrollbar-hide '>
-        <div className={cn('flex items-center gap-6 md:gap-10 md:min-w-full ', NAV_HEIGHT.h, 'px-8 md:px-20', 'justify-start md:justify-center')}>
+        <div className={cn('flex items-center gap-6 md:gap-10 md:min-w-full ', NAV_LAYOUT.h, 'px-8 md:px-20', 'justify-start md:justify-center')}>
           {list.map(item => (
             <button key={item.id}
                     data-tab-id={item.id}
