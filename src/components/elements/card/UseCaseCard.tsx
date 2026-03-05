@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
+import { cn } from '@/lib/utils'
 import { UseCaseDTO } from '@/types/respDto'
 import Badge from '@/components/ui/Badge'
 
@@ -14,7 +15,7 @@ export default function UseCaseCard({useCase}: UseCaseCardProps) {
   return (
     <Link href={href} className='group block h-full p-0.5  bg-white rounded-xl shadow-md cursor-pointer'>
       <div className='relative w-full rounded-t-xl overflow-hidden'>
-        <div className='w-full h-72 '>
+        <div className='w-full aspect-[4/3] '>
           {thumbnail
             ?<Image src={thumbnail} alt={title} fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -34,9 +35,9 @@ export default function UseCaseCard({useCase}: UseCaseCardProps) {
         </div>
 
         {/* 호버시 나타나는 검정레이어 */}
-        <div className='absolute inset-0 z-10 bg-black/70 opacity-0 group-hover:opacity-100 
-                        transition-opacity duration-300
-                        flex flex-col justify-end p-5 text-white'
+        <div className={cn('absolute inset-0 z-10 bg-black/70 opacity-0 group-hover:opacity-100',
+                        'transition-opacity duration-300',
+                        'flex flex-col justify-end p-5 text-white')}
         >
           <p className='text-sm line-clamp-3 leading-relaxed text-white/80'>
             {sum}
@@ -55,7 +56,7 @@ export default function UseCaseCard({useCase}: UseCaseCardProps) {
       </div>
 
       <div className='px-3 py-5'>
-        <h3 className='text-lg md:text-xl font-bold group-hover:text-main transition-colors'>{title}</h3>
+        <h3 className='min-h-[3.5rem] md:min-h-[4rem] text-lg md:text-xl line-clamp-2 break-keep font-bold group-hover:text-main transition-colors'>{title}</h3>
         <p className='text-gray-400 text-xs md:text-sm'>{date}</p>
       </div>
     </Link>

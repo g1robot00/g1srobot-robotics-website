@@ -9,6 +9,9 @@ import { cn } from '@/lib/utils'
 import { ArrowUp, MessageCircle } from 'lucide-react'
 
 export default function FloatingActions() {
+    const IconStyles = 'w-6 h-6 md:w-8 md:h-8 ';
+    const IconBoxStyles = 'p-3 md:p-4 bg-main rounded-full shadow-lg text-white cursor-pointer'
+
     const [showTopBtn, setShowTopBtn] = useState(false);
     const [bottom, setBottom] = useState(20);
     const pathname = usePathname();
@@ -79,21 +82,21 @@ export default function FloatingActions() {
                                     animate={{opacity: 1, y: 0, scale: 1}}
                                     exit={{opacity: 0, y: 20, scale: 0.8}}
                                     onClick={scrollToTop}
-                                    className='p-3 md:p-4 bg-main rounded-full shadow-lg text-white cursor-pointer'
+                                    className={IconBoxStyles}
                                     title='맨 위로'
                     >
-                        <ArrowUp size={24} strokeWidth={2.5} className=''/>
+                        <ArrowUp strokeWidth={2.5} className={IconStyles}/>
                     </motion.button>
                 )}
                 {/* 문의 버튼 (항시 노출) */}
                 <motion.button key='contact-btn'
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className='p-3 md:p-4 bg-main rounded-full shadow-lg text-white cursor-pointer'
+                                className={IconBoxStyles}
                                 title='문의하기'
                 >
                     <Link href='/support'>
-                        <MessageCircle size={24} strokeWidth={2.5} className=''/>
+                        <MessageCircle strokeWidth={2.5} className={IconStyles}/>
                     </Link>
                 </motion.button>
             </AnimatePresence>

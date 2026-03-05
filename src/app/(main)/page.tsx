@@ -19,7 +19,7 @@ export default async function Home() {
   return (
     <div className='flex flex-col'>
       <HeroSection/>
-      <LogoTicker clients={clients}/>
+      {/* <LogoTicker clients={clients}/> */}
       <IndustrySection industries={industries}/>
       <ProductLineSection productLines={productLines} />
       <UseCaseSection useCases={useCases}/>

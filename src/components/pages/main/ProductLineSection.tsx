@@ -9,9 +9,8 @@ import { cn } from '@/lib/utils';
 import { SECTION_PY } from '@/constants/styles';
 import Container from '@/components/shared/Container';
 import SectionHeader from './SectionHeader';
-import Badge from '@/components/ui/Badge';
 import { ProductLineListDTO } from '@/types/respDto';
-import { MoveRight, ArrowUpRight  } from 'lucide-react';
+import {  ArrowUpRight  } from 'lucide-react';
 
 interface ProductLineSectionProps {
     productLines: ProductLineListDTO[];
@@ -81,7 +80,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
     }, []);
 
     return (
-        <section className='relative w-full  py-10 '>
+        <section className='relative w-full  py-10'>
             <div className='absolute inset-0 z-[-2] overflow-hidden'>
                 <Image src='/img/productLineBg/bg10.jpg' alt='background' fill className='object-cover scale-105'/>
             </div>
@@ -101,77 +100,80 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                         data-index = {index}
                                         ref={(el) => {itemRefs.current[index] = el;}} //ref 저장
                                         className= {`border-b border-gray-800 py-10 md:py-15 transition-opacity duration-500
-                                                    ${activeId === index ? 'opacity-100' : 'opacity-30'}`}
+                                                    ${activeId === index ? 'border-main opacity-100' : 'opacity-30'}`}
                                     >
-                                        <div className={cn('flex items-center justify-between transition-all duration-500', 
-                                                        isActive ? 'mb-6' : 'text-gray-600 hover:text-gray-400')}
-                                        >
-                                            <div className='flex flex-col gap-1 cursor-pointer '>
-                                                <h3 onClick={() => scrollToSection(index)}
-                                                    className={cn(
-                                                        'text-2xl md:text-4xl 3xl:text-6xl font-bold ',
-                                                        isActive && 'text-white'
-                                                    )}
-                                                >
-                                                    {item.label}
-                                                </h3>
-                                                <p className={`text-sm md:text-base ${isActive && 'text-gray-300'}`}>{item.nameEn}</p>
-                                            </div>
-                                            <Link href={`${item.href}#${item.id}`} 
-                                                className={cn('cursor-pointer', isActive ? 'text-white p-3 bg-white/20 rounded-full' : 'hidden')}
+                                        <Link href={`${item.href}#${item.id}`}>
+                                            <div className={cn('flex items-center justify-between transition-all duration-500',
+                                                            isActive ? 'mb-10' : 'text-gray-600 hover:text-gray-400')}
                                             >
-                                                <ArrowUpRight  className='w-6 h-6 md:w-8 md:h-8'/>
-                                            </Link>
-                                        </div>
-                                        {/* 상세내용 및 모바일 전용 이미지 */}
-                                        <AnimatePresence>
-                                            {isActive && (
-                                                <motion.div 
-                                                    initial={{height: 0, opacity: 0}}
-                                                    animate={{height: 'auto', opacity: 1}}
-                                                    exit={{height: 0, opacity: 0}}
-                                                    transition={{duration: 0.4, ease: 'circOut'}}
-                                                    className='flex flex-col gap-6 overflow-hidden'
+                                                <div className='flex flex-col gap-1 cursor-pointer '>
+                                                    <p className={`text-sm md:text-base font-bold ${isActive && 'text-main'}`}>{item.nameEn}</p>
+                                                    <h3 onClick={() => scrollToSection(index)}
+                                                        className={cn('text-2xl md:text-4xl 3xl:text-6xl font-bold ',
+                                                                    isActive && 'text-white')}
+                                                    >
+                                                        {item.label}
+                                                    </h3>
+                                                </div>
+                                                <div
+                                                    className={cn('cursor-pointer', isActive ? 'text-white p-3 bg-white/20 rounded-full' : 'hidden')}
                                                 >
-                                                    <p className='text-gray-400 text-base md:text-lg leading-relaxed whitespace-pre-wrap'>
-                                                        {item.content}
-                                                    </p>
-                                                    {/* 모바일 전용 이미지박스 */}
-                                                    <div className='block lg:hidden relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden'>
-                                                        {item.thumbnail 
-                                                            ?<Image src={item.thumbnail} alt={item.label} fill className='object-cover'/>
-                                                            :<div className='w-full h-full bg-gray-700'/> 
-                                                        }
-                                                    </div>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
+                                                    <ArrowUpRight  className='w-6 h-6 md:w-8 md:h-8'/>
+                                                </div>
+                                            </div>
+                                            {/* 상세내용 및 모바일 전용 이미지 */}
+                                            <AnimatePresence>
+                                                {isActive && (
+                                                    <motion.div
+                                                        initial={{height: 0, opacity: 0}}
+                                                        animate={{height: 'auto', opacity: 1}}
+                                                        exit={{height: 0, opacity: 0}}
+                                                        transition={{duration: 0.4, ease: 'circOut'}}
+                                                        className='flex flex-col gap-6 overflow-hidden'
+                                                    >
+                                                        <p className='text-gray-400 text-base md:text-lg leading-snug whitespace-pre-wrap'>
+                                                            {item.content}
+                                                        </p>
+                                                        {/* 모바일 전용 이미지박스 */}
+                                                        <div className='block lg:hidden relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden'>
+                                                            {item.thumbnail
+                                                                ?<Image src={item.thumbnail} alt={item.label} fill className='object-cover'/>
+                                                                :<div className='w-full h-full bg-gray-700'/>
+                                                            }
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </Link>
                                     </div>
                                 )
                             })}
                         </div>
                         {/* 오른쪽: 화면에 고정되는 이미지 박스 */}
                         {/* FIXME 3xl flex-1.5 적용 안되는 듯, md 이상에서 flex-[1.5]를 주어 텍스트보다 더 넓은 영역 차지, 3xl에서 높이 증가 */}
-                        <div className='hidden lg:block lg:flex-[1.2] 3xl:flex-[1.5] sticky top-1/5 3xl:top-1/6 h-[600px] 3xl:h-[80vh]'> 
-                            <AnimatePresence  mode="wait">
-                                <motion.div className='relative w-full h-full bg-gray-800 rounded-2xl overflow-hidden'
-                                            key={activeId} // activeId가 바뀔때마다 애니메이션 트리거
-                                            initial={{opacity: 0, scale: 0.95, y: 20}}
-                                            animate={{ opacity: 1, scale: 1, y:0 }}
-                                            exit={{opacity: 0, y: -20}}
-                                            transition={{duration: 0.2, ease: [0.22, 1, 0.36, 1]}}
-                                >
-                                    {/* 현재 activeId에 맞는 이미지 출력 */}
-                                    {productLines[activeId].thumbnail
-                                    ?<Image src={productLines[activeId].thumbnail}
-                                            alt={productLines[activeId].label}
-                                            fill
-                                            className='object-cover bg-gray-700'
-                                    />
-                                    : <div className='w-full h-full bg-gray-700'></div>
-                                    }
-                                </motion.div>
-                            </AnimatePresence>
+                        <div className={cn('hidden lg:block', 
+                                        'lg:flex-[1.2] 3xl:flex-[1.5]', 
+                                        'sticky top-[calc(50vh-300px)] 3xl:top-[calc(50vh-375px)] aspect-square min-h-[400px] max-h-[600px] 3xl:max-h-[750px]')}
+                        > 
+                                <AnimatePresence  mode="wait">
+                                    <motion.div className='relative w-full h-full bg-gray-800 rounded-2xl overflow-hidden'
+                                                key={activeId} // activeId가 바뀔때마다 애니메이션 트리거
+                                                initial={{opacity: 0, scale: 0.95, y: 20}}
+                                                animate={{ opacity: 1, scale: 1, y:0 }}
+                                                exit={{opacity: 0, y: -20}}
+                                                transition={{duration: 0.2, ease: [0.22, 1, 0.36, 1]}}
+                                    >
+                                        {/* 현재 activeId에 맞는 이미지 출력 */}
+                                        {productLines[activeId].thumbnail
+                                        ?<Image src={productLines[activeId].thumbnail}
+                                                alt={productLines[activeId].label}
+                                                fill
+                                                className='object-cover bg-gray-700'
+                                        />
+                                        : <div className='w-full h-full bg-gray-700'></div>
+                                        }
+                                    </motion.div>
+                                </AnimatePresence>
                         </div>
                     </div>
             </Container>

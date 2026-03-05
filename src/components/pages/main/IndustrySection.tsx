@@ -27,23 +27,16 @@ export default function IndustrySection({industries}: IndustrySectionProps) {
                     title={`비즈니스 효율을 높이는\n산업별 공정 솔루션`} //다양한 산업 현장에 필요한\n자동화 시스템을 확인하세요
                     href='/solutions'
                 />
-                {/* ✨ 우측에 전체보기 링크 등을 두어 균형을 맞춤 */}
-                {/* <Link href="/solutions" className="flex-shrink-0 text-gray-400 hover:text-main transition-colors font-bold">
-                    View All Solutions →
-                </Link> */}
-
-                {/* ✨ 그리드 레이아웃으로 변경 */}
                 {/* FIXME 3xl 적용안됨 */}
                 <div className='grid grid-cols-1 md:grid-cols-3 3xl:grid-cols-3 gap-6 3xl:gap-8'>
                     {industries.map((item, index) => (
                         <Link key={item.id} href={`${item.href}#${item.id}`} className='group'>
                             <motion.div 
                                 whileHover={{ y: -10 }}
-                                className='relative p-8 3xl:p-12 border border-gray-200 rounded-3xl bg-white hover:border-main transition-colors duration-500 overflow-hidden'
+                                className='relative p-8 3xl:p-12 border border-gray-200 rounded-3xl bg-white hover:border-main hover:shadow-lg transition-colors duration-500 overflow-hidden'
                             >
-                                {/* ✨ 배경에 숫자나 약어 (01, 02...) */}
                                 <span className="absolute top-8 right-8 text-gray-100 font-bold text-5xl group-hover:text-main/10 transition-colors">
-                                    0{index + 1}
+                                    {String(index + 1).padStart(2, '0')}
                                 </span>
 
                                 <div className='relative z-10'>
