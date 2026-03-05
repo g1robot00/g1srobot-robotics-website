@@ -53,12 +53,12 @@ export default function NavDropbar() {
     return (
         <div ref={menuRef} 
             className={cn('relative py-3 flex items-center',
-                'bg-black/40 backdrop-blur-md ',
+                'bg-black/40 backdrop-blur-md',
                 'rounded-full cursor-pointer hover:bg-black/60 transition-all')}
         >
             <div className='relative'>
                 <button onClick={() => toggleMenu('parent')}
-                    className='block px-8 flex items-center gap-1 cursor-pointer whitespace-nowrap'>
+                    className='block px-8 flex items-center gap-1 cursor-pointer whitespace-nowrap text-sm md:text-base'>
                     {parentItem.label}
                     <ChevronDown size={14} className={`transition-transform ${openMenu === 'parent' && 'rotate-180'}`}/>
                 </button>
@@ -94,7 +94,7 @@ export default function NavDropbar() {
                     <div className='relative'>
                         <button
                             onClick={() => toggleMenu('child')}
-                            className='block px-8 flex items-center gap-1 cursor-pointer whitespace-nowrap'
+                            className='block px-8 flex items-center gap-1 cursor-pointer whitespace-nowrap text-sm md:text-base'
                         >
                             {currentChild?.label || parentItem.label}
                             <ChevronDown size={14} className={`transition-transform ${openMenu === 'child' && 'rotate-180'}`}/>

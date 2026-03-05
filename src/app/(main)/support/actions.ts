@@ -5,7 +5,7 @@ import { Resend } from "resend";
 import { INQUIRY_TYPES, InquiryTypeCode } from "@/constants/inquiryType";
 
 export async function sendInquiry(formData: FormData) {
-    const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // 1. 폼 데이터 추출
     

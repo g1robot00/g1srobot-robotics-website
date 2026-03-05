@@ -4,7 +4,6 @@ import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk'
 
 import { SECTION_PY } from '@/constants/styles'
 import Container from '@/components/shared/Container'
-import IconRenderer from '@/components/ui/IconRenderer'
 import { LocationDTO } from '@/types/respDto'
 import { ArrowUpRight } from 'lucide-react'
 
@@ -32,7 +31,7 @@ export default function LocationContainer({ contact }: { contact: LocationDTO })
 
     if (loading) return <div className="h-[450px] bg-gray-100 flex items-center justify-center">지도를 불러오는 중...</div>;
     if (error) {
-        console.error("카카오맵 로드 에러 상세:", error);
+        console.error("[KakaoMap] Failed to load SDK:", error);
         return <div className="h-[450px] bg-red-50 flex items-center justify-center text-red-500">지도를 불러오지 못했습니다. </div>;
     }
 

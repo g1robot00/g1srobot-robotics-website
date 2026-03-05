@@ -29,7 +29,7 @@ export default function ProductDetailContainer({ product, contextList, from }: P
             <div className='flex flex-col gap-20 md:gap-30'>
                 <Container className={ `${NAV_LAYOUT.pt}`}
                 >
-                    <div className={`flex flex-col ${NAV_LAYOUT.screenH} pt-5 md:py-15`}>
+                    <div className={`flex flex-col ${NAV_LAYOUT.screenH} max-h-[900px] pt-5 md:py-15`}>
                         <ProductIntroSection product={product} onInquiryClick={scrollToInquiry} contextList={contextList} from={from}/>
                     </div>
                 </Container>

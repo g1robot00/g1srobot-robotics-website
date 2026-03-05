@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { NAV_ITEMS } from '@/constants/navigation'
 import { NAV_LAYOUT } from '@/constants/styles'
 import MenuDrawer from './MenuDrawer'
+import Container from '../Container'
 import { NavItem } from '@/types/nav'
 import { Menu } from 'lucide-react';
 
@@ -68,8 +69,8 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
               )}
       >
         {/* 상단 메인 메뉴바 */}
-        <div className={`w-full ${NAV_LAYOUT.h} flex items-center justify-center`}>
-          <div className='w-full max-w-screen-2xl px-4 md:px-8 lg:px-12 flex items-center justify-between '>
+        <Container className={`w-full ${NAV_LAYOUT.h} flex justify-center`}>
+          <div className='w-full flex items-center justify-between '>
             <Link href='/'>
               <Image className="dark:invert "
                       src="/next.svg"
@@ -107,11 +108,11 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
               </button>
             </div>
           </div>
-        </div>
+        </Container>
         {/* 서브메뉴 영역 */}
         {activeMenu?.items && activeMenu.items.length > 0 && (
           <div className='w-full bg-white border-t border-gray-100 py-7 animate-in fade-in slide-in-from-top-2'>
-            <ul className='max-w-screen-2xl mx-auto px-12 flex justify-center gap-20'>
+            <ul className='mx-auto px-12 flex justify-center gap-20'>
               {activeMenu.items.map(sub => (
                 <li key={sub.label}>
                   <Link href={sub.href} className='lg:text-lg hover:text-main hover:cursor-pointer block'>

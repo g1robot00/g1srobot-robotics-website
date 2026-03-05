@@ -14,7 +14,6 @@ interface TechDocPageProps{
 export default async function page({searchParams}: TechDocPageProps) {
   const {productId} = await searchParams;
   // const initialProductId = resolvedParams.product || null;
-  console.log('page', productId)
   
   const techDocs: TechDocDTO[] = await client.fetch(TECH_DOC_QUERY);  
 

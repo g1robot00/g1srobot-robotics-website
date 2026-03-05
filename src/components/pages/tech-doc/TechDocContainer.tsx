@@ -20,8 +20,6 @@ export default function TechDocContainer({techDocs, selectedId}: TechDocContaine
   const [openItemId, setOpenItemId] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
-  console.log(filterIds)
-  
   // 외부클릭시 닫음
   useEffect(() => {
     if(!openItemId) return;

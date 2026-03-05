@@ -19,7 +19,7 @@ interface AboutSectionProps {
 export default function AboutSection({slogan, about, business, vision, idAbout, idVision}: AboutSectionProps) {
   const aboutMotion = 'absolute inset-0 z-20 w-full h-full flex flex-col gap-8 items-start md:items-center justify-center text-left md:text-center px-10'
   const aboutTitle = 'mt-6 text-2xl md:text-4xl text-main font-bold tracking-wide'
-  const aboutContent = 'text-sm md:text-2xl text-white tracking-tight md:whitespace-pre-wrap'
+  const aboutContent = 'text-sm md:text-2xl text-white tracking-tight whitespace-pre-wrap'
   const containerRef = useRef<HTMLDivElement>(null);
   // 📍 1. Image 컴포넌트를 모션용으로 변환합니다.
   const MotionImage = motion.create(Image);

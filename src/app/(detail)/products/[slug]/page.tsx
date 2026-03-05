@@ -11,7 +11,7 @@ import { UniversalDetailDTO, DetailNavDTO } from "@/types/respDto"
 
 interface PageProps {
     params:  Promise<{ slug: string }>
-    searchParams: Promise<{ from?: string; id?: string }>
+    searchParams: Promise<{ from?: 'industry' | 'productLine'; id?: string }>
 }
 
 export default async function page({ params, searchParams }: PageProps) {
