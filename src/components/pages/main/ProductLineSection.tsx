@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
@@ -17,6 +18,7 @@ interface ProductLineSectionProps {
 }
 
 export default function ProductLineSection({productLines}: ProductLineSectionProps) {
+    const router = useRouter(); //초기화
     const [activeId, setActiveId] = useState(0); // 현재 활성화된 아이템 인덱스
     const itemRefs = useRef<(HTMLDivElement | null)[]>([]); // 각 아이템을 참조하기 위한 Ref 배열
     const isManualScrolling = useRef(false);    //수동 스크롤중엔 잠금
@@ -48,8 +50,6 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                 isManualScrolling.current = false;
             }, 800); // 스크롤 속도에 따라 600~1000ms 사이로 조절하세요.
         }
-
-        
     }
 
     useEffect(() => {
@@ -99,24 +99,26 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                     <div key={item.id}
                                         data-index = {index}
                                         ref={(el) => {itemRefs.current[index] = el;}} //ref 저장
-                                        className= {`border-b border-gray-800 py-10 md:py-15 transition-opacity duration-500
-                                                    ${activeId === index ? 'border-main opacity-100' : 'opacity-30'}`}
+                                        className= {cn('border-b border-gray-800 py-10 md:py-15 transition-opacity duration-500',
+                                                    isActive? 'border-main opacity-100' : 'opacity-30')}
                                     >
-                                        <Link href={`${item.href}#${item.id}`}>
+                                        <div 
+                                            onClick={() => { isActive ? router.push(`${item.href}#${item.id}`) : scrollToSection(index)}}
+                                            className='block group cursor-pointer'
+                                        >
                                             <div className={cn('flex items-center justify-between transition-all duration-500',
                                                             isActive ? 'mb-10' : 'text-gray-600 hover:text-gray-400')}
                                             >
-                                                <div className='flex flex-col gap-1 cursor-pointer '>
+                                                <div className='flex flex-col gap-1 '>
                                                     <p className={`text-sm md:text-base font-bold ${isActive && 'text-main'}`}>{item.nameEn}</p>
-                                                    <h3 onClick={() => scrollToSection(index)}
-                                                        className={cn('text-2xl md:text-4xl 3xl:text-6xl font-bold ',
+                                                    <h3 className={cn('text-2xl md:text-4xl 3xl:text-6xl font-bold ',
                                                                     isActive && 'text-white')}
                                                     >
                                                         {item.label}
                                                     </h3>
                                                 </div>
                                                 <div
-                                                    className={cn('cursor-pointer', isActive ? 'text-white p-3 bg-white/20 rounded-full' : 'hidden')}
+                                                    className={cn('group-hover:text-main group-hover:bg-main/20 group-hover:shadow-lg', isActive ? 'text-white p-3 bg-white/20 rounded-full' : 'hidden')}
                                                 >
                                                     <ArrowUpRight  className='w-6 h-6 md:w-8 md:h-8'/>
                                                 </div>
@@ -144,7 +146,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                                     </motion.div>
                                                 )}
                                             </AnimatePresence>
-                                        </Link>
+                                        </div>
                                     </div>
                                 )
                             })}
