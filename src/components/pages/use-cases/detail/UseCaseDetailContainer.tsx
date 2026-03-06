@@ -2,9 +2,9 @@ import Image from "next/image"
 
 import Badge from "@/components/ui/Badge";
 import UseCaseDescriptionSection from "./UseCaseDescriptionSection";
-import { UseCaseDTO } from "@/types/respDto"
+import { UseCasePageDTO } from "@/types/respDto"
 
-export default function UseCaseDetailContainer({useCase}: {useCase: UseCaseDTO}) {
+export default function UseCaseDetailContainer({useCase}: {useCase: UseCasePageDTO}) {
     const { title, sum, date, products, industries, href, thumbnail } = useCase;
 
   return (

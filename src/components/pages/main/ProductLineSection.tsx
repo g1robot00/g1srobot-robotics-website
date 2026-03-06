@@ -102,8 +102,13 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                         className= {cn('border-b border-gray-800 py-10 md:py-15 transition-opacity duration-500',
                                                     isActive? 'border-main opacity-100' : 'opacity-30')}
                                     >
-                                        <div 
-                                            onClick={() => { isActive ? router.push(`${item.href}#${item.id}`) : scrollToSection(index)}}
+                                        <Link href={`${item.href}#${item.id}`} 
+                                            onClick={(e) =>  {
+                                                if (!isActive) {
+                                                    e.preventDefault(); 
+                                                    scrollToSection(index);
+                                                }
+                                            }}
                                             className='block group cursor-pointer'
                                         >
                                             <div className={cn('flex items-center justify-between transition-all duration-500',
@@ -146,7 +151,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                                     </motion.div>
                                                 )}
                                             </AnimatePresence>
-                                        </div>
+                                        </Link>
                                     </div>
                                 )
                             })}

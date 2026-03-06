@@ -1,33 +1,38 @@
-'use client'
+'use client' // FIXME 카드가 많을 경우 메모활용
 
 import { useState, useEffect, useMemo } from 'react'
 
 import { SECTION_PY } from '@/constants/styles';
-import Container from '@/components/shared/Container';
+import UseCaseOverlay from './UseCaseOverlay';
 import UseCaseCard from '@/components/elements/card/UseCaseCard'
+import Container from '@/components/shared/Container';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
-import { UseCaseDTO, IndustryListDTO, ProductDTO } from '@/types/respDto';
-import { RotateCw } from 'lucide-react';
+import { UseCasePageDTO } from '@/types/respDto';
 
 
 interface UseCaseContainerProps {
-    initialUseCases: UseCaseDTO[]
-    industries: IndustryListDTO[]
-    products: ProductDTO[]
+    initialData: UseCasePageDTO
 }
 
-export default function UseCaseContainer({ initialUseCases, industries, products }: UseCaseContainerProps) {
+export default function UseCaseContainer({ initialData }: UseCaseContainerProps) {
+    const {
+        useCases: initialUseCases, 
+        industryFilters, 
+        systemFilters 
+    } = initialData
     const [filterType, setFilterType] = useState<'industry' | 'product'>('industry'); 
     const [selectedFilters, setSelectedFilters] = useState<string[] >([]);  //현재 선택된 필터
     const [filteredCases, setFilteredCases] = useState(initialUseCases);    // 화면에 뿌릴 데이터
+    const [selectedId, setSelectedId] = useState<string | null>(null);
+    const selectedCase = filteredCases.find(item => item.id === selectedId); // FIXME 없을 경우 알림띄우기
 
     // 선택가능한 모든 옵션 변수로 추출
     const currentOptions = useMemo(() => {
         return filterType === 'industry'
-            ? industries.map(i => i.label)
-            : products.map(p => p.label)
-    },[filterType, industries, products])
+            ? industryFilters.map(i => i.name)
+            : systemFilters.map(p => p.name)
+    },[filterType, industryFilters, systemFilters])
     
     // 전체 선택 여부 확인
     const isAllSelected = selectedFilters.length === currentOptions.length && currentOptions.length > 0;
@@ -60,16 +65,16 @@ export default function UseCaseContainer({ initialUseCases, industries, products
         } else {
             const filtered = initialUseCases.filter(uc => {
                 if (filterType === 'industry') {
-                    return uc.industries.some(ind => selectedFilters.includes(ind.name));
+                    return uc.industries?.some(ind => selectedFilters.includes(ind.name)) ?? false;
                 }
                 if (filterType === 'product') {
-                    return uc.products.some(prod => selectedFilters.includes(prod.name));
+                    return uc.systems?.some(prod => selectedFilters.includes(prod.name)) ?? false;
                 }
+                return false;
             });
             setFilteredCases(filtered);
         }
     }
-
 
     return (
         <section className='w-full'> 
@@ -94,12 +99,12 @@ export default function UseCaseContainer({ initialUseCases, industries, products
                                 isActive={isAllSelected}
                                 onClick={handleAllToggle}
                         />
-                        {(filterType === 'industry' ? industries : products).map(item => (
-                            <Badge key={item.label}
-                                    label={item.label}
+                        {(filterType === 'industry' ? industryFilters : systemFilters).map(item => (
+                            <Badge key={item.name}
+                                    label={item.name}
                                     variant='filter'
-                                    isActive={selectedFilters.includes(item.label)}
-                                    onClick={()=>handleToggle(item.label)}
+                                    isActive={selectedFilters.includes(item.name)}
+                                    onClick={()=>handleToggle(item.name)}
                             />
                         ))}
                     </div>
@@ -111,11 +116,13 @@ export default function UseCaseContainer({ initialUseCases, industries, products
                     </div>
                 </div>
                 {/* use cases card */}
-                <div className='py-10 md:py-20 grid grid-cols-1 md:grid-cols-3 gap-5'>
+                <div className='py-10 md:py-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:!grid-cols-4 gap-x-4 gap-y-10'>
                     {filteredCases.length > 0
                         ? filteredCases.map(item => (
-                            <UseCaseCard key={item.title}
-                                useCase={item}
+                            <UseCaseCard key={item.id}
+                                        useCase={item}
+                                        onCardClick={() => setSelectedId(item.id)}
+
                             />
                         ))
                         : (
@@ -126,6 +133,12 @@ export default function UseCaseContainer({ initialUseCases, industries, products
                     }
                 </div>
             </Container>
+            {selectedCase && 
+                <UseCaseOverlay 
+                    useCase={selectedCase}
+                    onClose={() => setSelectedId(null)}
+                />
+            }
         </section>
     )
 }

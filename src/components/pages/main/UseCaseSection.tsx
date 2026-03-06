@@ -1,11 +1,12 @@
 'use client'
 
-import {useRef} from 'react'
+import {useRef, useState} from 'react'
 import Link from 'next/link';
 import Image from 'next/image';
 
 import { cn } from '@/lib/utils';
 import { SECTION_PY } from '@/constants/styles';
+import UseCaseOverlay from '../use-cases/UseCaseOverlay';
 import Container from '@/components/shared/Container';
 import SectionHeader from './SectionHeader';
 import UseCaseCard from '@/components/elements/card/UseCaseCard'
@@ -17,9 +18,11 @@ interface UseCaseSectionProps {
 }
 
 export default function UseCaseSection({useCases}: UseCaseSectionProps) {
-    // useCases =[];
     const scrollRef = useRef<HTMLDivElement>(null);
-    const bgImage = useCases[0]?.thumbnail || '/img/default.jpg';
+    const bgImage = useCases[0]?.thumbnail || '/img/default.jpg';   //FIXME 이미지 교체
+    
+    const [selectedId, setSelectedId] = useState<string | null>(null);
+    const selectedCase = useCases.find(item => item.id === selectedId); // FIXME 없을 경우 알림띄우기
 
     const handleScroll = (direction: 'left' | 'right') => {
         if(scrollRef.current) {
@@ -34,7 +37,7 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
     }
 
     return (
-        <section className={cn('relative w-full h-screen 3xl:h-fit 3xl:min-h-[80vh]', `${SECTION_PY.base}`, 'flex flex-col justify-center  bg-grain overflow-hidden')}>
+        <section className={cn('relative z-[10] w-full h-screen 3xl:h-fit 3xl:min-h-[80vh]', `${SECTION_PY.base}`, 'flex flex-col justify-center  bg-grain overflow-hidden')}>
             {/* 배경 */}
             {bgImage && (
                 <div className='absolute inset-0 z-[-2]'>
@@ -79,12 +82,12 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                     >
 
                         {useCases.map(item => (
-                            <div key={item.title}
+                            <div key={item.id}
                                 className={cn('flex-shrink-0 snap-start',
                                             // FIXME 데스크탑 너비: % 사용XX
                                             'w-[80vw] md:w-[30%] ')}
                             >
-                                <UseCaseCard useCase={item} />
+                                <UseCaseCard useCase={item} onCardClick={() => setSelectedId(item.id)}/>
                             </div>
                         ))}
                         <Link href='/use-cases' 
@@ -107,6 +110,12 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                     </Container>
                 }
             </div>
+            {selectedCase && 
+                <UseCaseOverlay 
+                    useCase={selectedCase}
+                    onClose={() => setSelectedId(null)}
+                />
+            }
         </section>
     )
 }

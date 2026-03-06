@@ -17,26 +17,17 @@ export interface ProductItemDTO {
 
 export type ProductItemSimpleDTO = Omit<ProductItemDTO, 'specs' | 'thumbnail'>;
 
-export interface RelatedItem {
+export interface BaseItem {
+    id: string;
     name: string;
 }
 
-export interface RelatedProductDTO {
-    id: string;
-    name: string;
-    mainImage: string;
+export interface LinkedItem extends BaseItem {
     href: string;
 }
 
-// 제품
-export interface ProductDTO {
-    id: string;
-    label: string;
-    slug: string;
-    specs: ProductSpec[];
-    description: string;
-    productLine: RelatedItem;
-    industries: RelatedItem[];
+export interface RelatedProductDTO extends LinkedItem{
+    mainImage: string;
 }
 
 // 제품상세(시스템, 로봇, 부품)
@@ -79,11 +70,7 @@ export interface ProductLineProductsDTO extends ProductLineBase{   //ProductLine
 export interface DetailNavDTO {
     id: string;
     name: string;
-    products: {
-        id: string;
-        name: string;
-        href: string;
-    }[];
+    products: LinkedItem[];
 }
 
 // 산업별
@@ -103,14 +90,21 @@ export interface IndustryProductsDTO {
 
 // 적용 사례
 export interface UseCaseDTO {
+    id: string;
     title: string;
-    slug: string;
-    href: string;
-    sum: string;
+    description: string;
     date: string;
-    thumbnail?: string; // 이미지를 추가했을 경우
-    products: RelatedItem[];
-    industries: RelatedItem[];
+    systems: LinkedItem[];
+    industries: BaseItem[];
+    thumbnail?: string;
+    images?: string;
+    videos?: string;
+}
+
+export interface UseCasePageDTO {
+    useCases: UseCaseDTO[];
+    industryFilters: BaseItem[];
+    systemFilters: BaseItem[];
 }
 
 // 기술자료
@@ -127,10 +121,15 @@ export interface TechDocDTO {
         size: string;
         extention: string;
     }[];
-    relatedProducts: {
-        id: string;
-        name: string;
-    }[];
+    relatedProducts: BaseItem[];
+}
+
+//랜딩페이지 
+export interface LandingPageDTO {
+    industries: IndustryListDTO[];
+    productLines: ProductLineListDTO[];
+    useCases: UseCaseDTO[];
+    clients: ClientsDTO[];
 }
 
 // 회사소개

@@ -13,7 +13,7 @@ interface HeroBannerProps {
 export default function HeroBanner({heroData, subTabs}: HeroBannerProps) {
   return (
         <>
-          <div className='w-full h-[75vh]'>
+          <div className='w-full h-[35vh] md:h-[75vh]'>
               <section
                     className="relative w-full h-full flex flex-col items-center justify-center text-white bg-cover bg-center"
                     style={{

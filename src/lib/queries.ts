@@ -1,23 +1,5 @@
 const PRODUCT_FILTER_LOGIC = `*[_type in ["system", "robot", "component"] && references(^._id)]`;
 
-
-// 제품 (적용사례에서 사용) // FIXME 삭제
-export const PRODUCTS_QUERY = `
-  *[_type == "product" && defined(slug.current)]{
-    "id":_id,
-    "label": name,
-    slug,
-    description,
-    specs,
-    productLine->{
-      name
-    },
-    industries[]->{
-      name
-    }
-  }
-`;
-
 // 시스템,로봇,부품 상세
 export const UNIVERSAL_DETAIL_QUERY = `
   *[_type in ["system", "robot", "component"] && slug.current == $slug][0] {
@@ -51,6 +33,56 @@ export const UNIVERSAL_DETAIL_QUERY = `
     }
   }
 `
+
+export const LANDING_PAGE_QUERY = `{
+  "industries": *[_type == "industry"] | order(name asc) {
+    "id": _id,
+    "label": name,
+    "href": "/solutions/",
+    "icon": iconName
+  },
+  "productLines": *[_type == "productLine"] | order(name asc) {
+    "id": _id,
+    "label": name,
+    "nameEn": nameEn,
+    "href": "/products",
+    "content": description,
+    "kind": *[_type in ["system", "robot", "component" ] && references(^._id)] {
+      "id":_id,
+      "type": _type,
+      "label": name,
+      "href": "/products/" + slug.current,
+    },
+    "thumbnail": coalesce(
+      mainImage.asset->url, 
+      *[_type in ["system", "robot", "component"] && references(^._id)] | order(_createdAt desc)[0]{
+        "url": coalesce(mainImage.asset->url, images[0].asset->url)
+      }.url
+    )
+  },
+  "useCases": *[_type == "useCase"] | order(endDate desc) {
+    "id": _id,
+    "title": title,
+    "description": description,
+    "date": endDate,
+    "systems": systems[] -> {
+      "id": _id,
+      "name": name,
+      "href": '/products/' + slug.current,
+    },
+    "industries": industries[] -> {
+      "id": _id,
+      "name": name,
+    },
+    "thumbnail": mainImage.asset->url,
+    "images": images[].asset->url,
+    "videos": videos[].asset->url
+  },
+  "clients": *[_id == 'siteSettings'][0].clients[]-> {
+    'name': 'name',
+    'logo': logo.asset->url,
+  }
+}`
 
 // 제품군
 export const PRODUCT_LINE_LIST_QUERY = `
@@ -117,23 +149,36 @@ export const PRODUCT_LINE_NAV_QUERY = `
 `
 
 // 적용 사례
-export const USE_CASES_QUERY = `
-  *[_type == "useCase"] | order(endDate desc) {
+export const USE_CASES_QUERY = `{
+  "useCases": *[_type == "useCase"] | order(endDate desc) {
+    "id": _id,
     "title": title,
-    "slug": slug.current,
-    "href": "/use-cases/" + slug.current,
-    "sum": summary,
+    "description": description,
     "date": endDate,
-    
-    "products": products[] -> {
-      name
+    "systems": systems[] -> {
+      "id": _id,
+      "name": name,
+      "href": '/products/' + slug.current,
     },
     "industries": industries[] -> {
-      name
+      "id": _id,
+      "name": name,
     },
     "thumbnail": mainImage.asset->url,
+    "images": images[].asset->url,
+    "videos": videos[].asset->url
+  },
+
+  //필터 리스트
+  "industryFilters": *[_type == "industry" && count(*[_type == "useCase" && references(^._id)]) > 0] {
+    "id": _id,
+    "name": name,
+  },
+  "systemFilters": *[_type == "system" && count(*[_type == "useCase" && references(^._id)])> 0] {
+    "id": _id,
+    "name": name
   }
-`;
+}`;
 
 // 산업
 export const INDUSTRY_LIST_QUERY = `

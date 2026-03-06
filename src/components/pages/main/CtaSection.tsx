@@ -41,8 +41,8 @@ export default function CtaSection() {
                                     "h-full p-8 md:p-12 rounded-[2rem] border transition-all duration-500",
                                     // 첫 번째 버튼은 강조(Dark), 두 번째는 일반(White) 스타일 추천
                                     idx === 0
-                                        ? "bg-zinc-900 border-zinc-800 text-white hover:shadow-2xl hover:shadow-zinc-900/20"
-                                        : "bg-white border-gray-200 text-gray-900 hover:shadow-2xl hover:shadow-gray-200/50"
+                                        ? "bg-zinc-900 border-zinc-800 text-white hover:shadow-2xl hover:shadow-main/70"
+                                        : "bg-white border-gray-200 text-gray-900 hover:shadow-2xl hover:shadow-main/50"
                                 )}>
                                     <div className="flex flex-col h-full justify-between gap-12">
                                         <div className="space-y-4">
