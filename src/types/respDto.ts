@@ -30,6 +30,7 @@ export interface RelatedProductDTO extends LinkedItem{
     mainImage: string;
 }
 
+
 // 제품상세(시스템, 로봇, 부품)
 export interface UniversalDetailDTO {
     id: string;
@@ -59,9 +60,6 @@ export interface ProductLineBase {
     thumbnail: string;
 }
 
-export interface ProductLineListDTO extends ProductLineBase{
-    kind: ProductItemSimpleDTO[];
-}
 
 export interface ProductLineProductsDTO extends ProductLineBase{   //ProductLineProductsDTO
     kind: ProductItemDTO[];
@@ -74,13 +72,6 @@ export interface DetailNavDTO {
 }
 
 // 산업별
-export interface IndustryListDTO {
-    id: string;
-    label: string;
-    href: string;
-    icon: string;
-}
-
 export interface IndustryProductsDTO {
     id: string;
     label: string;
@@ -107,6 +98,32 @@ export interface UseCasePageDTO {
     systemFilters: BaseItem[];
 }
 
+//랜딩페이지 
+export interface IndustryListDTO {
+    id: string;
+    label: string;
+    href: string;
+    icon: string;
+}
+
+export interface ProductLineListDTO extends ProductLineBase{
+    // kind: ProductItemSimpleDTO[];
+    hasProducts: boolean;
+}
+
+// 고객사 로고
+export interface ClientsDTO {
+    name: string;
+    logo: string
+}
+
+export interface LandingPageDTO {
+    industries: IndustryListDTO[];
+    productLines: ProductLineListDTO[];
+    useCases: UseCaseDTO[];
+    clients: ClientsDTO[];
+}
+
 // 기술자료
 export interface TechDocDTO {
     id: string;
@@ -124,13 +141,6 @@ export interface TechDocDTO {
     relatedProducts: BaseItem[];
 }
 
-//랜딩페이지 
-export interface LandingPageDTO {
-    industries: IndustryListDTO[];
-    productLines: ProductLineListDTO[];
-    useCases: UseCaseDTO[];
-    clients: ClientsDTO[];
-}
 
 // 회사소개
 export interface SloganItem {
@@ -182,9 +192,3 @@ export interface LocationDTO{
     address: LocationItem;
 }
 
-
-// 고객사 로고
-export interface ClientsDTO {
-    name: string;
-    logo: string
-}
