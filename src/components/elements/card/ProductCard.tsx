@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import { cn } from '@/lib/utils'
 import Badge from '@/components/ui/Badge'
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
 import { ProductItemDTO } from '@/types/respDto'
 import { ArrowUpRight } from 'lucide-react'
 
@@ -37,7 +38,7 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
                             className="object-cover transition-transform duration-500 group-hover:scale-105" 
                             sizes="(max-width: 768px) 100vw, 33vw" // 성능 최적화
                     />   
-                    : <div className="w-full h-full bg-gray-200" />
+                    : <ImagePlaceholder size='md'/>
                 }
 
                 {/* 호버 검정레이어 */}

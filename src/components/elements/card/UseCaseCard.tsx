@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import { cn } from '@/lib/utils'
 import { UseCaseDTO } from '@/types/respDto'
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
 import Badge from '@/components/ui/Badge'
 
 interface UseCaseCardProps {
@@ -12,7 +13,7 @@ interface UseCaseCardProps {
 }
 
 export default function UseCaseCard({useCase, onCardClick}: UseCaseCardProps) {
-   const { id, title, description, date, systems, industries, thumbnail } = useCase; // 구조분해 할당
+   const { id, title, date, systems, industries, thumbnail } = useCase; // 구조분해 할당
   return (
     <div onClick={()=>onCardClick(id)} className='group block h-full border border-gray-100 bg-white rounded-2xl shadow-md cursor-pointer'>
       <div className='relative w-full rounded-t-2xl overflow-hidden'>
@@ -22,7 +23,7 @@ export default function UseCaseCard({useCase, onCardClick}: UseCaseCardProps) {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 33vw" // 성능 최적화
             />
-            : <div className="w-full h-full bg-gray-200" />
+            : <ImagePlaceholder size='md'/>
           }
         </div>
         <div className='absolute top-3 left-3 z-5 flex flex-wrap gap-1'>

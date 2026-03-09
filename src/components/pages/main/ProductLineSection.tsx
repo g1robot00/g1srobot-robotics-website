@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { SECTION_PY } from '@/constants/styles';
 import Container from '@/components/shared/Container';
 import SectionHeader from './SectionHeader';
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import { ProductLineListDTO } from '@/types/respDto';
 import {  ArrowUpRight  } from 'lucide-react';
 
@@ -114,9 +115,9 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                             <div className={cn('flex items-center justify-between transition-all duration-500',
                                                             isActive ? 'mb-10' : 'text-gray-600 hover:text-gray-400')}
                                             >
-                                                <div className='flex flex-col gap-1 '>
+                                                <div className='flex flex-col gap-2 '>
                                                     <p className={`text-sm md:text-base font-bold ${isActive && 'text-main'}`}>{item.nameEn}</p>
-                                                    <h3 className={cn('text-2xl md:text-4xl 3xl:text-6xl font-bold ',
+                                                    <h3 className={cn('text-2xl md:text-4xl font-bold ',
                                                                     isActive && 'text-white')}
                                                     >
                                                         {item.label}
@@ -138,14 +139,15 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                                         transition={{duration: 0.4, ease: 'circOut'}}
                                                         className='flex flex-col gap-6 overflow-hidden'
                                                     >
-                                                        <p className='text-gray-400 text-base md:text-lg leading-snug whitespace-pre-wrap'>
+                                                        <p className='text-gray-400 text-base md:text-lg  whitespace-pre-wrap'>
                                                             {item.content}
                                                         </p>
                                                         {/* 모바일 전용 이미지박스 */}
                                                         <div className='block lg:hidden relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden'>
                                                             {item.thumbnail
                                                                 ?<Image src={item.thumbnail} alt={item.label} fill className='object-cover'/>
-                                                                :<div className='w-full h-full bg-gray-700'/>
+                                                                : <ImagePlaceholder />
+                                                                // <div className='w-full h-full bg-gray-700'/>
                                                             }
                                                         </div>
                                                     </motion.div>
@@ -177,7 +179,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                                 fill
                                                 className='object-cover bg-gray-700'
                                         />
-                                        : <div className='w-full h-full bg-gray-700'></div>
+                                        : <ImagePlaceholder size='lg'/>
                                         }
                                     </motion.div>
                                 </AnimatePresence>

@@ -12,10 +12,10 @@ interface ClientsSectionProps {
 
 export default function ClientsSection({clients, id}: ClientsSectionProps) {
     return (
-        <section id={id} className='w-full h-full lg:h-screen bg-black text-white py-20 md:py-30  croll-mt-[120px]' >
+        <section id={id} className='w-full h-full lg:min-h-screen bg-black text-white py-20 md:py-30  croll-mt-[120px]' >
             <Container>
                 <SectionHeader category='Our Clients'
-                                title='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+                                title={`다양한 분야의 파트너와 함께\n자동화의 가치를 만듭니다`}
                                 theme= 'dark'
                 />
                     <div className='grid gap-x-5 gap-y-10 md:gap-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 place-items-center'>

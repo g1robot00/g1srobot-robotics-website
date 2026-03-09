@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 
 import { cn } from '@/lib/utils'
 import Portal from '@/components/shared/Portal'
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder'
 import Container from '@/components/shared/Container'
 import Badge from '@/components/ui/Badge'
 import { UseCaseDTO } from '@/types/respDto'
@@ -49,7 +50,10 @@ export default function UseCaseOverlay({ useCase, onClose }: UseCaseOverlayProps
                                     'flex-1 min-h-0 overflow-hidden')}
                     >
                         <div className='lg:flex-[1.2] 3xl:flex-[1.5] relative w-full overflow-hidden aspect-[4/3] bg-gray-100 self-start'>
-                            <Image src={useCase?.thumbnail || ''} alt={useCase.title} fill className='object-contain'/>
+                            { useCase?.thumbnail 
+                                ? <Image src={useCase.thumbnail} alt={useCase.title || 'UseCase detail'} fill className='object-contain'/>
+                                : <ImagePlaceholder  size='md'/> 
+                            }
                         </div>
                         <div className='flex-1 flex flex-col gap-8  min-h-0 overflow-y-auto'>
                             <div className='flex flex-col gap-4'>

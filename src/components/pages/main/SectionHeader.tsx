@@ -21,7 +21,7 @@ export default function SectionHeader({
         <div className={cn('flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 md:mb-20', className)}>
             <div className='flex flex-col gap-5 md:max-w-[60%]'>
                 <h3 className='text-base md:text-lg text-main '>{category}</h3>
-                <h2 className={cn('text-3xl md:text-5xl 3xl:text-6xl font-bold leading-tight tracking-tight whitespace-pre-wrap', 
+                <h2 className={cn('text-3xl md:text-5xl 3xl:text-6xl font-bold leading-snug tracking-tight whitespace-pre-wrap', 
                                 theme === 'light' ? 'text-gray-900' : 'text-white')}
                 >
                     {title}

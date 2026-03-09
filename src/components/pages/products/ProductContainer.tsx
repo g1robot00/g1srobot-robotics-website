@@ -67,9 +67,9 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
                 }
                 {filteredList.length > 0
                     ?filteredList.map((item: ProductLineProductsDTO | IndustryProductsDTO ) => (
-                        <section key={item.id} id={item.id} className="max-sm:last:mb-0 mb-30 scroll-mt-42">
+                        <div key={item.id} id={item.id} className="max-sm:last:mb-0 mb-30 md:mb-50 scroll-mt-42">
                             {/* --- 제품군(Product Line) 헤더 --- */}
-                            <div className="flex flex-col mb-5 md:mb-10 ">
+                            <div className="flex flex-col mb-5 md:mb-10">
                                 <div className={cn('mb-4 flex flex-col gap-1', 'pl-3 md:pl-5 border-l-6 md:border-l-8 border-l-main rounded-sm md:rounded-md')}>
                                     <p className='font-bold text-sm md:text-base text-main'>{item.nameEn}</p>
                                     <h2 className="text-2xl md:text-4xl font-bold">{item.label}</h2>
@@ -82,7 +82,7 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
                                     <ProductCard key={product.id} product={product} from={from} id={product.id}/>
                                 ))}
                             </div>
-                        </section>
+                        </div>
                     ))
                     :<div className='py-40 text-center flex flex-col gap-4 items-center'>
                         <p className='text-gray-400 text-base md:text-xl font-menium'>선택한 조건에 맞는 제품이 없습니다.</p>

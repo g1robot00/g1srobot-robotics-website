@@ -90,7 +90,7 @@ export default function HistorySection({history, id}: HistorySectionProps) {
         <section id={id} className='w-full'>
             <Container className='py-30 flex flex-col md:gap-5'>
                 <SectionHeader category='History'
-                            title='Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+                            title={`축적된 기술과 경험으로\n다져온 성장의 과정입니다`}
                 />
                     <div className='relative flex flex-col gap-15 md:grid md:grid-cols-[180px_1fr] md:gap-35'>
                         {/* 좌측 네비게이션 */}

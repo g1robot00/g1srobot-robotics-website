@@ -3,8 +3,8 @@
 import { useState } from "react"
 import Image from "next/image"
 
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder"
 import ProductThumbnails from "./ProductThumbnails"
-import { PlayCircle } from "lucide-react"
 
 interface ProductIntroGalleryProps {
     imgUrls: string[],
@@ -20,39 +20,52 @@ export default function ProductIntroGallery({ imgUrls, videoUrls, name }: Produc
     const [activeIndex, setActiveIndex] = useState(0);
     const currentMedia = allMedia[activeIndex];
 
-    if(allMedia.length === 0) {
-        return ( 
-        <div className="w-full h-full aspect-[4/3] bg-gray-100 rounded-xl flex justify-center items-center text-gray-400">
-            이미지 준비중
-        </div>
-    )}
+    const renderMainMedia = () => {
+        if (!currentMedia) return <ImagePlaceholder size='md'/>; // 데이터 로딩 지연 대비
+
+        if (currentMedia.type === 'image'){
+            return (
+                <Image src={currentMedia.url}
+                    alt={`${name} main`}
+                    fill
+                    priority
+                    className='object-contain'
+                />
+            )
+        }
+
+        else if (currentMedia.type === 'video') {
+            return (
+                <video 
+                        src={currentMedia.url}
+                        controls
+                        className='w-full h-full object-contain'
+                />
+            )
+        }
+
+        return <ImagePlaceholder size='md'/>
+    }
 
     return (
         <div className='flex flex-col items-center justify-center h-full w-full'>
-            <div className="flex-1 w-full min-h-0 flex items-center jutify-center">
-                <div className='relative w-full h-full md:max-w-[95%] max-h-full aspect-[4/3] bg-gray-50 overflow-hidden'>
-                    {currentMedia.type === 'image'
-                        ?<Image src={allMedia[activeIndex].url}
-                            alt={`${name} main`}
-                            fill
-                            priority
-                            className='object-contain'
-                        />
-                        : <video key={allMedia[activeIndex].url}
-                                src={allMedia[activeIndex].url}
-                                controls
-                                className='w-full h-full object-contain'
-                        />
+            <div className="flex-1 w-full min-h-0 flex items-center justify-center">
+                <div className='relative w-full h-full max-h-full aspect-[4/3] bg-gray-50 overflow-hidden'>
+                    { currentMedia
+                        ?  renderMainMedia()
+                        : <ImagePlaceholder size='md'/>
                     }
                 </div>
             </div>
-            <div className='w-full flex-shrink-0'>
-                <ProductThumbnails allMedia={allMedia} 
-                                    name={name} 
-                                    activeIndex={activeIndex} 
-                                    setActiveIndex={setActiveIndex}
-                />
-            </div>
+            { allMedia.length > 1 && 
+                <div className='w-full flex-shrink-0'>
+                    <ProductThumbnails allMedia={allMedia} 
+                                        name={name} 
+                                        activeIndex={activeIndex} 
+                                        setActiveIndex={setActiveIndex}
+                    />
+                </div>
+            }
         </div>
     )
 }
