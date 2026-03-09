@@ -37,7 +37,7 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
     }
 
     return (
-        <section className={cn('relative z-[10] w-full h-screen 3xl:h-fit 3xl:min-h-[80vh]', `${SECTION_PY.base}`, 'flex flex-col justify-center  bg-grain overflow-hidden')}>
+        <section className={cn('relative w-full h-screen 3xl:h-fit 3xl:min-h-[80vh]', `${SECTION_PY.base}`, 'flex flex-col justify-center  bg-grain overflow-hidden')}>
             {/* 배경 */}
             {bgImage && (
                 <div className='absolute inset-0 z-[-2]'>
