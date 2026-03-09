@@ -116,7 +116,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                             >
                                                 <div className='flex flex-col gap-2'>
                                                     <p className={`text-sm md:text-base font-bold ${isActive && 'text-main'}`}>{item.nameEn}</p>
-                                                    <h3 className={cn('text-2xl md:text-4xl font-bold',
+                                                    <h3 className={cn('text-2xl md:text-4xl  font-bold tracking-tight',
                                                                     isActive && 'text-white')}
                                                     >
                                                         {item.label}
@@ -134,7 +134,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                                         transition={{duration: 0.4, ease: 'circOut'}}
                                                         className='flex flex-col gap-6 '
                                                     >
-                                                        <p className='text-gray-300 text-base tracking-wide leading-wider whitespace-pre-wrap'>
+                                                        <p className='text-gray-300 text-base tracking-wide leading-relaxed whitespace-pre-wrap'>
                                                             {item.content}
                                                         </p>
 
@@ -194,25 +194,25 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                                         'lg:flex-[1.2] 3xl:flex-[1.5]', 
                                         'sticky top-[calc(50vh-300px)] 3xl:top-[calc(50vh-375px)] aspect-square min-h-[400px] max-h-[600px] 3xl:max-h-[750px]')}
                         > 
-                                <AnimatePresence  mode="wait">
-                                    <motion.div className='relative w-full h-full bg-gray-800 rounded-2xl overflow-hidden'
-                                                key={activeId} // activeId가 바뀔때마다 애니메이션 트리거
-                                                initial={{opacity: 0, scale: 0.95, y: 20}}
-                                                animate={{ opacity: 1, scale: 1, y:0 }}
-                                                exit={{opacity: 0, y: -20}}
-                                                transition={{duration: 0.2, ease: [0.22, 1, 0.36, 1]}}
-                                    >
-                                        {/* 현재 activeId에 맞는 이미지 출력 */}
-                                        {productLines[activeId].thumbnail
-                                        ?<Image src={productLines[activeId].thumbnail}
-                                                alt={productLines[activeId].label}
-                                                fill
-                                                className='object-cover bg-gray-700'
-                                        />
-                                        : <ImagePlaceholder size='lg'/>
-                                        }
-                                    </motion.div>
-                                </AnimatePresence>
+                            <AnimatePresence  mode="wait">
+                                <motion.div className='relative w-full h-full bg-gray-800 rounded-2xl overflow-hidden'
+                                            key={activeId} // activeId가 바뀔때마다 애니메이션 트리거
+                                            initial={{opacity: 0, scale: 0.95, y: 20}}
+                                            animate={{ opacity: 1, scale: 1, y:0 }}
+                                            exit={{opacity: 0, y: -20}}
+                                            transition={{duration: 0.2, ease: [0.22, 1, 0.36, 1]}}
+                                >
+                                    {/* 현재 activeId에 맞는 이미지 출력 */}
+                                    {productLines[activeId].thumbnail
+                                    ?<Image src={productLines[activeId].thumbnail}
+                                            alt={productLines[activeId].label}
+                                            fill
+                                            className='object-cover bg-gray-700'
+                                    />
+                                    : <ImagePlaceholder size='lg'/>
+                                    }
+                                </motion.div>
+                            </AnimatePresence>
                         </div>
                     </div>
             </Container>
