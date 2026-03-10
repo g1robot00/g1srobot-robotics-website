@@ -44,7 +44,6 @@ export const LANDING_PAGE_QUERY = `{
     "images": images[].asset->url,
     "videos": videos[].asset->url
   },
-  // FIXME 고객사의 경우 상업적이용/변형 동의를 받아야함, 저작물임
   "clients": *[_id == 'siteSettings'][0].clients[]-> {
     'name': 'name',
     'logo': logo.asset->url,
@@ -75,14 +74,16 @@ export const UNIVERSAL_DETAIL_QUERY = `
       "id": _id,
       "name": name,
       "mainImage": mainImage.asset->url,
-      "href": "/products/" + slug.current
+      "href": "/products/" + slug.current,
+      "hasContent": defined(description) && count(specs) > 0
     },
 
     "components": components[] -> {
       "id": _id,
       "name": name,
       "mainImage": mainImage.asset->url,
-      "href": "/products/" +slug.current
+      "href": "/products/" +slug.current,
+      "hasContent": defined(description) && count(specs) > 0
     }
   }
 `

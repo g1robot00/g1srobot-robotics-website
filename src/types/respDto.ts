@@ -28,6 +28,7 @@ export interface LinkedItem extends BaseItem {
 
 export interface RelatedProductDTO extends LinkedItem{
     mainImage: string;
+    hasContent: boolean;
 }
 
 
