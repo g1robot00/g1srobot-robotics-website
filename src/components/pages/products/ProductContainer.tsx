@@ -18,7 +18,6 @@ interface ProductContainerProps {
 const PRODUCT_TYPES = [
     {name: 'system', label: '시스템'}, 
     {name: 'robot', label: '로봇'}, 
-    {name: 'component', label: '부품'}, 
 ]
 
 export default function ProductContainer({ from, list, type='normal' }: ProductContainerProps) {

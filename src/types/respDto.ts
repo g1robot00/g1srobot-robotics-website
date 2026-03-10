@@ -8,7 +8,7 @@ export interface ProductSpec {
 
 export interface ProductItemDTO {
     id: string;
-    type: 'system' | 'robot' | 'component';
+    type: 'system' | 'robot';
     label: string;
     href: string;
     specs: ProductSpec[];
@@ -41,9 +41,8 @@ export interface UniversalDetailDTO {
     description: string;
     specs: ProductSpec[];
     specsImg: string;
-    productLine: string;
-    industries: string[];
-    mainImage: string;
+    productLine?: string;
+    industries?: string[];
     images: string[];
     videos: string[],
     robots?: RelatedProductDTO[];
@@ -61,7 +60,7 @@ export interface ProductLineBase {
 }
 
 
-export interface ProductLineProductsDTO extends ProductLineBase{   //ProductLineProductsDTO
+export interface ProductLineProductsDTO extends ProductLineBase{ //부품 삭제 ㅇㅇ
     kind: ProductItemDTO[];
 }
 
@@ -107,7 +106,6 @@ export interface IndustryListDTO {
 }
 
 export interface ProductLineListDTO extends ProductLineBase{
-    // kind: ProductItemSimpleDTO[];
     hasProducts: boolean;
 }
 

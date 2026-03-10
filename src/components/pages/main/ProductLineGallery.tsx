@@ -1,6 +1,17 @@
 import React from 'react'
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 
-export default function ProductLineGallery() {
+import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
+import { ProductLineListDTO } from '@/types/respDto';
+
+interface ProductLineGalleryProps {
+    previews: Pick<ProductLineListDTO, 'thumbnail' | 'label'>[];
+    activeId: number;
+}
+
+export default function ProductLineGallery({previews, activeId}: ProductLineGalleryProps) {
+    const isActive = previews[activeId];
     return (
         <AnimatePresence mode="wait">
             <motion.div className='relative w-full h-full bg-gray-800 rounded-2xl overflow-hidden'
@@ -11,9 +22,9 @@ export default function ProductLineGallery() {
                 transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
                 {/* 현재 activeId에 맞는 이미지 출력 */}
-                {productLines[activeId].thumbnail
-                    ? <Image src={productLines[activeId].thumbnail}
-                        alt={productLines[activeId].label}
+                {isActive.thumbnail
+                    ? <Image src={isActive.thumbnail}
+                        alt={isActive.label}
                         fill
                         className='object-cover bg-gray-700'
                     />

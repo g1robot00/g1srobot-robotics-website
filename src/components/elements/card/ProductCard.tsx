@@ -19,7 +19,6 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
     const typeConfig = {
         system: {label: '시스템', color: 'bg-blue-500/20 text-blue-500'},
         robot: {label: '로봇', color: 'bg-main/20 text-main'},
-        component: {label: '부품', color: 'bg-gray-500/20 text-gray-500'},
     }
     const currentType = typeConfig[type];
 

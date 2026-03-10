@@ -22,11 +22,11 @@ export default function ProductIntroInfo({ product, contextList, from }: Product
                 </div>
             </div>
             <div className='hidden lg:flex lg:justify-between md:gap-2 px-2'>
-                {mainSpecs.map(spec => (
+                {mainSpecs?.map(spec => (
                     <div key={spec.label} className='relative group'>
                         <div key={spec.label} className='flex flex-col'>
                             <div className='text-lg md:text-2xl font-semibold line-clamp-2 break-keep '>
-                                {spec.value  // undefined, null, ""(빈 문자열)인 경우를 모두 한 번에 처리
+                                {spec.value 
                                     ?<>
                                         <span>{spec.value}</span>
                                         <span className='ml-1'>{spec.unit}</span>
@@ -45,14 +45,17 @@ export default function ProductIntroInfo({ product, contextList, from }: Product
             </div>
             <div className='flex-1 min-h-0 p-5 bg-gray-100 rounded-lg overflow-y-auto'>
                 <div className='flex flex-col gap-6 flex-wrap'>
-                    {from === 'industry'
-                        ? <span className='w-fit px-3 py-2 bg-main/20 rounded-full text-main text-sm font-bold'>{product.productLine}</span>
-
-                        : <div className='flex gap-1 flex-wrap'>
-                            {product.industries.map(i =>
-                                <span key={i} className='w-fit px-3 py-2 bg-main/20 rounded-full text-main text-sm font-bold'>{i}</span>
-                            )}
-                        </div>
+                    {((from === 'industry' && product.productLine) || (from !== 'industry' && (product.industries?.length || 0) > 0)) &&
+                        <>
+                            { from === 'industry'
+                                ? <span className='w-fit px-3 py-2 bg-main/20 rounded-full text-main text-sm font-bold'>{product.productLine}</span>
+                                : <div className='flex gap-1 flex-wrap'>
+                                    {product.industries?.map(i =>
+                                        <span key={i} className='w-fit px-3 py-2 bg-main/20 rounded-full text-main text-sm font-bold'>{i}</span>
+                                    )}
+                                </div>
+                            }
+                        </>
                     }
                     <div className='text-gray-800 whitespace-pre-wrap leading-relaxed'>
                         {product.description}

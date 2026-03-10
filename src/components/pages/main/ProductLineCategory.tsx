@@ -17,7 +17,7 @@ interface ProductLineCategoryProps {
 
 export default function ProductLineCategory({productLines, activeId, onItemClick, itemRefs}: ProductLineCategoryProps) {
     return (
-        <div>
+        <>
             {productLines.map((item, index) => {
                 const isActive = activeId === index;
                 return (
@@ -102,7 +102,6 @@ export default function ProductLineCategory({productLines, activeId, onItemClick
                                             {item.thumbnail
                                                 ? <Image src={item.thumbnail} alt={item.label} fill className='object-cover' />
                                                 : <ImagePlaceholder />
-                                                // <div className='w-full h-full bg-gray-700'/>
                                             }
                                         </div>
                                     </motion.div>
@@ -112,6 +111,6 @@ export default function ProductLineCategory({productLines, activeId, onItemClick
                     </div>
                 )
             })}
-        </div>
+        </>
     )
 }
