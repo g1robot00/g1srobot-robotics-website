@@ -1,16 +1,18 @@
 import React from 'react'
-import { client } from '@/lib/sanity';
 
 import { CONTACT_QUERY } from '@/lib/queries'
-import IconRenderer from '@/components/ui/IconRenderer';
-import { ContactDTO } from '@/types/respDto';
+import IconRenderer from '@/components/ui/IconRenderer'
+import { ContactDTO } from '@/types/respDto'
 
-export default async function ContactHeader() {
-    const rawContact: ContactDTO = await client.fetch(CONTACT_QUERY);
+interface ContactHeaderProps {
+    initialContact: ContactDTO;
+}
+
+export default async function ContactHeader({initialContact}: ContactHeaderProps) {
     const contacts = [
-    { id: 'email', ...rawContact.email },
-    { id: 'phone', ...rawContact.phone },
-];
+        { id: 'email', ...initialContact.email },
+        { id: 'phone', ...initialContact.phone },
+    ];
 
     return (
         <div className='flex flex-col gap-10 items-center justify-center '>

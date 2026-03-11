@@ -60,7 +60,7 @@ export default function ProductDescriptionSection({ product, from }: Description
                                             </div>
                                         }
                                     </div>
-                                    <span className={cn('text-sm md:text-base line-clamp-2 break-keep min-h-[2.5rem] md:min-h-[3rem]',
+                                    <span className={cn('font-medium text-sm md:text-base line-clamp-2 break-keep min-h-[2.5rem] md:min-h-[3rem]',
                                                         isPreparing ? 'text-gray-400' : 'text-gray-700 group-hover:text-main')}
                                     >
                                         {item.name}

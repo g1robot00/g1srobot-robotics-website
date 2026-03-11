@@ -55,7 +55,6 @@ export default function LocationContainer({ contact }: { contact: LocationDTO })
                             <div key={item.nameEn} className='grid grid-cols-[120px_1fr]'>
                                 <span className='font-bold'>
                                     {item.nameEn}
-                                    {/* <IconRenderer iconName={item.iconName} /> */}
                                 </span>
                                 <span className='text-lg text-gray-800 tracing-tight '>{item.value.value}</span>
                             </div>

@@ -251,9 +251,9 @@ export const COMPANY_QUERY = `
 // 연락수단
 export const CONTACT_QUERY = `
   *[_id == 'siteSettings'][0].contact {
-    phone { 'value': text, iconName },
-    email { 'value': text, iconName },
-    address { 'value': text, iconName }
+    phone { 'value': text, 'iconName': iconName },
+    email { 'value': text, 'iconName':iconName },
+    address { 'value': text, 'iconName':iconName }
   }
 `
 

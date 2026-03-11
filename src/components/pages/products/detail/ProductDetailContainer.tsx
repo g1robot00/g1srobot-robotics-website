@@ -2,21 +2,23 @@
 
 import { useRef } from 'react'
 
-import { cn } from '@/lib/utils'
+import { FEATURE_FLAGS } from '@/constants/config'
 import { NAV_LAYOUT } from '@/constants/styles'
+import InquiryPreparing from '@/components/shared/InquiryPreparing'
 import ProductIntroSection from './ProductIntroSection'
 import ProductDescriptionSection from './ProductDescriptionSection'
 import ProductInquirySection from './ProductInquirySection'
 import Container from '@/components/shared/Container'
-import { UniversalDetailDTO, DetailNavDTO } from '@/types/respDto'
+import { UniversalDetailDTO, DetailNavDTO, ContactDTO } from '@/types/respDto'
 
 interface ProductDetailContainerProps {
     product: UniversalDetailDTO
     contextList: DetailNavDTO[]
     from?: 'industry' | 'productLine'
+    contact: ContactDTO | null
 }
 
-export default function ProductDetailContainer({ product, contextList, from }: ProductDetailContainerProps) {
+export default function ProductDetailContainer({ product, contextList, from, contact }: ProductDetailContainerProps) {
     const inquiryRef = useRef<HTMLDivElement>(null);
 
     const scrollToInquiry = () => {
@@ -40,7 +42,12 @@ export default function ProductDetailContainer({ product, contextList, from }: P
 
                 <div ref={inquiryRef} className='bg-gray-200 py-20 md:pt-30 md:pb-40'>
                     <Container>
+                    {FEATURE_FLAGS.IS_INQUIRY_ENABLED
+                        ?
                         <ProductInquirySection productName={`${product.name} _ ${product.nameEn}`} />
+                        :
+                        <InquiryPreparing initialContact={contact}/>
+                    }
                     </Container>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 'use client'
 
 import InquiryForm from '@/components/elements/contact/InquiryForm'
-import { useInquiryForm } from '@/hooks/useInquiryForm'
 
 export default function ProductInquirySection({productName}: {productName: string}) {
 

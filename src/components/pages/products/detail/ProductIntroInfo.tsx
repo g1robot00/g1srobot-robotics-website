@@ -24,7 +24,8 @@ export default function ProductIntroInfo({ product, contextList, from }: Product
             <div className='hidden lg:flex lg:justify-between md:gap-2 px-2'>
                 {mainSpecs?.map(spec => (
                     <div key={spec.label} className='relative group'>
-                        <div key={spec.label} className='flex flex-col'>
+                        <div key={spec.label} className='flex flex-col gap-1'>
+                            <span className='font-medium text-sm text-gray-500'>{spec.label}</span>
                             <div className='text-lg md:text-2xl font-semibold line-clamp-2 break-keep '>
                                 {spec.value 
                                     ?<>
@@ -34,7 +35,6 @@ export default function ProductIntroInfo({ product, contextList, from }: Product
                                     :<span>-</span>
                                 }
                             </div>
-                            <span className='text-sm text-gray-500'>{spec.label}</span>
                         </div>
                         <div className="absolute hidden group-hover:block bg-black text-white p-2 rounded text-xs z-20 bottom-full mt-2">
                             {spec.value}{spec.unit}

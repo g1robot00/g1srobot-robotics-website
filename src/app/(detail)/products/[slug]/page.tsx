@@ -4,10 +4,12 @@ import { client } from "@/lib/sanity"
 import { 
     UNIVERSAL_DETAIL_QUERY, 
     PRODUCT_LINE_NAV_QUERY, 
-    INDUSTRY_NAV_QUERY 
+    INDUSTRY_NAV_QUERY,
+    CONTACT_QUERY
 } from "@/lib/queries"
+import { FEATURE_FLAGS } from "@/constants/config"
 import ProductDetailContainer from "@/components/pages/products/detail/ProductDetailContainer"
-import { UniversalDetailDTO, DetailNavDTO } from "@/types/respDto"
+import { UniversalDetailDTO, DetailNavDTO, ContactDTO } from "@/types/respDto"
 
 interface PageProps {
     params:  Promise<{ slug: string }>
@@ -19,8 +21,8 @@ export default async function page({ params, searchParams }: PageProps) {
     const { slug } = await params;
     const {from, id} = await searchParams;
 
-    const product: UniversalDetailDTO = await client.fetch(UNIVERSAL_DETAIL_QUERY, { slug }); // (기존)제품
-
+    const product: UniversalDetailDTO = await client.fetch(UNIVERSAL_DETAIL_QUERY, { slug });
+    
     // 'from'에 맞는 형제 제품리스트 가져오기
     let contextList: DetailNavDTO[] = [];
     if(from === 'industry') {
@@ -29,6 +31,9 @@ export default async function page({ params, searchParams }: PageProps) {
         contextList = await client.fetch(PRODUCT_LINE_NAV_QUERY);
     }
 
+    const contact :ContactDTO | null = !FEATURE_FLAGS.IS_INQUIRY_ENABLED
+        ? await client.fetch(CONTACT_QUERY) : null;
+
     // 데이터없으면 404페이지
     if (!product) {
         notFound();
@@ -36,7 +41,7 @@ export default async function page({ params, searchParams }: PageProps) {
 
     return (
         <main>
-            <ProductDetailContainer product={product} contextList={contextList} from={from}/>
+            <ProductDetailContainer product={product} contextList={contextList} from={from} contact={contact}/>
         </main>
     )
 }
