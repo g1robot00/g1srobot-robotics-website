@@ -7,7 +7,7 @@ interface InquiryPreparingProps {
     initialContact: ContactDTO | null
 }
 
-export default function InquiryPreparing({initialContact}: InquiryPreparingProps) {
+export default function ServicePreparing({initialContact}: InquiryPreparingProps) {
     if (!initialContact) return null;
 
     const contacts = [
@@ -16,7 +16,7 @@ export default function InquiryPreparing({initialContact}: InquiryPreparingProps
     ];
     
     return (
-        <div className=' h-[60vh] flex items-center justify-center p-5'>
+        <div className='w-full h-[60vh] flex items-center justify-center p-5'>
             <div className='flex flex-col gap-10 items-center'>
                 <div className='flex flex-col gap-5 items-start md:items-center'>
                     <LoaderCircle size={40} className='text-main'/>

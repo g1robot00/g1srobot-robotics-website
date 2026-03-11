@@ -31,8 +31,10 @@ export default async function page({ params, searchParams }: PageProps) {
         contextList = await client.fetch(PRODUCT_LINE_NAV_QUERY);
     }
 
-    const contact :ContactDTO | null = !FEATURE_FLAGS.IS_INQUIRY_ENABLED
-        ? await client.fetch(CONTACT_QUERY) : null;
+    const contact :ContactDTO | null = 
+        !FEATURE_FLAGS.IS_INQUIRY_ENABLED 
+            ? await client.fetch(CONTACT_QUERY) 
+            : null;
 
     // 데이터없으면 404페이지
     if (!product) {

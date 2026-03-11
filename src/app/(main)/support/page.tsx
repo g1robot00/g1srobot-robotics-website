@@ -13,7 +13,7 @@ export default async function page() {
   return (
     <div>
         <HeroBanner heroData={heroData} />
-        <ContactContainer initialContact={contact}/>
+        <ContactContainer contact={contact}/>
     </div>
   )
 }

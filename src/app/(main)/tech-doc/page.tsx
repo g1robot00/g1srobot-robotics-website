@@ -1,11 +1,11 @@
-import React from 'react'
 import { client } from '@/lib/sanity'
 
-import { TECH_DOC_QUERY } from '@/lib/queries'
+import { FEATURE_FLAGS } from '@/constants/config';
+import { TECH_DOC_QUERY, CONTACT_QUERY } from '@/lib/queries'
 import { getHeroDataByPath } from "@/lib/nav-utils";
 import HeroBanner from '@/components/shared/hero/HeroBanner'
 import TechDocContainer from '@/components/pages/tech-doc/TechDocContainer'
-import { TechDocDTO } from '@/types/respDto'
+import { TechDocDTO, ContactDTO } from '@/types/respDto'
 
 interface TechDocPageProps{
   searchParams: Promise<{productId?: string}>
@@ -13,15 +13,18 @@ interface TechDocPageProps{
 
 export default async function page({searchParams}: TechDocPageProps) {
   const {productId} = await searchParams;
-  // const initialProductId = resolvedParams.product || null;
   
-  const techDocs: TechDocDTO[] = await client.fetch(TECH_DOC_QUERY);  
+  const techDocs: TechDocDTO[] = await client.fetch(TECH_DOC_QUERY);
+  const contact :ContactDTO | null = 
+          !FEATURE_FLAGS.IS_INQUIRY_ENABLED 
+              ? await client.fetch(CONTACT_QUERY) 
+              : null;  
 
   const heroData = getHeroDataByPath('/tech-doc');
   return (
     <div>
         <HeroBanner heroData={heroData}/>
-        <TechDocContainer techDocs={techDocs} selectedId={productId}/>
+        <TechDocContainer techDocs={techDocs} selectedId={productId} contact={contact}/>
     </div>
   )
 }

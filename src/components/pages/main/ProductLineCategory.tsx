@@ -12,7 +12,7 @@ interface ProductLineCategoryProps {
     productLines: ProductLineListDTO[];
     activeId: number;
     onItemClick: (index: number) => void ;
-    itemRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
+    itemRefs: React.RefObject<(HTMLDivElement | null)[]>;
 }
 
 export default function ProductLineCategory({productLines, activeId, onItemClick, itemRefs}: ProductLineCategoryProps) {

@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 import { FEATURE_FLAGS } from '@/constants/config'
 import { NAV_LAYOUT } from '@/constants/styles'
-import InquiryPreparing from '@/components/shared/InquiryPreparing'
+import ServicePreparing from '@/components/shared/ServicePreparing'
 import ProductIntroSection from './ProductIntroSection'
 import ProductDescriptionSection from './ProductDescriptionSection'
 import ProductInquirySection from './ProductInquirySection'
@@ -46,7 +46,7 @@ export default function ProductDetailContainer({ product, contextList, from, con
                         ?
                         <ProductInquirySection productName={`${product.name} _ ${product.nameEn}`} />
                         :
-                        <InquiryPreparing initialContact={contact}/>
+                        <ServicePreparing initialContact={contact}/>
                     }
                     </Container>
                 </div>
