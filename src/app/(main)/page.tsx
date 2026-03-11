@@ -13,8 +13,6 @@ import { LandingPageDTO, IndustryListDTO, ProductLineListDTO, UseCasePageDTO, Cl
 export default async function Home() {
   const landing: LandingPageDTO = await client.fetch(LANDING_PAGE_QUERY);
 
-  console.log(landing.useCases)
-
   return (
     <div className='flex flex-col'>
       <HeroSection/>

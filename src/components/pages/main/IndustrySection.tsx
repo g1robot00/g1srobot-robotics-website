@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 import Container from '@/components/shared/Container';
-import SectionHeader from './SectionHeader';
+import SectionHeader from '../../shared/SectionHeader';
 import IconRenderer from '@/components/ui/IconRenderer';
 import { IndustryListDTO } from '@/types/respDto';
 import { ArrowUpRight } from 'lucide-react';

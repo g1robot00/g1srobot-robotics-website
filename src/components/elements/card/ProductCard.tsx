@@ -28,7 +28,7 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
     }
 
     return (
-        <Link href={`${href}?from=${from}&id=${id}`} key={label} 
+        <Link href={`${href}?from=${from}`} key={label} 
             className={cn('group block flex flex-col gap-4 p-2 md:p-3 transition-all duration-300 rounded-2xl', 'hover:bg-gray-100')}
         >
             <div className='relative w-full aspect-square md:aspect-[10/9]  rounded-xl overflow-hidden'>
@@ -51,7 +51,6 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
             <div className='flex flex-col gap-2'>
                 <div className='flex flex-col gap-y-1 md:flex-row '>
                     <Badge label={currentType.label} className={`${currentType.color} flex-shrink-0 w-fit h-fit shadow-none mr-2`}/>
-                    {/* <span  className={`${currentType.color} font-bold text-xs flex-shrink-0 w-fit h-fit shadow-none mr-2`}>{currentType.label}</span> */}
                     <h3 className={cn('text-lg md:text-xl font-bold leading-snug group-hover:text-main transition-colors', 
                                     'line-clamp-2 break-keep min-h-[3rem] md:min-h-[3.5rem]')} 
                     >

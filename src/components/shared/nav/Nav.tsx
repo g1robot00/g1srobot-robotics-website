@@ -35,7 +35,7 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
     window.addEventListener('showNavbar', showNav);
 
     const handleScroll = () => {
-      if (isLocked.current) return; // ✨ 잠겨있으면 아래 로직 아예 실행 안함!
+      if (isLocked.current) return; // 잠겨있으면 아래 로직 아예 실행 안함!
       const currentScrollY = window.scrollY;
 
       // 1. 투명도 감지(맨 위 50px)
@@ -70,19 +70,20 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
       >
         {/* 상단 메인 메뉴바 */}
         <Container className={`w-full ${NAV_LAYOUT.h} flex justify-center`}>
-          <div className='w-full flex items-center justify-between '>
-            <Link href='/'>
-              <Image className="dark:invert "
-                      src="/next.svg"
-                      alt="Next.js logo"
-                      width={100}
+          <div className='w-full flex md:gap-3 items-center justify-between '>
+            <Link href='/' className='max-md:w-[150px]'>
+              <Image className="dark:invert"
+                      src="/img/logo/g1srobot_Logo_main.svg"
+                      alt="g1srobot logo"
+                      width={200}
                       height={20}
                       priority
               />
             </Link>
+
             <ul onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className='hidden lg:flex gap-6'
+                className='hidden flex-shrink-0 xl:flex gap-6'
             >
               {NAV_ITEMS.map(item => (
                 <li key={item.label}
@@ -95,7 +96,8 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
                 </li>
               ))}
             </ul>
-            <div className='flex gap-7 items-center'>
+
+            <div className='flex-shrink-0 flex gap-3 lg:gap-6 items-center'>
               <Link href={'/support'}
                     className={cn('px-5 py-2 border rounded-full font-bold text-sm hidden md:block',
                               isTransparent? 'border-white text-white hover:bg-white/40': 'bg-main text-white hover:bg-main/70'
@@ -115,7 +117,7 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
             <ul className='mx-auto px-12 flex justify-center gap-20'>
               {activeMenu.items.map(sub => (
                 <li key={sub.label}>
-                  <Link href={sub.href} className='lg:text-lg hover:text-main hover:cursor-pointer block'>
+                  <Link href={sub.href} className='font-medium lg:text-lg hover:text-main hover:cursor-pointer block'>
                     {sub.label}
                   </Link>
                 </li>

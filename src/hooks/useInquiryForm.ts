@@ -87,7 +87,6 @@ export function useInquiryForm(): UseInquiryFormReturn {
         if(result.success) {
             alert(result.message);
             window.location.reload();   // 성공 후 새로고침
-            // console.log('제출완료');
         }
     };
 

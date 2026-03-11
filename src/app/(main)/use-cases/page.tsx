@@ -12,7 +12,6 @@ import {UseCasePageDTO} from '@/types/respDto';
 
 export default async function page() {
   const useCases: UseCasePageDTO = await client.fetch(USE_CASES_PAGE_QUERY) || [];
-  console.log('useData 데이터: ', useCases)
 
   const heroData = getHeroDataByPath('/use-cases');
 

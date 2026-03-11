@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { SECTION_PY } from '@/constants/styles';
 import UseCaseOverlay from '../use-cases/UseCaseOverlay';
 import Container from '@/components/shared/Container';
-import SectionHeader from './SectionHeader';
+import SectionHeader from '../../shared/SectionHeader';
 import UseCaseCard from '@/components/elements/card/UseCaseCard'
 import { UseCaseDTO } from '@/types/respDto';
 import { ChevronLeft, ChevronRight, MoveRight } from 'lucide-react'
@@ -19,7 +19,7 @@ interface UseCaseSectionProps {
 
 export default function UseCaseSection({useCases}: UseCaseSectionProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
-    const bgImage = useCases[0]?.thumbnail || '/img/default.jpg';   //FIXME 이미지 교체
+    const bgImage = '/img/landingHeroBg/heroBg4.jpg';   //FIXME 이미지 교체
     
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const selectedCase = useCases.find(item => item.id === selectedId); // FIXME 없을 경우 알림띄우기

@@ -1,10 +1,8 @@
 import React from 'react'
-import Script from 'next/script';
 
 import Nav from "@/components/shared/nav/Nav";
 import Footer from "@/components/shared/footer/Footer";
 import FloatingActions from '@/components/shared/FloatingActions';
-
 
 export default function layout({children}: {children: React.ReactNode}) {
   return (

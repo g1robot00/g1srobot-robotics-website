@@ -13,17 +13,16 @@ import { UniversalDetailDTO, DetailNavDTO, ContactDTO } from "@/types/respDto"
 
 interface PageProps {
     params:  Promise<{ slug: string }>
-    searchParams: Promise<{ from?: 'industry' | 'productLine'; id?: string }>
+    searchParams: Promise<{ from?: 'industry' | 'productLine'; }>
 }
 
 export default async function page({ params, searchParams }: PageProps) {
     // url에서 slug 추출(params.slug)
     const { slug } = await params;
-    const {from, id} = await searchParams;
+    const {from} = await searchParams;
 
     const product: UniversalDetailDTO = await client.fetch(UNIVERSAL_DETAIL_QUERY, { slug });
     
-    // 'from'에 맞는 형제 제품리스트 가져오기
     let contextList: DetailNavDTO[] = [];
     if(from === 'industry') {
         contextList = await client.fetch(INDUSTRY_NAV_QUERY);
@@ -36,7 +35,6 @@ export default async function page({ params, searchParams }: PageProps) {
             ? await client.fetch(CONTACT_QUERY) 
             : null;
 
-    // 데이터없으면 404페이지
     if (!product) {
         notFound();
     }

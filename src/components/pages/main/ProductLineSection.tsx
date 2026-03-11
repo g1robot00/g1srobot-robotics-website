@@ -10,7 +10,7 @@ import { SECTION_PY } from '@/constants/styles';
 import ProductLineCategory from './ProductLineCategory';
 import ProductLineGallery from './ProductLineGallery';
 import Container from '@/components/shared/Container';
-import SectionHeader from './SectionHeader';
+import SectionHeader from '../../shared/SectionHeader';
 import { ProductLineListDTO } from '@/types/respDto';
 
 interface ProductLineSectionProps {

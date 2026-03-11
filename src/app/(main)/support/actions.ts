@@ -22,7 +22,7 @@ export async function sendInquiry(formData: FormData) {
     const content= formData.get('content') as string;
 
     const infoRows = [
-        {label: '문의 유형', value: displayType},
+        { label: '문의 유형', value: displayType},
         { label: '회사명', value: company },
         { label: '부서', value: department },
         { label: '성함', value: name },

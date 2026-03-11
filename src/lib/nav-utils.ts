@@ -8,6 +8,6 @@ export function getHeroDataByPath(pathname: string): HeroData {
     
     return {
         label: match?.label || 'G1sRobot',
-        heroBg: match?.heroBg || '/img/default.jpg'
+        heroBg: match?.heroBg || '/img/HeroBg/abstract_black1.jpg'
     }
 }

@@ -4,7 +4,7 @@ import { useMemo, useState, useEffect } from 'react'
 
 import { cn } from '@/lib/utils'
 import Container from '@/components/shared/Container'
-import SectionHeader from '../main/SectionHeader'
+import SectionHeader from '../../shared/SectionHeader'
 import { CompanyDTO } from '@/types/respDto'
 import { Circle } from 'lucide-react';
 
