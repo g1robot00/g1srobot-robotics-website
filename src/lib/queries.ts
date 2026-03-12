@@ -272,6 +272,15 @@ export const LOCATION_QUERY = `
   }
 `
 
+// 문의_개인정보 수집 동의
+export const INQUIRY_CONSENT_QUERY = `
+  *[_type == "policy" && identifier.current == "inquiry-consent"][0] {
+    "title": title,
+    "label": consentLabel,
+    "content": content,
+  }
+`
+
 // 푸터
 export const FOOTER_QUERY = `{
   "contacts": *[_id == 'siteSettings'][0].contact {

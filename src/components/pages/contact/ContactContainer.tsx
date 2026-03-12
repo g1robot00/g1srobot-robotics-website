@@ -2,6 +2,7 @@ import { SECTION_PY } from '@/constants/styles'
 import { FEATURE_FLAGS } from '@/constants/config'
 import ServicePreparing from '@/components/shared/ServicePreparing'
 import Container from '@/components/shared/Container'
+import InquiryFormWrapper from '@/components/elements/contact/InquiryFormWrapper'
 import InquiryForm from '@/components/elements/contact/InquiryForm'
 import ContactHeader from './ContactHeader'
 import { ContactDTO } from '@/types/respDto'
@@ -18,7 +19,7 @@ export default function ContactContainer({contact}: ContactContainerProps) {
           ?
             <Container className={`${SECTION_PY.base} flex flex-col gap-16`}>
               <ContactHeader initialContact={contact}/>
-              <InquiryForm />
+              <InquiryFormWrapper />
             </Container>
           : 
             <Container className={SECTION_PY.base}>

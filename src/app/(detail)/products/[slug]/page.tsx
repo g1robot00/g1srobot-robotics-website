@@ -9,6 +9,9 @@ import {
 } from "@/lib/queries"
 import { FEATURE_FLAGS } from "@/constants/config"
 import ProductDetailContainer from "@/components/pages/products/detail/ProductDetailContainer"
+import ProductInquirySection from "@/components/pages/products/detail/ProductInquirySection"
+import InquiryFormWrapper from "@/components/elements/contact/InquiryFormWrapper"
+import ServicePreparing from "@/components/shared/ServicePreparing"
 import { UniversalDetailDTO, DetailNavDTO, ContactDTO } from "@/types/respDto"
 
 interface PageProps {
@@ -35,13 +38,26 @@ export default async function page({ params, searchParams }: PageProps) {
             ? await client.fetch(CONTACT_QUERY, {}, { next: { revalidate: 0 } }) 
             : null;
 
+    
     if (!product) {
         notFound();
     }
 
     return (
         <main>
-            <ProductDetailContainer product={product} contextList={contextList} from={from} contact={contact}/>
+            <ProductDetailContainer 
+                product={product} 
+                contextList={contextList} 
+                from={from} 
+                contact={contact}
+                inquirySlot = {
+                    FEATURE_FLAGS.IS_INQUIRY_ENABLED ? (
+                        <ProductInquirySection productName={product.name}/>
+                        ) : (
+                        <ServicePreparing initialContact={contact} />
+                    )
+                }
+            />
         </main>
     )
 }
