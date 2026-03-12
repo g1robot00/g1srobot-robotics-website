@@ -15,10 +15,9 @@ export default async function page({searchParams}: TechDocPageProps) {
   const {productId} = await searchParams;
   
   const techDocs: TechDocDTO[] = await client.fetch(TECH_DOC_QUERY);
-  const contact :ContactDTO | null = 
-          !FEATURE_FLAGS.IS_INQUIRY_ENABLED 
-              ? await client.fetch(CONTACT_QUERY) 
-              : null;  
+  const contact :ContactDTO | null = !FEATURE_FLAGS.IS_INQUIRY_ENABLED 
+    ? await client.fetch(CONTACT_QUERY, {}, { next: { revalidate: 0 } }) //캐시 무시
+    : null;  
 
   const heroData = getHeroDataByPath('/tech-doc');
   return (

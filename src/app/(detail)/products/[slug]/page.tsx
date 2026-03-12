@@ -32,7 +32,7 @@ export default async function page({ params, searchParams }: PageProps) {
 
     const contact :ContactDTO | null = 
         !FEATURE_FLAGS.IS_INQUIRY_ENABLED 
-            ? await client.fetch(CONTACT_QUERY) 
+            ? await client.fetch(CONTACT_QUERY, {}, { next: { revalidate: 0 } }) 
             : null;
 
     if (!product) {

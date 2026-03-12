@@ -3,14 +3,16 @@ import Link from 'next/link'
 import { client } from '@/lib/sanity'
 
 import { cn } from '@/lib/utils'
-import { CONTACT_QUERY } from '@/lib/queries'
+import { FOOTER_QUERY } from '@/lib/queries'
 import { NAV_ITEMS } from '@/constants/navigation'
 import Container from '../Container'
+import FooterPolicySection from './FooterPolicySection'
 import ContactItem from './ContactItem'
-import { ContactDTO } from '@/types/respDto'
+import { FooterDTO } from '@/types/respDto'
 
 export default async function Footer() {
-  const contacts: ContactDTO = await client.fetch(CONTACT_QUERY);
+  const footer: FooterDTO = await client.fetch(FOOTER_QUERY);
+  const {contacts, policy} = footer;
   const allContacts = [
     {id: 'email', ...contacts.email}, 
     {id: 'phone', ...contacts.phone}, 
@@ -46,10 +48,7 @@ export default async function Footer() {
                   </Link>
                 ))}
               </div>
-              <div className='flex flex-col gap-2 md:items-end text-xs md:text-base md:text-right'>
-                <span className='text-main'>개인정보처리방침</span>
-                <span>@Copyright 2026 G1SRobot, All Rights Reserved</span>
-              </div>
+              <FooterPolicySection  policy={policy}/>
           </div>
         </Container>
     </footer>

@@ -271,3 +271,22 @@ export const LOCATION_QUERY = `
     }
   }
 `
+
+// 푸터
+export const FOOTER_QUERY = `{
+  "contacts": *[_id == 'siteSettings'][0].contact {
+    phone { 'value': text, 'iconName': iconName },
+    email { 'value': text, 'iconName':iconName },
+    address { 'value': text, 'iconName':iconName }
+  },
+  "policy": {
+    "privacyPolicy": *[_type == "policy" && identifier.current == "privacy-policy"][0] {
+      "title": title,
+      "content": content,
+    },
+    "emailRefusal": *[_type == "policy" && identifier.current == "email-refusal"][0] {
+      "title": title,
+      "content": content,
+    },
+  }
+}`

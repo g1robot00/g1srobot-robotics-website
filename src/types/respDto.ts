@@ -191,3 +191,16 @@ export interface LocationDTO{
     address: LocationItem;
 }
 
+// 푸터
+export interface PolicyItem {
+    title: string; 
+    content: any[];
+}
+
+export interface FooterDTO {
+    contacts: ContactDTO,
+    policy: {
+        privacyPolicy: PolicyItem,
+        emailRefusal: PolicyItem,
+    }
+}

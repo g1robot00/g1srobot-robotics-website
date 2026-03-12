@@ -23,7 +23,6 @@ export default async function page() {
   return (
     <div >
         <HeroBanner heroData={heroData} subTabs={COMPANY_TABS}/>
-        {/* <SubCategoryTab list={tabList} /> */}
         <CompanyContainer company={company}/>
     </div>
   )
