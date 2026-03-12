@@ -53,7 +53,7 @@ export default function AboutSection({slogan, about, business, vision, idAbout, 
   const thirdTextOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
 
   return (
-    <section ref={containerRef} className='relateve h-[400vh] py-20 w-full bg-black text-white'>
+    <section ref={containerRef} className='relateve h-[400vh] pt-20 w-full bg-black text-white'>
         {/* 📍 앵커 1: About 감지용 (섹션 상단) */}
         <div id={idAbout} className="absolute top-[220vh] h-[120vh] w-full pointer-events-none scroll-mt-[150px]" />
         {/* 📍 앵커 2: Vision 감지용 (섹션 절반 지점) */}

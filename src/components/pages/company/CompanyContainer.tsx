@@ -17,7 +17,7 @@ export default function CompanyContainer({company}: CompanyContainerProps) {
     <div className='w-full'>
       <AboutSection slogan={slogan} about={about} business={business} vision={vision} idAbout={COMPANY_TABS[0].id} idVision={COMPANY_TABS[1].id}/>
       {/* <ClientsSection clients={clients} id= {COMPANY_TABS[2].id}/> */}
-      <HistorySection history={history} id= {COMPANY_TABS[3].id}/>
+      <HistorySection history={history} id= {COMPANY_TABS[2].id}/>
     </div>
   )
 }

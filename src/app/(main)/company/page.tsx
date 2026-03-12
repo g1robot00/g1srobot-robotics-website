@@ -13,12 +13,6 @@ export default async function page() {
   const company: CompanyDTO = await client.fetch(COMPANY_QUERY);
   
   const heroData = getHeroDataByPath('/company');
-  const tabList = [
-    {label: 'About', id: 'about'},
-    {label: 'Vision', id: 'vision'},
-    {label: 'Clients', id: 'clients'},
-    {label: 'History', id: 'history'},
-  ];
 
   return (
     <div >
