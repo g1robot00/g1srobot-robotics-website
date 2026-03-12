@@ -31,7 +31,7 @@ export default function LocationContainer({ contact }: { contact: LocationDTO })
 
     if (loading) return <div className="h-[450px] bg-gray-100 flex items-center justify-center">지도를 불러오는 중...</div>;
     if (error) {
-        console.error("[KakaoMap] Failed to load SDK:", error);
+        // console.error("[KakaoMap] Failed to load SDK:", error);
         return <div className="h-[450px] bg-red-50 flex items-center justify-center text-red-500">지도를 불러오지 못했습니다. </div>;
     }
 
