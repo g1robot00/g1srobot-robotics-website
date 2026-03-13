@@ -10,7 +10,6 @@ import {
 import { FEATURE_FLAGS } from "@/constants/config"
 import ProductDetailContainer from "@/components/pages/products/detail/ProductDetailContainer"
 import ProductInquirySection from "@/components/pages/products/detail/ProductInquirySection"
-import InquiryFormWrapper from "@/components/elements/contact/InquiryFormWrapper"
 import ServicePreparing from "@/components/shared/ServicePreparing"
 import { UniversalDetailDTO, DetailNavDTO, ContactDTO } from "@/types/respDto"
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { client } from '@/lib/sanity';
 
 import { COMPANY_QUERY } from '@/lib/queries'

@@ -14,7 +14,7 @@ export default function ProductLineGallery({previews, activeId}: ProductLineGall
     const isActive = previews[activeId];
     return (
         <AnimatePresence mode="wait">
-            <motion.div className='relative w-full h-full bg-gray-800 rounded-2xl overflow-hidden'
+            <motion.div className='relative w-full h-full bg-black rounded-2xl overflow-hidden'
                 key={activeId} // activeId가 바뀔때마다 애니메이션 트리거
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -26,7 +26,7 @@ export default function ProductLineGallery({previews, activeId}: ProductLineGall
                     ? <Image src={isActive.thumbnail}
                         alt={isActive.label}
                         fill
-                        className='object-cover bg-gray-700'
+                        className='object-contain bg-gray-700'
                     />
                     : <ImagePlaceholder size='lg' />
                 }

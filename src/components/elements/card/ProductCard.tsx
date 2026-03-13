@@ -28,12 +28,12 @@ export default function ProductCard({ product, from, id }: ProductCardProps) {
 
     return (
         <Link href={`${href}?from=${from}`} key={label} 
-            className={cn('group block flex flex-col gap-4 p-2 md:p-3 transition-all duration-300 rounded-2xl', 'hover:bg-gray-100')}
+            className={cn('group block flex flex-col gap-4 p-2 md:p-3 transition-all duration-300 rounded-lg md:rounded-2xl', 'hover:bg-gray-100')}
         >
-            <div className='relative w-full aspect-square md:aspect-[10/9]  rounded-xl overflow-hidden'>
+            <div className='relative w-full aspect-square   rounded-xl overflow-hidden bg-gray-100'>
                 {thumbnail
                     ? <Image src={thumbnail} alt={label} fill 
-                            className="object-cover transition-transform duration-500 group-hover:scale-105" 
+                            className="object-contain transition-transform duration-500 group-hover:scale-105" 
                             sizes="(max-width: 768px) 100vw, 33vw" // 성능 최적화
                     />   
                     : <ImagePlaceholder size='md'/>
