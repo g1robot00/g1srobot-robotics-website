@@ -57,7 +57,7 @@ export default function UseCaseOverlay({ useCase, onClose }: UseCaseOverlayProps
                                     fill 
                                     priority
                                     className='object-contain'
-                                    sizes="100vw"
+                                    sizes="(max-width: 1024px) 100vw, (max-width: 1680px) 55vw, 60vw"
                                     quality={90}
                                 />
                                 : <ImagePlaceholder  size='md'/> 

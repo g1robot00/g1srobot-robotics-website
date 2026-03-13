@@ -33,7 +33,7 @@ export async function sendInquiry(formData: FormData) {
     try{
         const {data, error} = await resend.emails.send({
             from: 'onboarding@resend.dev',
-            to: '99gkwldnjs99@gmail.com',
+            to: `${process.env.EMAIL_ADDRESS}`,
             subject: `[신규 문의]${company} - ${name}님의 문의입니다.`,
             html:`
                 <h2>신규문의 상세내용<h2>

@@ -115,7 +115,7 @@ export default function UseCaseContainer({ initialData }: UseCaseContainerProps)
                         />
                     </div>
                 </div>
-                {/* use cases card */}
+                
                 <div className='py-10 md:py-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:!grid-cols-4 gap-x-4 gap-y-10'>
                     {filteredCases.length > 0
                         ? filteredCases.map(item => (

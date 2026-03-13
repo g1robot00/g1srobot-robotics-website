@@ -48,7 +48,13 @@ export default function ProductDescriptionSection({ product, from }: Description
                                                 )}
                                     >
                                         {item.mainImage 
-                                            ? <Image src={item.mainImage} alt={item.name} fill className={cn("object-cover transition-all duration-400", !isPreparing && 'group-hover:scale-110')} />
+                                            ? <Image 
+                                                src={item.mainImage} 
+                                                alt={item.name} 
+                                                fill 
+                                                className={cn("object-cover transition-all duration-400", !isPreparing && 'group-hover:scale-110')} 
+                                                sizes='(max-width: 768px) 33vw, 20vw'
+                                            />
                                             : <ImagePlaceholder size='sm' text={isPreparing ? 'Info Preparing': 'Image Preparing'}/>
                                         }
                                         {isPreparing &&

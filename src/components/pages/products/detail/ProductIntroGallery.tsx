@@ -30,7 +30,7 @@ export default function ProductIntroGallery({ imgUrls, videoUrls, name }: Produc
                     fill
                     priority
                     className='object-contain'
-                    sizes="100vw"
+                    sizes="(max-width: 768px)100vw, 55vw"
                     quality={90}
                 />
             )
