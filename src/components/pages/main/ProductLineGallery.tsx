@@ -27,6 +27,8 @@ export default function ProductLineGallery({previews, activeId}: ProductLineGall
                         alt={isActive.label}
                         fill
                         className='object-contain bg-gray-700'
+                        sizes="(max-width: 1024px) 1px, 70vw"
+                        quality={85}
                     />
                     : <ImagePlaceholder size='lg' />
                 }

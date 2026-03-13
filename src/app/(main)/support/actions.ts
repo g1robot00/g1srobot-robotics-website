@@ -8,7 +8,6 @@ export async function sendInquiry(formData: FormData) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     // 1. 폼 데이터 추출
-    
     const type= formData.get('inquiryType') as string;
     const displayType = INQUIRY_TYPES[type as InquiryTypeCode] || type;
     

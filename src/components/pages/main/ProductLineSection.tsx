@@ -81,7 +81,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
     return (
         <section className='relative w-full  py-10'>
             <div className='absolute inset-0 z-[-2] overflow-hidden'>
-                <Image src='/img/productLineBg/bg10.jpg' alt='background' fill className='object-cover scale-105'/>
+                <Image src='/img/productLineBg/bg10.jpg' alt='ProductLine Background' fill className='object-cover scale-105' sizes='100vw'/>
             </div>
             <Container className={cn(SECTION_PY.lg, 'transition-all duration-500')}>
                 <SectionHeader category='Product Lines'
@@ -91,7 +91,7 @@ export default function ProductLineSection({productLines}: ProductLineSectionPro
                 />
                     <div className='relative flex flex-col md:flex-row gap-10 md:gap-20 3xl:gap-32 '>
                         {/* 왼쪽: 아코디언 스타일 */}
-                        <div className='flex-1 flex flex-col py-0 lg:py-20 '>
+                        <div className='flex-1 flex flex-col py-0 lg:py-20'>
                             <ProductLineCategory 
                                 productLines={productLines}
                                 activeId={activeId}

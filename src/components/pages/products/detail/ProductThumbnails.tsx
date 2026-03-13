@@ -53,7 +53,7 @@ export default function ProductThumbnails({ allMedia, name, activeIndex, setActi
                             )}
                         >
                             {item.type === 'image' 
-                                ?<Image src={allMedia[idx].url} alt={`${name} thumb ${idx}`} fill className='object-cover' />
+                                ?<Image src={allMedia[idx].url} alt={`${name} thumb ${idx}`} fill className='object-cover' sizes="(max-width: 768px) 20vw, 10vw" />
                                 :<div className="w-full h-full bg-slate-800 flex flex-col items-center justify-center gap-1">
                                     <PlayCircle className="text-white/80 group-hover:text-white transition-colors" size={32} />
                                     <span className="text-[9px] text-white/60 font-bold tracking-tighter">VIDEO</span>

@@ -21,7 +21,7 @@ export default function UseCaseCard({useCase, onCardClick}: UseCaseCardProps) {
           {thumbnail
             ?<Image src={thumbnail} alt={title} fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 33vw" // 성능 최적화
+                sizes="(max-width: 768px) 100vw, 33vw"
             />
             : <ImagePlaceholder size='md'/>
           }

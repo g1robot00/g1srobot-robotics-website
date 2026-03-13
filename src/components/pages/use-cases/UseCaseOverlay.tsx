@@ -51,7 +51,15 @@ export default function UseCaseOverlay({ useCase, onClose }: UseCaseOverlayProps
                     >
                         <div className='lg:flex-[1.2] 3xl:flex-[1.5] relative w-full overflow-hidden aspect-[4/3] bg-gray-100 self-start'>
                             { useCase?.thumbnail 
-                                ? <Image src={useCase.thumbnail} alt={useCase.title || 'UseCase detail'} fill className='object-contain'/>
+                                ? <Image 
+                                    src={useCase.thumbnail} 
+                                    alt={useCase.title || 'UseCase detail'} 
+                                    fill 
+                                    priority
+                                    className='object-contain'
+                                    sizes="100vw"
+                                    quality={90}
+                                />
                                 : <ImagePlaceholder  size='md'/> 
                             }
                         </div>

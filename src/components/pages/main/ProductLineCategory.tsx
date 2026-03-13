@@ -36,7 +36,7 @@ export default function ProductLineCategory({productLines, activeId, onItemClick
                             }}
                             className='block group p-3  py-7 md:py-12'
                         >
-                            <div className={cn('flex flex-col gap-2 md:flex-row  md:items-center md:justify-between transition-all duration-500',
+                            <div className={cn('flex flex-col gap-2 md:flex-row md:items-center md:justify-between transition-all duration-500',
                                 isActive ? 'mb-10' : 'text-gray-600 hover:text-gray-400')}
                             >
                                 <div className='flex flex-col gap-2'>
@@ -100,7 +100,14 @@ export default function ProductLineCategory({productLines, activeId, onItemClick
                                         {/* 모바일 전용 이미지박스 */}
                                         <div className='block lg:hidden relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden'>
                                             {item.thumbnail
-                                                ? <Image src={item.thumbnail} alt={item.label} fill className='object-cover' />
+                                                ? <Image 
+                                                    src={item.thumbnail} 
+                                                    alt={item.label} 
+                                                    fill 
+                                                    className='object-cover' 
+                                                    sizes="(max-width: 1024px) 100vw, 1px" 
+                                                    quality={85}
+                                                />
                                                 : <ImagePlaceholder />
                                             }
                                         </div>

@@ -27,7 +27,14 @@ export default function HeroSection() {
                     text-white text-center`}
     >
       <div className='absolute inset-0 z-[-2] overflow-hidden'>
-        <Image src={SLOGANS[index].bg} alt={`heroBg ${index}`} fill className='object-cover scale-105 '/>
+        <Image 
+          src={SLOGANS[index].bg} 
+          alt={`heroBg ${index}`} 
+          fill 
+          priority
+          className='object-cover scale-105' 
+          sizes='100vw'
+        />
       </div>
       <div className="absolute inset-0 z-[-1] bg-black/70 " />
       <Container>

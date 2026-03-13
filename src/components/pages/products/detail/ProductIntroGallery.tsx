@@ -30,6 +30,8 @@ export default function ProductIntroGallery({ imgUrls, videoUrls, name }: Produc
                     fill
                     priority
                     className='object-contain'
+                    sizes="100vw"
+                    quality={90}
                 />
             )
         }
@@ -59,10 +61,11 @@ export default function ProductIntroGallery({ imgUrls, videoUrls, name }: Produc
             </div>
             { allMedia.length > 1 && 
                 <div className='w-full flex-shrink-0'>
-                    <ProductThumbnails allMedia={allMedia} 
-                                        name={name} 
-                                        activeIndex={activeIndex} 
-                                        setActiveIndex={setActiveIndex}
+                    <ProductThumbnails 
+                        allMedia={allMedia} 
+                        name={name} 
+                        activeIndex={activeIndex} 
+                        setActiveIndex={setActiveIndex}
                     />
                 </div>
             }
