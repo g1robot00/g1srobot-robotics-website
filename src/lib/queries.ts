@@ -16,11 +16,7 @@ export const LANDING_PAGE_QUERY = `{
     "content": description,
     "hasProducts": count(*[${PRODUCT_TYPES_CONDITION}]) > 0,
     "thumbnail": coalesce(
-      // 1순위: 현재(productLine) 테이블의 mainImage URL
       mainImage.asset->url, 
-
-      // 2순위: 1순위가 없을 경우, 이 제품군을 참조하는 제품들 중 
-      // 참조하는 제품을 찾은 뒤, 그 제품의 [대표이미지] 혹은 [갤러리 첫장] 중 있는 걸 가져옴
       *[${PRODUCT_TYPES_CONDITION}] | order(_createdAt desc)[0]{
         "url": coalesce(mainImage.asset->url, images[0].asset->url)
       }.url
@@ -90,7 +86,7 @@ export const UNIVERSAL_DETAIL_QUERY = `
 
 // 제품군
 export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
-  *[_type == "productLine" && count(*[${PRODUCT_TYPES_CONDITION}]) > 0] | order(orderRank asc) { // 해당제품 없으면 목록 삭제
+  *[_type == "productLine" && count(*[${PRODUCT_TYPES_CONDITION}]) > 0] | order(orderRank asc) {
     "id": _id,
     "label": name,
     "nameEn": nameEn,
@@ -98,7 +94,7 @@ export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
     "content": description,
 
     // 2. 해당 제품군에 속한 제품들을 필터링해서 가져오기(SQL의 JOIN)
-    "kind": *[${PRODUCT_TYPES_CONDITION}] {
+    "kind": *[${PRODUCT_TYPES_CONDITION}] | order(publishedAt desc) {
       "id":_id,
       "type": _type,
       "label": name,
@@ -128,10 +124,10 @@ export const PRODUCT_LINE_NAV_QUERY = `
 
 // 산업
 export const INDUSTRY_WITH_PRODUCTS_QUERY = `
-  *[_type == 'industry'&& count(*[${PRODUCT_TYPES_CONDITION}]) > 0]   | order(orderRank asc){ 
+  *[_type == 'industry'&& count(*[${PRODUCT_TYPES_CONDITION}]) > 0]  | order(orderRank asc){ 
     "id": _id,
     "label": name,
-    "kind": *[${PRODUCT_TYPES_CONDITION}] {
+    "kind": *[${PRODUCT_TYPES_CONDITION}] | order(publishedAt desc){
       "id": _id,
       "type": _type,
       "label": name,
