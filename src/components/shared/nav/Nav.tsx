@@ -72,12 +72,12 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
         <Container className={`w-full ${NAV_LAYOUT.h} flex justify-center`}>
           <div className='w-full flex md:gap-3 items-center justify-between '>
             <Link href='/' className='max-md:w-[150px]'>
-              <Image className="dark:invert"
-                      src="/img/logo/g1srobot_Logo_main.svg"
-                      alt="g1srobot logo"
-                      width={200}
-                      height={20}
-                      priority
+              <Image 
+                src="/img/logo/g1srobot_Logo_main.svg"
+                alt="g1srobot logo"
+                width={200}
+                height={20}
+                priority
               />
             </Link>
 

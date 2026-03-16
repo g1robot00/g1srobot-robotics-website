@@ -2,6 +2,7 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
     // 테일윈드가 CSS를 생성하기 위해 감시할 파일 경로들입니다.
+    darkMode: 'class',
     content: [
         "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
         "./src/components/**/*.{js,ts,jsx,tsx,mdx}", // components 폴더 감시
