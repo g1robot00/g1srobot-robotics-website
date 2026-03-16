@@ -1,5 +1,7 @@
 'use client'
+
 import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation' 
 
 import { cn } from '@/lib/utils';
 import { SECTION_PY } from '@/constants/styles';
@@ -21,9 +23,20 @@ const PRODUCT_TYPES = [
 ]
 
 export default function ProductContainer({ from, list, type='normal' }: ProductContainerProps) {
+    const pathname = usePathname();
     const [selectedFilters, setSelectedFilters] = useState<string[]>(PRODUCT_TYPES.map(item => item.name));
     const [filteredList, setFilteredList] = useState<ProductLineProductsDTO[] | IndustryProductsDTO[]>(list);
 
+    useEffect(() => {
+        if (window.location.hash) {
+            const timer = setTimeout(() => {
+                window.history.replaceState(null, '', pathname);
+            }, 500);
+
+            return () => clearTimeout(timer);
+        }
+    }, [pathname]);
+    
     const handleToggle = (label: string) => {
         setSelectedFilters(
             prev => prev.includes(label)
@@ -73,7 +86,6 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
                                     <p className='font-bold text-sm md:text-base text-main'>{item.nameEn}</p>
                                     <h2 className="text-2xl md:text-4xl font-bold">{item.label}</h2>
                                 </div>
-                                {/* {('content' in item) && item.content && <p className="text-sm md:text-base text-gray-600 whitespace-pre-wrap">{item.content}</p>} */}
                             </div>
                             {/* --- 해당 제품군에 속한 제품(Products) 리스트 --- */}
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-10">

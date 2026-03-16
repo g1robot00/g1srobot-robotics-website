@@ -15,11 +15,6 @@ interface IndustrySectionProps {
 export default function IndustrySection({industries}: IndustrySectionProps) {
     return (
         <section className='relative w-full py-20 3xl:py-40 overflow-hidden'>
-            {/* ✨ 배경 데코레이션 */}
-            <div className="absolute -top-20 -left-10 z-[-2] text-gray-100 font-black text-[15rem] leading-none opacity-40 select-none">
-                01
-            </div>
-
             <Container>
                 <SectionHeader 
                     category='Solutions'
