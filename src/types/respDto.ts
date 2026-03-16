@@ -102,8 +102,8 @@ export interface UseCasePageDTO {
 export interface IndustryListDTO {
     id: string;
     label: string;
+    nameEn: string;
     href: string;
-    icon: string;
 }
 
 export interface ProductLineListDTO extends ProductLineBase{

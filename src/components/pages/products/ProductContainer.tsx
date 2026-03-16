@@ -6,7 +6,7 @@ import { SECTION_PY } from '@/constants/styles';
 import Container from '@/components/shared/Container';
 import ProductCard from '@/components/elements/card/ProductCard';
 import Badge from '@/components/ui/Badge';
-import { ProductLineProductsDTO, IndustryProductsDTO, ProductItemDTO} from '@/types/respDto'
+import { ProductLineProductsDTO, IndustryProductsDTO} from '@/types/respDto'
 
 
 interface ProductContainerProps {

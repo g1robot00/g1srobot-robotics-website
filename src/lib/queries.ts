@@ -2,13 +2,13 @@ const PRODUCT_TYPES_CONDITION = `_type in ["system", "robot"] && references(^._i
 
 // 랜딩페이지
 export const LANDING_PAGE_QUERY = `{
-  "industries": *[_type == "industry"] | order(name asc) {
+  "industries": *[_type == "industry"] | order(orderRank asc) {
     "id": _id,
     "label": name,
+    "nameEn": nameEn,
     "href": "/solutions/",
-    "icon": iconName
   },
-  "productLines": *[_type == "productLine"] | order(name asc) {
+  "productLines": *[_type == "productLine"] | order(orderRank asc) {
     "id": _id,
     "label": name,
     "nameEn": nameEn,
@@ -90,7 +90,7 @@ export const UNIVERSAL_DETAIL_QUERY = `
 
 // 제품군
 export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
-  *[_type == "productLine" && count(*[${PRODUCT_TYPES_CONDITION}]) > 0] | order(name asc) { // 해당제품 없으면 목록 삭제
+  *[_type == "productLine" && count(*[${PRODUCT_TYPES_CONDITION}]) > 0] | order(orderRank asc) { // 해당제품 없으면 목록 삭제
     "id": _id,
     "label": name,
     "nameEn": nameEn,
@@ -128,7 +128,7 @@ export const PRODUCT_LINE_NAV_QUERY = `
 
 // 산업
 export const INDUSTRY_WITH_PRODUCTS_QUERY = `
-  *[_type == 'industry'&& count(*[${PRODUCT_TYPES_CONDITION}]) > 0] { // 해당제품 없으면 목록 삭제
+  *[_type == 'industry'&& count(*[${PRODUCT_TYPES_CONDITION}]) > 0]   | order(orderRank asc){ 
     "id": _id,
     "label": name,
     "kind": *[${PRODUCT_TYPES_CONDITION}] {

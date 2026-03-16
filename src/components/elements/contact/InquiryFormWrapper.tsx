@@ -9,7 +9,7 @@ interface InquiryFormWrapperProps {
 }
 
 export default async function InquiryFormWrapper({ productName }: InquiryFormWrapperProps) {
-    const policy: InquiryConsentDTO = await client.fetch(INQUIRY_CONSENT_QUERY, {}, { next: { revalidate: 0 } });
+    const policy: InquiryConsentDTO = await client.fetch(INQUIRY_CONSENT_QUERY);
 
     return (
         <InquiryForm productName={productName} policy={policy} />
