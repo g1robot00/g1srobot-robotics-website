@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation' 
+import { usePathname } from 'next/navigation' 
 
 import { cn } from '@/lib/utils';
 import { SECTION_PY } from '@/constants/styles';
@@ -26,6 +26,8 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
     const pathname = usePathname();
     const [selectedFilters, setSelectedFilters] = useState<string[]>(PRODUCT_TYPES.map(item => item.name));
     const [filteredList, setFilteredList] = useState<ProductLineProductsDTO[] | IndustryProductsDTO[]>(list);
+
+    console.log('제품리스트', filteredList.filter(item => item.kind.some(pd => !pd.thumbnail)));
 
     useEffect(() => {
         if (window.location.hash) {

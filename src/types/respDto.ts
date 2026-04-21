@@ -11,11 +11,12 @@ export interface ProductItemDTO {
     type: 'system' | 'robot';
     label: string;
     href: string;
+    showProduct: boolean;
     specs: ProductSpec[];
     thumbnail: string;
 }
 
-export type ProductItemSimpleDTO = Omit<ProductItemDTO, 'specs' | 'thumbnail'>;
+// export type ProductItemSimpleDTO = Omit<ProductItemDTO, 'specs' | 'thumbnail'>;
 
 export interface BaseItem {
     id: string;
@@ -59,7 +60,6 @@ export interface ProductLineBase {
     content: string;
     thumbnail: string;
 }
-
 
 export interface ProductLineProductsDTO extends ProductLineBase{ //부품 삭제 ㅇㅇ
     kind: ProductItemDTO[];

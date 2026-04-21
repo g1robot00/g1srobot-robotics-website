@@ -8,7 +8,7 @@ import IndustrySection from '@/components/pages/main/IndustrySection';
 import ProductLineSection from '@/components/pages/main/ProductLineSection';
 import UseCaseSection from '@/components/pages/main/UseCaseSection';
 import CtaSection from '@/components/pages/main/CtaSection';
-import { LandingPageDTO, IndustryListDTO, ProductLineListDTO, UseCasePageDTO, ClientsDTO } from '@/types/respDto';
+import { LandingPageDTO } from '@/types/respDto';
 
 export default async function Home() {
   const landing: LandingPageDTO = await client.fetch(LANDING_PAGE_QUERY);

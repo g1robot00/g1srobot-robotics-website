@@ -100,8 +100,9 @@ export const PRODUCT_LINE_WITH_PRODUCTS_QUERY = `
       "label": name,
       "nameEn": nameEn,
       "href": "/products/" + slug.current,
-      "specs": specs,
-      "thumbnail": coalesce(mainImage.asset->url, images[0].asset->url)
+      "showProduct": showProduct,
+      "specs": select(showProduct != false => specs, null),
+      "thumbnail": select(showProduct != false => coalesce(mainImage.asset->url, images[0].asset->url), null)
     },
 
     // 3. 이미지 처리(이미지가 없다면 첫번째 제품의 이미지를 가져오거나 처리)
@@ -124,17 +125,19 @@ export const PRODUCT_LINE_NAV_QUERY = `
 
 // 산업
 export const INDUSTRY_WITH_PRODUCTS_QUERY = `
-  *[_type == 'industry'&& count(*[${PRODUCT_TYPES_CONDITION}]) > 0]  | order(orderRank asc){ 
+  *[_type == 'industry'&& count(*[${PRODUCT_TYPES_CONDITION}]) > 0] | order(orderRank asc){ 
     "id": _id,
     "label": name,
+    "nameEn": nameEn,
     "kind": *[${PRODUCT_TYPES_CONDITION}] | order(publishedAt desc){
       "id": _id,
       "type": _type,
       "label": name,
       "nameEn": nameEn,
       "href": "/products/" + slug.current,
-      "specs": specs,
-      "thumbnail": coalesce(mainImage.asset->url, images[0].asset->url)
+      "showProduct": showProduct,
+      "specs": select(showProduct != false => specs, null),
+      "thumbnail": select(showProduct != false => coalesce(mainImage.asset->url, images[0].asset->url), null)
     }
   }
 `
