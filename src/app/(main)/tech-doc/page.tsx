@@ -1,11 +1,11 @@
 import { client } from '@/lib/sanity'
 
 import { FEATURE_FLAGS } from '@/constants/config';
-import { TECH_DOC_QUERY, CONTACT_QUERY } from '@/lib/queries'
+import { TECH_DOC_PAGE_QUERY, CONTACT_QUERY } from '@/lib/queries'
 import { getHeroDataByPath } from "@/lib/nav-utils";
 import HeroBanner from '@/components/shared/hero/HeroBanner'
 import TechDocContainer from '@/components/pages/tech-doc/TechDocContainer'
-import { TechDocDTO, ContactDTO } from '@/types/respDto'
+import { TechDocPageDTO, ContactDTO } from '@/types/respDto'
 
 interface TechDocPageProps{
   searchParams: Promise<{productId?: string}>
@@ -14,8 +14,8 @@ interface TechDocPageProps{
 export default async function page({searchParams}: TechDocPageProps) {
   const {productId} = await searchParams;
   
-  const techDocs: TechDocDTO[] = await client.fetch(TECH_DOC_QUERY);
-  const contact :ContactDTO | null = !FEATURE_FLAGS.IS_INQUIRY_ENABLED 
+  const techDocs:TechDocPageDTO = await client.fetch(TECH_DOC_PAGE_QUERY);
+  const contact: ContactDTO | null = !FEATURE_FLAGS.IS_INQUIRY_ENABLED 
     ? await client.fetch(CONTACT_QUERY) //캐시 무시
     : null;  
 
@@ -23,7 +23,7 @@ export default async function page({searchParams}: TechDocPageProps) {
   return (
     <div>
         <HeroBanner heroData={heroData}/>
-        <TechDocContainer techDocs={techDocs} selectedId={productId} contact={contact}/>
+        <TechDocContainer techDocData={techDocs} selectedId={productId} contact={contact}/>
     </div>
   )
 }

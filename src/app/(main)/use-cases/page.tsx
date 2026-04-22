@@ -2,9 +2,7 @@
 import React from 'react'
 import { client } from "@/lib/sanity";
 
-import { 
-  USE_CASES_PAGE_QUERY, 
-} from '@/lib/queries'
+import {USE_CASES_PAGE_QUERY} from '@/lib/queries'
 import { getHeroDataByPath } from '@/lib/nav-utils';
 import HeroBanner from '@/components/shared/hero/HeroBanner'
 import UseCaseContainer from '@/components/pages/use-cases/UseCaseContainer';

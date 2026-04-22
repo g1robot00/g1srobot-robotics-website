@@ -140,6 +140,12 @@ export interface TechDocDTO {
     relatedProducts: BaseItem[];
 }
 
+export interface TechDocPageDTO {
+    techDocs: TechDocDTO[];
+    activeCategoryIds: string[];
+    productOptions: {label: string, items: BaseItem[]}[];
+}
+
 
 // 회사소개
 export interface SloganItem {

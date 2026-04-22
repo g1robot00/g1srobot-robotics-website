@@ -1,4 +1,5 @@
 const PRODUCT_TYPES_CONDITION = `_type in ["system", "robot"] && references(^._id)`;
+const TECH_DOC_TYPE_CONDITION = `_type == "techDoc" && references(^._id)`;
 
 // 랜딩페이지
 export const LANDING_PAGE_QUERY = `{
@@ -187,6 +188,45 @@ export const USE_CASES_PAGE_QUERY = `{
 
 
 //기술자료
+export const TECH_DOC_PAGE_QUERY = `{
+  "techDocs": *[_type == "techDoc"]{
+    "id": _id,
+    title,
+    category,
+    language,
+    releaseDate,
+    "files": file[] {
+      "key": _key,
+      "url": asset->url, // PDF 주소
+      "name": asset->originalFilename, //원래 파일이름 
+      "size": asset->size,  //파일용량
+      "extension": asset->extension //확장자(.pdf ...)
+    },
+    "relatedProducts": relatedProducts[] -> {
+      "id": _id,
+      name
+    }
+  },
+  // array::unique는 중복을 제거
+  "activeCategoryIds": array::unique(*[_type == "techDoc"].category),
+  "productOptions": [
+    {
+      "label": "시스템",
+      "items": *[_type == "system" && count(*[${TECH_DOC_TYPE_CONDITION}]) > 0] | order(name asc){
+        "id": _id,
+        "name": name
+      }
+    },
+    {
+      "label": "로봇",
+      "items": *[_type == "robot" && count(*[${TECH_DOC_TYPE_CONDITION}]) > 0] | order(name asc) {
+        "id": _id,
+        "name": name
+      }
+    }
+  ],
+}`
+
 export const TECH_DOC_QUERY = `
   *[_type == 'techDoc'] {
     "id": _id,
@@ -207,7 +247,6 @@ export const TECH_DOC_QUERY = `
     },
     // 필터용 제품 목록
     "filterOption": *[_type == "productLine" 
-
       // 조건 1: 이 제품군 아래에 있는 제품들 중 techDoc이 존재하는 제품이 하나라도 있는가?
       && count(*[${PRODUCT_TYPES_CONDITION}
       && count(*[_type == 'techDoc' && references(^._id)]) > 0 ]) > 0
@@ -221,7 +260,6 @@ export const TECH_DOC_QUERY = `
             'name': name
           }
       }
-    
   }
 `
 
