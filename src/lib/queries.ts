@@ -71,7 +71,7 @@ export const UNIVERSAL_DETAIL_QUERY = `
       "name": name,
       "mainImage": mainImage.asset->url,
       "href": "/products/" + slug.current,
-      "hasContent": defined(description) && count(specs) > 0
+      "hasContent": (showProduct != false) && defined(description) && count(specs) > 0
     },
 
     "components": components[] -> {
@@ -79,7 +79,7 @@ export const UNIVERSAL_DETAIL_QUERY = `
       "name": name,
       "mainImage": mainImage.asset->url,
       "href": "/products/" +slug.current,
-      "hasContent": defined(description) && count(specs) > 0
+      "hasContent": (showProduct != false) && defined(description) && count(specs) > 0
     }
   }
 `

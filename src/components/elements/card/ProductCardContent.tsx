@@ -75,7 +75,7 @@ export default function ProductCardContent({ product, isLinkable }: ProductCardC
                     <div className={cn('flex flex-col gap-y-2 md:gap-y-4 divide-y divide-gray-200', !isLinkable && 'invisible')}>
                         {displaySpecs.map((spec) => (
                             <div key={spec._key} className='flex flex-col gap-1 md:flex-row md:justify-between text-xs md:text-sm'>
-                                <span className='flex-shrink-0 mr-1 text-gray-500'>{spec.label}</span>
+                                <span className='flex-shrink-0 mr-1 text-gray-500 font-medium'>{spec.label}</span>
                                 {spec.value
                                     ? <span className='font-bold text-gray-700 truncate'>{spec.value}{spec.unit}</span>
                                     : <span className={`font-bold text-gray-700 ${!spec.label && 'invisible'}`}>-</span>

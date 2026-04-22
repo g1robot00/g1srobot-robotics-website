@@ -27,8 +27,6 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
     const [selectedFilters, setSelectedFilters] = useState<string[]>(PRODUCT_TYPES.map(item => item.name));
     const [filteredList, setFilteredList] = useState<ProductLineProductsDTO[] | IndustryProductsDTO[]>(list);
 
-    console.log('제품리스트', filteredList.filter(item => item.kind.some(pd => !pd.thumbnail)));
-
     useEffect(() => {
         if (window.location.hash) {
             const timer = setTimeout(() => {
@@ -92,7 +90,7 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
                             {/* --- 해당 제품군에 속한 제품(Products) 리스트 --- */}
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-10">
                                 {item.kind.map((product) => (
-                                    <ProductCard key={product.id} product={product} from={from} id={product.id}/>
+                                    <ProductCard key={product.id} product={product} from={from}/>
                                 ))}
                             </div>
                         </div>
