@@ -19,7 +19,7 @@ export default function FooterPolicySection({policy}: FooterPolicySectionProps) 
                     <button onClick={() => setOpenModalKey('emailRefusal')} className='cursor-pointer'>이메일 무단수집 거부</button>
                     <button onClick={() => setOpenModalKey('privacyPolicy')} className='text-main cursor-pointer'>개인정보처리방침</button>
                 </div>
-                <span className='text-sm text-gray-500'>@Copyright 2026 G1SRobot, All Rights Reserved</span>
+                <span className='text-sm text-gray-500'>@Copyright G1sRobot, All Rights Reserved</span>
             </div>
             {openModalKey && <PolicyModal onClose={()=>setOpenModalKey(null)} data={policy[openModalKey]}/>}
         </>
