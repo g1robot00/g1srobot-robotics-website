@@ -60,6 +60,7 @@ export const UNIVERSAL_DETAIL_QUERY = `
     "specsImg": specsImg.asset->url,
     "productLine": productLine->name,
     "industries": industries[]->name,
+    "hasDocs": count(*[_type == "techDoc" && references(^._id)]) > 0,
     "images": select(
         count(images) > 0 => images[].asset->url,
         [mainImage.asset->url]

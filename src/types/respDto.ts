@@ -45,8 +45,9 @@ export interface UniversalDetailDTO {
     specsImg: string;
     productLine?: string;
     industries?: string[];
+    hasDocs: boolean;
     images: string[];
-    videos: string[],
+    videos: string[];
     robots?: RelatedProductDTO[];
     components?: RelatedProductDTO[];
 }

@@ -8,7 +8,8 @@ extends React.ButtonHTMLAttributes<HTMLButtonElement>
 {
     label: string | React.ReactNode
     variant?: 'filled' | 'outline'
-    href?: string
+    href?: string,
+    disabled?: boolean
     showArrow?: boolean
     className?: string
     onClick?: () => void
@@ -19,15 +20,18 @@ export default function Button({
     label, 
     variant = 'filled',
     href,
+    disabled = false,
     showArrow = false,
     className,
     onClick,
     noMinWidth = false,
     ...props
 }: ButtonProps) {
-    const baseStyles = `${ noMinWidth ? 'p-2' :'min-w-40 px-4 py-2'} rounded-md 
-                        flex justify-center items-center 
-                        text-base md:text-lg font-semibold cursor-pointer`
+    const isLink = href && !disabled
+
+    const baseStyles = cn(noMinWidth ? 'p-2' :'min-w-40 px-4 py-2', 
+                        'rounded-md flex justify-center items-center text-base md:text-lg font-semibold',
+                        disabled ? 'opacity-50 cursor-not-allowed grayscale': 'cursor-pointer')
     
     const variantStyles = {
         filled: 'bg-main text-white hover:bg-main/70',
@@ -41,7 +45,7 @@ export default function Button({
         </>
     )
 
-    if(href) {
+    if(isLink) {
         return (
             <Link href={href} 
                 className={cn(
