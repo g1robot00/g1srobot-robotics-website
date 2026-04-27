@@ -50,7 +50,7 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
             <Container>
                 <div className='flex justify-between items-end'>
                     <SectionHeader category='Use Cases'
-                                    title={`파트너와 함께 달성한\n자동화 성공 경험을 공유합니다`}   //로봇 도입으로 변화한\n실제 현장의 공정 사례
+                                    title={`파트너와 함께 달성한\n자동화 성공 경험을 공유합니다`}
                                     className='w-full'
                                     theme='dark'
                     />
@@ -91,7 +91,7 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                             </div>
                         ))}
                         <Link href='/use-cases' 
-                            className={cn('group ml-5 flex flex-col gap-2 items-center text-white', )}
+                            className={cn('group ml-5 flex flex-col gap-2 items-center text-white', 'flex-shrink-0 snap-start' )}
                         >
                             <div className='h-fit p-5 border border-gray-200 rounded-full group-hover:bg-gray-300/30 cursor-pointer '>
                                 <MoveRight/>

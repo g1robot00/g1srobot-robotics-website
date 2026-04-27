@@ -72,8 +72,8 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
         {/* 상단 메인 메뉴바 */}
         <Container className={`w-full ${NAV_LAYOUT.h} flex justify-center`}>
           <div className='w-full flex md:gap-3 items-center justify-between '>
-            <Link href='/' className='max-md:w-[150px] transition-color'>
-              <Logo className='w-50 h-auto' 
+            <Link href='/' className=' transition-color'>
+              <Logo className='max-md:w-[150px] w-50 h-auto' 
                     logoMain={isTransparent ? 'white': '#62BEFF'} 
                     logoDark={isTransparent ? 'white': '#004E99'}
                     cmpName={isTransparent ? 'white': '#004E99'}/>
