@@ -24,7 +24,7 @@ export default function TechDocFilter({
     const hasFilter = selectedCategoryIds.length > 0 || selectedProductIds.length > 0;
     return (
         <div className='flex items-center gap-4 mb-2 bg-gray-50 p-6 rounded-2xl'>
-            <div className='grid grid-cols-1 md:flex gap-4'>
+            <div className='w-full grid grid-cols-1 md:flex gap-4'>
                 <MultiSelect
                     label='카테고리'
                     variant='category'
@@ -39,19 +39,19 @@ export default function TechDocFilter({
                     selectedIds={selectedProductIds}
                     onToggle={onProductToggle}
                 />
+                {hasFilter && (
+                    <div className='flex items-center gap-2'>
+                        {/* <span className='text-sm text-gray-500'>필터 적용 중</span> */}
+                        <button
+                            onClick={onReset}
+                            className='flex items-center gap-0.5 text-sm text-main cursor-pointer hover:underline'
+                        >
+                            <RotateCcw  size={14} /> 
+                            초기화
+                        </button>
+                    </div>
+                )}
             </div>
-            {hasFilter && (
-                <div className='flex items-center gap-2'>
-                    {/* <span className='text-sm text-gray-500'>필터 적용 중</span> */}
-                    <button
-                        onClick={onReset}
-                        className='flex items-center gap-0.5 text-sm text-main cursor-pointer hover:underline'
-                    >
-                        <RotateCcw  size={14} /> 
-                        초기화
-                    </button>
-                </div>
-            )}
         </div>
     )
 }

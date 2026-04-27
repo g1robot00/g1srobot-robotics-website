@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -48,7 +46,7 @@ export default function ProductIntroInfoBreadCrumb({ product, contextList, from 
 
     return (
         <div className="flex items-center gap-1 text-sm font-medium text-gray-400 mb-2">
-            <span className='flex-shrink-0'>{from === 'industry' ? '산업별 솔루션' : '제품 및 서비스'}</span>
+            <Link href={`/${from === 'industry' ? 'solutions' : 'products'}`} className='flex-shrink-0 hover:underline'>{from === 'industry' ? '산업별 솔루션' : '제품 및 서비스'}</Link>
             <ChevronRight size={12} />
 
             {industryJoin &&
@@ -85,7 +83,7 @@ export default function ProductIntroInfoBreadCrumb({ product, contextList, from 
                                         <div className='mt-2 border-l-2 border-gray-200 flex flex-col gap-1'>
                                             {item.products.map(i => (
                                                 <Link key={i.id}
-                                                    href={`${i.href}?from=${from}&id=${i.id}`}
+                                                    href={`${i.href}?from=${from}`}
                                                     onClick={() => setOpenMenu(false)}
                                                     className={cn(
                                                         "block py-1 px-2 rounded-md whitespace-nowrap hover:bg-gray-100",
