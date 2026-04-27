@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import { TechDocPageDTO } from '@/types/respDto'
 import { ChevronDown, Check } from 'lucide-react'
 
-// 📍 variant별로 props를 분리한 discriminated union
+//  variant별로 props를 분리한 discriminated union
 type MultiSelectProps = 
     | {
         variant: 'category'

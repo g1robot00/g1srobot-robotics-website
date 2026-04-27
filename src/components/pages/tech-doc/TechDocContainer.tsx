@@ -101,12 +101,7 @@ export default function TechDocContainer({ techDocData, selectedId, contact }: T
               onReset={handleReset}
             />
             :<div className='py-40 text-center flex flex-col gap-4 items-center'>
-                <p className='text-gray-400 text-base md:text-xl font-menium'>자료 준비중입니다.</p>
-                {/* <button onClick={onReset}
-                        className='text-gray-400 underline text-sm md:text-base font-bold cursor-pointer'
-                >
-                    이전 페이지
-                </button> */}
+                <p className='text-gray-400 text-base md:text-xl font-menium'>등록된 자료가 없습니다.</p>
             </div>
         }
         </Container>

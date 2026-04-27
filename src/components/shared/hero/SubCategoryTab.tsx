@@ -16,7 +16,7 @@ export default function SubCategoryTab({ list }: SubCategoryTabProps) {
   const isManualScrolling = useRef(false); //FIXME 서브탭 선택해서 위로 스크롤 시 네브바 안나오게
 
 
-  // ✅ 1. [초기화 & Scroll Spy] : 어떤 섹션을 보고 있는지 감지
+  // 1. [초기화 & Scroll Spy] : 어떤 섹션을 보고 있는지 감지
   useEffect(() => {
     // [랜딩페이지에서 왔을때] 처음 페이지 들어왔을때 주소창 해시가 있는지 확인
     const hash = window.location.hash.replace('#', '');
@@ -26,7 +26,7 @@ export default function SubCategoryTab({ list }: SubCategoryTabProps) {
 
       setTimeout(() => {
         setActiveId(hash);
-        // 📍 2. 브라우저의 기본 점프를 무시하고 우리가 원하는 위치로 재조정
+        //  2. 브라우저의 기본 점프를 무시하고 우리가 원하는 위치로 재조정
         const element = document.getElementById(hash);
         element?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
@@ -68,7 +68,7 @@ export default function SubCategoryTab({ list }: SubCategoryTabProps) {
     }
   }, [activeId])
 
-  // ✅ 2. [네브바 방향 감지] : 스크롤 위/아래에 따라 탭의 top 위치 조절
+  // 2. [네브바 방향 감지] : 스크롤 위/아래에 따라 탭의 top 위치 조절
   useEffect(() => {
     const updateNavVisibility = () => {
       if (isManualScrolling.current) return;
@@ -89,7 +89,7 @@ export default function SubCategoryTab({ list }: SubCategoryTabProps) {
   }, [])
 
 
-  // ✅ 3. [클릭 이벤트] : 탭 클릭 시 해당 위치로 스무스하게 이동
+  // 3. [클릭 이벤트] : 탭 클릭 시 해당 위치로 스무스하게 이동
   const handleManualScroll = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -101,11 +101,11 @@ export default function SubCategoryTab({ list }: SubCategoryTabProps) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
 
-    // 📍 스크롤 애니메이션이 끝날 때쯤(약 0.8초~1초 후) 플래그 OFF
+    //  스크롤 애니메이션이 끝날 때쯤(약 0.8초~1초 후) 플래그 OFF
     setTimeout(() => {
       // ✨ 이동이 끝난 후 잠금 해제 신호 전송
       window.dispatchEvent(new CustomEvent('manualScrollLock', { detail: false }));
-      // 📍 도착한 지점의 스크롤 값을 lastScrollY에 업데이트해서 오작동 방지
+      //  도착한 지점의 스크롤 값을 lastScrollY에 업데이트해서 오작동 방지
       lastScrollY.current = window.scrollY;
       isManualScrolling.current = false;
     }, 1000);

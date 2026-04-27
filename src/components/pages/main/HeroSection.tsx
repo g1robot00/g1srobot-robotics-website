@@ -70,7 +70,7 @@ export default function HeroSection() {
         {SLOGANS.map((_, i) => (
           <button key={i}
                   onClick={() => setIndex(i)}
-                  className='p-2 flex items-center justify-center group cursor-pointer'
+                  className='p-1 md:p-2 flex items-center justify-center group cursor-pointer'
           >
             <div className={`h-1 md:h-1.5 transition-all duration-500 rounded-full cursor-pointer ${i === index ? 'w-8 md:w-10 bg-main' : 'w-3 bg-white/20'}`}/>      
           </button>

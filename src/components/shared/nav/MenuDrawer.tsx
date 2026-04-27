@@ -1,4 +1,3 @@
-//FIXME 들어가고 나가는 모션
 'use client'
 
 import { useEffect, useRef } from "react"

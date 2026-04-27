@@ -21,7 +21,7 @@ export default function AboutSection({slogan, about, business, vision, idAbout, 
   const aboutTitle = 'mt-6 text-2xl md:text-4xl text-main font-bold tracking-wide'
   const aboutContent = 'text-sm md:text-2xl text-white tracking-tight leading-snug whitespace-pre-wrap'
   const containerRef = useRef<HTMLDivElement>(null);
-  // 📍 1. Image 컴포넌트를 모션용으로 변환합니다.
+  //  1. Image 컴포넌트를 모션용으로 변환합니다.
   const MotionImage = motion.create(Image);
 
   // 1. 스크롤 진행도 측정 (0~1)
@@ -54,9 +54,9 @@ export default function AboutSection({slogan, about, business, vision, idAbout, 
 
   return (
     <section ref={containerRef} className='relateve h-[400vh] pt-20 w-full bg-black text-white'>
-        {/* 📍 앵커 1: About 감지용 (섹션 상단) */}
+        {/*  앵커 1: About 감지용 (섹션 상단) */}
         <div id={idAbout} className="absolute top-[220vh] h-[120vh] w-full pointer-events-none scroll-mt-[150px]" />
-        {/* 📍 앵커 2: Vision 감지용 (섹션 절반 지점) */}
+        {/*  앵커 2: Vision 감지용 (섹션 절반 지점) */}
         <div id={idVision} className="absolute top-[340vh] h-[60vh] w-full pointer-events-none scroll-mt-[150px]" />
         {/* Sticky: 스크롤 되는동안 화면에 고정되는 영역 */}
         <div className='sticky top-0 w-full h-screen flex flex-col items-center justify-center overflow-hidden'>

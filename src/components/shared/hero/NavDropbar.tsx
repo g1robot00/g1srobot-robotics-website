@@ -71,8 +71,7 @@ export default function NavDropbar() {
                             exit="exit"
                             transition= {ACCORDION_VARIANTS.transition}
                             className='absolute top-[calc(100%+15px)] left-0 z-50
-                                min-w-full w-max px-2 py-4 bg-white shadow-xl rounded-xl overflow-hidden
-                                text-black'
+                                min-w-full w-max px-2 py-4 bg-white shadow-xl rounded-xl overflow-hidden  text-black'
                         >
                             {NAV_ITEMS.map(item => (
                                 <li key={item.href} 

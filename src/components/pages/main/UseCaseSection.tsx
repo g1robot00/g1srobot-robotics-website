@@ -98,7 +98,6 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                             </div>
                             <span className="text-sm font-bold opacity-60 group-hover:opacity-100">전체보기</span>
                         </Link>
-                        {/* FIXME 모바일 우측 잘림_ 여백 확보용 spacer */}
                         <div className='flex-shrink-0 w-5 md:w-10 xl:w-20 3xl:w-[calc((100vw-1840px)/2+80px)]' />
                     </div>
                     : <Container className='h-full'>
