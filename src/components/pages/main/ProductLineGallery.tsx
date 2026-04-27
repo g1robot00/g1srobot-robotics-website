@@ -26,7 +26,7 @@ export default function ProductLineGallery({previews, activeId}: ProductLineGall
                     ? <Image src={isActive.thumbnail}
                         alt={isActive.label}
                         fill
-                        className='object-contain bg-gray-700'
+                        className='object-contain bg-black'
                         sizes="(max-width: 1024px) 1px, 70vw"
                         quality={85}
                     />

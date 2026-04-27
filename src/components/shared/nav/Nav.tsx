@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { NAV_ITEMS } from '@/constants/navigation'
 import { NAV_LAYOUT } from '@/constants/styles'
+import Logo from '../Logo'
 import MenuDrawer from './MenuDrawer'
 import Container from '../Container'
 import { NavItem } from '@/types/nav'
@@ -71,14 +72,18 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
         {/* 상단 메인 메뉴바 */}
         <Container className={`w-full ${NAV_LAYOUT.h} flex justify-center`}>
           <div className='w-full flex md:gap-3 items-center justify-between '>
-            <Link href='/' className='max-md:w-[150px]'>
-              <Image 
-                src="/img/logo/g1srobot_Logo_main.svg"
+            <Link href='/' className='max-md:w-[150px] transition-color'>
+              <Logo className='w-50 h-auto' 
+                    logoMain={isTransparent ? 'white': '#62BEFF'} 
+                    logoDark={isTransparent ? 'white': '#004E99'}
+                    cmpName={isTransparent ? 'white': '#004E99'}/>
+              {/* <Image 
+                src="/img/logo/g1s_logo_name.svg"
                 alt="g1srobot logo"
                 width={200}
                 height={20}
                 priority
-              />
+              /> */}
             </Link>
 
             <ul onMouseEnter={() => setIsHovered(true)}

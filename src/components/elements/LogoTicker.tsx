@@ -27,16 +27,16 @@ export default function LogoTicker({clients}: {clients: ClientsDTO[]}) {
                 <motion.div className="flex gap-15 md:gap-20 flex-none pr-20"
                     animate={{ x: '-50%' }} // 전체 길이의 절반만큼 이동, FIXME 3번반복이면 33.33%이동인데 하면 멈춤
                     transition={{
-                        duration: 50, // 속도 조절 (숫자가 클수록 느려짐)
+                        duration: 80, // 속도 조절 (숫자가 클수록 느려짐)
                         repeat: Infinity,
                         ease: 'linear', // 일정한 속도를 위해 필수
                         repeatType: 'loop'
                     }}
                 >
                     {[...clients, ...clients, ...clients].map((partner, idx) => (
-                        <div key={idx} className="flex-none h-5 md:h-10 w-auto flex items-center justify-center">
+                        <div key={idx} className="flex-none h-5 md:h-8 w-auto flex items-center justify-center">
                             <Image src={partner.logo} alt={partner.name} width={60} height={20}
-                                className="h-full w-auto object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer"
+                                className="h-full w-auto object-contain opacity-60 grayscale transition-all cursor-pointer"
                             />
                         </div>
                     ))}

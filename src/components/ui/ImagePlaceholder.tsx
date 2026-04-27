@@ -1,4 +1,4 @@
-
+import Image from "next/image";
 import { cn } from "@/lib/utils"
 import { Hexagon } from "lucide-react"
 
@@ -18,10 +18,15 @@ export default function ImagePlaceholder({ className, text, size = 'md' }: Image
     const currentSize = sizeStyle[size];
 
     return (
-        <div className={cn('w-full h-full bg-brand-dark p-2 flex flex-col gap-2 md:gap-4 items-center justify-center', className)}>
-            {/* FIXME 로고 */}
-            <div className="opacity-20 text-main">
-                <Hexagon strokeWidth={5} className={currentSize.img} />
+        <div className={cn('w-full h-full bg-brand-dark p-2 flex flex-col gap-3 md:gap-5 items-center justify-center', className)}>
+            <div className={`opacity-20 text-main ${currentSize.img}`} >
+                <Image
+                    src="/img/logo/g1s_logo.svg"
+                    alt="g1srobot logo"
+                    width={200}
+                    height={200}
+                    priority
+                />
             </div>
             <p className={`${currentSize.text} text-[8px] font-bold tracking-[0.2rem] opacity-20 text-main text-center uppercase`}>
                 {text || 'Image coming soon'}

@@ -98,7 +98,7 @@ export default function ProductLineCategory({productLines, activeId, onItemClick
                                         </div>
 
                                         {/* 모바일 전용 이미지박스 */}
-                                        <div className='block lg:hidden relative w-full aspect-video bg-gray-800 rounded-lg overflow-hidden'>
+                                        <div className='block lg:hidden relative w-full aspect-video bg-black rounded-lg overflow-hidden'>
                                             {item.thumbnail
                                                 ? <Image 
                                                     src={item.thumbnail} 

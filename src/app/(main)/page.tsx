@@ -16,7 +16,7 @@ export default async function Home() {
   return (
     <div className='flex flex-col'>
       <HeroSection/>
-      {/* <LogoTicker clients={landing.clients}/> */}
+      <LogoTicker clients={landing.clients}/>
       <IndustrySection industries={landing.industries}/>
       <ProductLineSection productLines={landing.productLines} />
       <UseCaseSection useCases={landing.useCases}/>
