@@ -8,13 +8,6 @@ import { LocationDTO } from '@/types/respDto'
 import { ArrowUpRight } from 'lucide-react'
 
 
-// if (typeof window !== "undefined") {
-//   const script = document.createElement("script");
-//   script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&autoload=false`;
-//   script.async = true;
-//   document.head.appendChild(script);
-// }
-
 export default function LocationContainer({ contact }: { contact: LocationDTO }) {
     const contacts = [
         {nameEn: 'Address.', value: contact.address},

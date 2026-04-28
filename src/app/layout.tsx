@@ -22,6 +22,11 @@ export const metadata: Metadata = {
     description: "협소공간 효율을 극대화하는 혁신적인 로봇 및 무인 자동화 시스템 개발 전문",
     images: ["/img/HeroBg/g1s_high1.jpg"],
     type: "website"
+  },
+  verification: {
+    other: {
+      "naver-site-verification": process.env.NEXT_PUBLIC_NAVER_VERIFICATION || ''
+    }
   }
 };
 
