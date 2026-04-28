@@ -11,8 +11,8 @@ interface ImagePlaceholderProps {
 export default function ImagePlaceholder({ className, text, size = 'md' }: ImagePlaceholderProps) {
     const sizeStyle = {
         sm: { img: 'w-5 h-5 md:w-10 md:h-10', text: 'text-[8px]' },
-        md: { img: 'w-10 h-10 md:w-14 md:h-14', text: 'text-[10px]' },
-        lg: { img: 'w-14 h-14 md:w-18 md:h-18', text: 'text-[10px] md:text-xs' },
+        md: { img: 'w-10 h-10 md:w-18 md:h-18', text: 'text-[10px]' },
+        lg: { img: 'w-14 h-14 md:w-22 md:h-22', text: 'text-[10px] md:text-xs' },
     }
 
     const currentSize = sizeStyle[size];
@@ -21,7 +21,7 @@ export default function ImagePlaceholder({ className, text, size = 'md' }: Image
         <div className={cn('w-full h-full bg-brand-dark p-2 flex flex-col gap-3 md:gap-5 items-center justify-center', className)}>
             <div className={`opacity-20 text-main ${currentSize.img}`} >
                 <Image
-                    src="/img/logo/g1s_logo.svg"
+                    src="/img/logo/g1s_logo_ORIG.svg"
                     alt="g1srobot logo"
                     width={200}
                     height={200}

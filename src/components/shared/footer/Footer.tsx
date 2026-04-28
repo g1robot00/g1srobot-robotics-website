@@ -1,11 +1,10 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { client } from '@/lib/sanity'
 
 import { cn } from '@/lib/utils'
 import { FOOTER_QUERY } from '@/lib/queries'
 import { NAV_ITEMS } from '@/constants/navigation'
-import Logo from '../Logo'
+import LogoEn from '@/components/ui/LogoEn'
 import Container from '../Container'
 import FooterPolicySection from './FooterPolicySection'
 import ContactItem from './ContactItem'
@@ -24,16 +23,9 @@ export default async function Footer() {
     >
         <Container className='md:h-100 py-8 md:py-16 grid grid-cols-1 gap-5 lg:gap-10 md:grid-cols-2 text-white/80'>
           <div className='flex flex-col gap-9 md:justify-between'>
-            <div className='w-[200px] md:w-[250px] lg:w-[300px]'>
-              <Logo className='w-full h-auto' cmpName='white'/>
-              {/* <Image 
-                src="/img/logo/g1s_logo_name.svg"
-                alt="g1srobot logo"
-                width={300}
-                height={20}
-                priority
-              /> */}
-            </div>
+            <Link href='/' className='w-[200px] md:w-[250px] lg:w-[300px]'>
+              <LogoEn className='w-full h-auto' logoText='white'/>
+            </Link>
             <div className='flex flex-col gap-3 md:gap-8'>
               {allContacts.map(item => (
                 <ContactItem key={item.id} info={item} />

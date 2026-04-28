@@ -8,6 +8,7 @@
   --background: #ffffff;
   --foreground: #171717;
   --main: #62BEFF;
+  --logo-dark: #004E99;
   --brand-dark: #001A33;
 }
 
@@ -15,6 +16,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-main: var(--main);
+  --color-logo-dark: var(--logo-dark);
   --color-brand-dark: var(--brand-dark);
 
   --font-sans: var(--font-geist-sans);

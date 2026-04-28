@@ -1,13 +1,12 @@
 'use client'
 
 import {useState, useEffect, useRef} from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { NAV_ITEMS } from '@/constants/navigation'
 import { NAV_LAYOUT } from '@/constants/styles'
-import Logo from '../Logo'
+import LogoEn from '@/components/ui/LogoEn'
 import MenuDrawer from './MenuDrawer'
 import Container from '../Container'
 import { NavItem } from '@/types/nav'
@@ -72,18 +71,11 @@ export default function Nav({noTransparent = false} : {noTransparent?: boolean})
         {/* 상단 메인 메뉴바 */}
         <Container className={`w-full ${NAV_LAYOUT.h} flex justify-center`}>
           <div className='w-full flex md:gap-3 items-center justify-between '>
-            <Link href='/' className=' transition-color'>
-              <Logo className='max-md:w-[150px] w-50 h-auto' 
-                    logoMain={isTransparent ? 'white': '#62BEFF'} 
-                    logoDark={isTransparent ? 'white': '#004E99'}
-                    cmpName={isTransparent ? 'white': '#004E99'}/>
-              {/* <Image 
-                src="/img/logo/g1s_logo_name.svg"
-                alt="g1srobot logo"
-                width={200}
-                height={20}
-                priority
-              /> */}
+            <Link href='/' className='transition-color'>
+              <LogoEn className='max-md:w-[150px] w-50 h-auto' 
+                    logoMain={isTransparent ? 'white': 'var(--main)'} 
+                    logoDark={isTransparent ? 'white': 'var(--logo-dark)'}
+                    logoText={isTransparent ? 'white': 'var(--logo-dark)'}/>
             </Link>
 
             <ul onMouseEnter={() => setIsHovered(true)}
