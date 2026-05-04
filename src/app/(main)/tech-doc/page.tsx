@@ -7,6 +7,11 @@ import HeroBanner from '@/components/shared/hero/HeroBanner'
 import TechDocContainer from '@/components/pages/tech-doc/TechDocContainer'
 import { TechDocPageDTO, ContactDTO } from '@/types/respDto'
 
+export const metadata = {
+  title: "기술 자료실",
+  description: "제품 카탈로그, 기술 자료 등 지원에스로봇의 전문 자료를 제공합니다. 공장 자동화 및 물류 로봇 도입을 위한 상세 데이터를 확인하실 수 있습니다."
+}
+
 interface TechDocPageProps{
   searchParams: Promise<{productId?: string}>
 }
