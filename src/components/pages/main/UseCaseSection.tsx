@@ -37,7 +37,7 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
     }
 
     return (
-        <section className={cn('relative w-full h-screen 3xl:h-fit 3xl:min-h-[80vh]', `${SECTION_PY.base}`, 'flex flex-col justify-center  bg-grain overflow-hidden')}>
+        <section className={cn('relative w-full h-screen md:h-fit 3xl:min-h-[80vh]', `${SECTION_PY.base}`, 'flex flex-col justify-center  bg-grain overflow-hidden')}>
             {/* 배경 */}
             {bgImage && (
                 <div className='absolute inset-0 z-[-2]'>
@@ -75,7 +75,6 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                     ? <div ref={scrollRef}
                         className={cn('w-full h-fit md:h-full flex gap-5 items-center overflow-x-auto snap-x snap-mandatory scrollbar-hide',
                                     'pl-5 md:pl-10 xl:pl-[calc((100vw-1440px)/2+80px)] 3xl:!pl-[calc((100vw-1840px)/2+80px)]',
-                                    'pr-5 md:pr-10 xl:pr-[calc((100vw-1440px)/2+80px)] 3xl:!pr-[calc((100vw-1840px)/2+80px)]'
                                 )}
                         // 스냅 위치를 왼쪽(start)으로 고정하여 정렬 유지
                         style={{ scrollSnapType: 'x mandatory', scrollPaddingLeft: 'var(--side-margin, 20px)'  }}
@@ -84,8 +83,7 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                         {useCases.map(item => (
                             <div key={item.id}
                                 className={cn('flex-shrink-0 snap-start',
-                                            // FIXME 데스크탑 너비: % 사용XX
-                                            'w-[80vw] md:w-[30%] ')}
+                                            'w-[80vw] md:w-[30%] md:min-w-[400px] ')}
                             >
                                 <UseCaseCard useCase={item} onCardClick={() => setSelectedId(item.id)}/>
                             </div>
@@ -98,7 +96,7 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                             </div>
                             <span className="text-sm font-bold opacity-60 group-hover:opacity-100">전체보기</span>
                         </Link>
-                        <div className='flex-shrink-0 w-5 md:w-10 xl:w-20 3xl:w-[calc((100vw-1840px)/2+80px)]' />
+                        <div className='flex-shrink-0 w-5 md:w-10 xl:w-20 3xl:w-[calc((100vw-1840px)/2+80px)]' aria-hidden='true'/>
                     </div>
                     : <Container className='h-full'>
                         <div className='w-full h-full min-h-[400px] 3xl:h-[700px] flex items-center justify-center rounded-lg bg-white/20'>
