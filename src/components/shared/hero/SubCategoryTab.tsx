@@ -9,7 +9,6 @@ import { SubCategoryTabProps } from '@/types/nav';
 export default function SubCategoryTab({ list }: SubCategoryTabProps) {
   const [activeId, setActiveId] = useState(list[0]?.id);
   const [isNavVisible, setIsNavVisible] = useState(true); // 네브바 상태표시
-  // const [lastScrollY, setLastScrollY] = useState(0);  // 이전 스크롤 위치
   const lastScrollY = useRef(0); // ✨ lastScrollY를 Ref로 변경 (재렌더링 방지 및 값 동기화)
   const scrollContainerRef = useRef<HTMLDivElement>(null); //스크롤 컨테이너 잡는 ref
   // 수동 스크롤인지 확인하는 변수(<-> 서브탭 눌러서 이동)
@@ -39,6 +38,7 @@ export default function SubCategoryTab({ list }: SubCategoryTabProps) {
     };
 
     const observer = new IntersectionObserver(entries => {  // 이 조건으로 감시하는 감시관
+      if (isManualScrolling.current) return;
       entries.forEach(entry => {  //감시대상 리스트
         if (entry.isIntersecting) {  // 현재 이 요소가 감지영역에 들어왔는가
           setActiveId(entry.target.id);
@@ -103,12 +103,12 @@ export default function SubCategoryTab({ list }: SubCategoryTabProps) {
 
     //  스크롤 애니메이션이 끝날 때쯤(약 0.8초~1초 후) 플래그 OFF
     setTimeout(() => {
-      // ✨ 이동이 끝난 후 잠금 해제 신호 전송
+      // 이동이 끝난 후 잠금 해제 신호 전송
       window.dispatchEvent(new CustomEvent('manualScrollLock', { detail: false }));
       //  도착한 지점의 스크롤 값을 lastScrollY에 업데이트해서 오작동 방지
       lastScrollY.current = window.scrollY;
       isManualScrolling.current = false;
-    }, 1000);
+    }, 1200);
   };
 
   return (

@@ -14,7 +14,7 @@ import { ProductLineProductsDTO, IndustryProductsDTO} from '@/types/respDto'
 interface ProductContainerProps {
     from: 'industry' | 'productLine'
     list: ProductLineProductsDTO[] | IndustryProductsDTO[]
-    type?: 'filter' | 'normal' // FIXME 제품페이지엔 시스템/로봇 필터 --type === 'detail'
+    type?: 'filter' | 'normal'
 }
 
 const PRODUCT_TYPES = [
@@ -54,7 +54,7 @@ export default function ProductContainer({ from, list, type='normal' }: ProductC
         const filtered = list.map(pl => ({
             ...pl,
             kind: pl.kind.filter(product => selectedFilters.includes(product.type))
-        })).filter(pl => pl.kind.length > 0); //제품이 하나도 안 남은 제품군은 섹션 자체를 숨김;
+        })).filter(pl => pl.kind.length > 0); //제품이 하나도 안 남은 제품군은 섹션 자체를 숨김
         
         setFilteredList(filtered);
     }, [selectedFilters, list]);
