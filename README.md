@@ -12,8 +12,24 @@
 ---
 ## 🚀 Key Performance & Achievements
 
-![Lighthouse Score-데스크탑](https://github.com/user-attachments/assets/92f05772-c13f-49c5-89ed-a19baafecf70)
-![Lighthouse Score-모바일](https://github.com/user-attachments/assets/7a1b8cd7-71ae-4f68-bd9b-ad514bb1d8c0)
+<table align='center' style="border-collapse: collapse; border: none; border-spacing: 0;">
+    <tr align="center" style="border: none;" >
+        <td style="border: none;">
+            <img src="https://github.com/user-attachments/assets/92f05772-c13f-49c5-89ed-a19baafecf70" width="350" alt="Lighthouse Score-Desktop" />
+        </td>
+        <td style="border: none;">
+            <img src="https://github.com/user-attachments/assets/7a1b8cd7-71ae-4f68-bd9b-ad514bb1d8c0" width="350" alt="Lighthouse Score-Mobile" />
+        </td>
+    </tr>
+    <tr align="center" style="border: none;">
+        <td style="border: none;">
+            <p>Lighthouse Score-데스크탑</p>
+        </td>
+        <td style="border: none;">
+            <p>Lighthouse Score-모바일</p>
+        </td>
+    </tr>
+</table>
 
 **[Performance Optimization: Lighthouse Score]**
 - Desktop 99점 / Mobile 89점 달성
@@ -140,17 +156,20 @@ graph TD
     %% [스타일 정의]
     classDef product stroke:#2ecc71,stroke-width:2px,fill:#eafaf1
     classDef taxonomy stroke:#e67e22,stroke-width:2px,fill:#fef5e7
-    classDef operation stroke:#1abc9c,stroke-width:2px,fill:#e8f8f5
-    classDef settings stroke:#e74c3c,stroke-width:2px,fill:#fdedec
+    classDef document stroke:#1abc9c,stroke-width:2px,fill:#e8f8f5
+    classDef singleton stroke:#e74c3c,stroke-width:2px,fill:#fdedec
     classDef object stroke:#777,stroke-width:1px,fill:#f4f4f4,stroke-dasharray: 5 5
+    classDef mixin stroke:#3498db,stroke-width:2px,fill:#ebf5fb,stroke-dasharray: 5 5
 
-    %% [그룹 1: 제품 계층 구조]
-    subgraph Product_Structure [제품 계층 구조]
+    %% [그룹 1: Core 제품 계층]
+    subgraph Core_Product [핵심 제품 구조]
+        CommonFields{{CommonFields Logic}}
         System[System]
         Robot[Robot]
         Component[Component]
     end
     class System,Robot,Component product
+    class CommonFields mixin
 
     %% [그룹 2: 분류 체계]
     subgraph Taxonomy [분류 체계]
@@ -159,44 +178,62 @@ graph TD
     end
     class Industry,ProductLine taxonomy
 
-    %% [그룹 3: 운영 및 콘텐츠]
-    subgraph Content_Operation [운영 및 콘텐츠]
+    %% [그룹 3: 운영 문서]
+    subgraph Documents [운영 및 콘텐츠]
         UseCase[UseCase]
         TechDoc[TechDoc]
+        Policy[Policy]
         Client[Client]
     end
-    class UseCase,TechDoc,Client operation
+    class UseCase,TechDoc,Policy,Client document
 
-    %% [그룹 4: 사이트 설정]
-    subgraph Global_Settings [사이트 설정]
+    %% [그룹 4: 싱글톤 설정]
+    subgraph Singletons [싱글톤 설정]
         SiteSettings[SiteSettings]
         CompanyConfig[CompanyConfig]
         HomeConfig[HomeConfig]
     end
-    class SiteSettings,CompanyConfig,HomeConfig settings
+    class SiteSettings,CompanyConfig,HomeConfig singleton
 
+    %% [그룹 5: 재사용 객체]
+    subgraph Shared_Objects [공통 객체 단위]
+        Location[LocationInfo]
+        Contact[ContactItem]
+        History[HistoryObject]
+    end
+    class Location,Contact,History object
 
-%% 1. 제품 직계 계층
-    System -- "1:N" --> Robot
-    Robot -- "1:N" --> Component
+    %% --- [물리적 관계 설정: 화살표 끝이 참조/사용 대상임] ---
 
-    %% 2. 제품군/산업군 참조
-    System -. "references" .-> ProductLine
-    Robot -. "references" .-> ProductLine
+    %% 1. 코드 레벨의 필드 주입 (CommonFields)
+    CommonFields ==> System
+    CommonFields ==> Robot
+    CommonFields ==> Component
 
-    System -. "references" .-> Industry
-    Robot -. "references" .-> Industry
-
-    %% 3. 연관 콘텐츠
-    UseCase -. "references" .-> System
-    UseCase -. "references" .-> Industry
+    %% 1. 1:N 참조 (Array of References)
+    System -. "1:N" .-> Robot
+    Robot -. "1:N" .-> Component
     
-    TechDoc -. "references" .-> System
-    TechDoc -. "references" .-> Robot
-    TechDoc -. "references" .-> Component
+    System -. "1:N" .-> Industry
+    Robot -. "1:N" .-> Industry
+    
+    UseCase -. "1:N" .-> System
+    UseCase -. "1:N" .-> Industry
+    
+    TechDoc -. "1:N" .-> System
+    TechDoc -. "1:N" .-> Robot
+    TechDoc -. "1:N" .-> Component
 
-    %% 4. 관리 및 객체 공유
-    SiteSettings -. "references" .-> Client
+    SiteSettings -. "1:N" .-> Client
+
+    %% 2. 1:1 참조 (Single Reference)
+    System -. "1:1" .-> ProductLine
+    Robot -. "1:1" .-> ProductLine
+
+    %% 3. 객체 포함 (Object 필드 사용 기준)
+    SiteSettings -- "uses" --> Contact
+    SiteSettings -- "uses" --> Location
+    CompanyConfig -- "uses" --> History
 ```
 
 ---
@@ -432,14 +469,56 @@ src/
 
 - **실시간 위치 감지(Scroll Spy):** Intersection Observer를 활용해 사용자의 스크롤 위치를 추적하고 네비게이션 상태를 실시간으로 동기화.
 - **적응형 인터랙션(Adaptive Interaction):** 사용자의 디바이스와 조작 환경에 따라 컴포넌트의 배치를 유동적으로 변경.
-![데스크탑-상대 위치](https://github.com/user-attachments/assets/8a62c258-7117-4ed8-a1ef-5f8dff078d69)
-![모바일-하단 고정](https://github.com/user-attachments/assets/2114cc26-8774-4fa4-a8ff-70e59e403da1)
+<table align='center' style="border-collapse: collapse; border: none; border-spacing: 0;">
+    <tr align="center" style="border: none;" >
+        <td style="border: none;">
+            <img src="https://github.com/user-attachments/assets/8a62c258-7117-4ed8-a1ef-5f8dff078d69" width="400" alt="데스크탑-상대 위치" />
+        </td>
+        <td style="border: none;">
+            <img src="https://github.com/user-attachments/assets/2114cc26-8774-4fa4-a8ff-70e59e403da1" height="300" alt="모바일-하단 고정" />
+        </td>
+    </tr>
+    <tr align="center" style="border: none;">
+        <td style="border: none;">
+            <p>데스크탑-상대 위치</p>
+        </td>
+        <td style="border: none;">
+            <p>모바일-하단 고정</p>
+        </td>
+    </tr>
+</table>
+<br>
+
 - **데이터 가용성 기반의 인터페이스 제어:**  다형성 렌더링(Polymorphic Rendering)으로 처리하여 탐색 실패 경험(Dead-end)을 시스템적으로 차단하고 검색 로봇과 사용자 모두에게 정확한 가이드 제공.
-![1. 제품군 섹션에 해당 제품이 없으면 문의 페이지로 연결](https://github.com/user-attachments/assets/0afd3a66-bc13-4e83-b33e-7a92399695d5)
-![1. 제품군 섹션에 해당 제품이 없으면 문의 페이지로 연결](https://github.com/user-attachments/assets/a0a0171a-9323-454b-83eb-2f50d8b5c587)
+    >1. 제품군 섹션에 해당하는 제품이 없으면 문의 페이지로 연결
+    <table align='center' style="border-collapse: collapse; border: none; border-spacing: 0;">
+        <tr align="center" style="border: none;" >
+            <td style="border: none;">
+                <img src="https://github.com/user-attachments/assets/0afd3a66-bc13-4e83-b33e-7a92399695d5" width="350" alt="해당 제품있는 경우" />
+            </td>
+            <td style="border: none;">
+                <img src="https://github.com/user-attachments/assets/a0a0171a-9323-454b-83eb-2f50d8b5c587" width="350" alt="해당 제품없는 경우" />
+            </td>
+        </tr>
+        <tr align="center" style="border: none;">
+            <td style="border: none;">
+                <p>해당 제품있는 경우->해당 제품 라인업</p>
+            </td>
+            <td style="border: none;">
+                <p>해당 제품 없는 경우->문의 페이지</p>
+            </td>
+        </tr>
+    </table>
+    <br>
 
-![2.제품의 정보 공개 여부에 따라 안내 및 <Link>, <div> 태그를 판단](https://github.com/user-attachments/assets/ab1e7e41-eb0d-421b-ab0e-9d0bc057b154)
-
+    >2. 제품의 정보 공개 여부에 따라 안내 및 `<Link>`, `<div>` 태그를 판단
+    <table align='center' style="border-collapse: collapse; border: none; border-spacing: 0;">
+        <tr align='center' style="border: none;">
+            <td style="border: none;">
+                <img src="https://github.com/user-attachments/assets/ab1e7e41-eb0d-421b-ab0e-9d0bc057b154" width="600" alt="인터페이스 제어" />
+            </td>
+        </tr>
+    </table>
 </details>
 
 <details>
@@ -448,7 +527,13 @@ src/
 - **Full-bleed 그리드 정렬:** `calc()`와 CSS 변수를 활용해 전역 그리드 라인과 일치하는 가변 패딩 설계 및 물리적 Spacer를 통한 브라우저 렌더링 결함(패딩 씹힘) 극복.
 - **Sticky 포지셔닝 정합성**: `translate`의 물리적 한계를 인지하고 `calc()` 기반의 결정론적 좌표 계산으로 부모 경계 내 완벽한 중앙 정렬 구현.
 - **레이아웃 무결성 유지:** `ImagePlaceholder`, `Typograpy 기반 min-h`, `가상 슬롯(Ghost Slot)` 배치를 통해 정보가 부족한 상황에서도 레이아웃 흔들림(Jank)를 방지하고 구글 Lighthouse CLS 점수 최적화.
-<img width="1224" height="631" alt="Image" src="https://github.com/user-attachments/assets/ab1e7e41-eb0d-421b-ab0e-9d0bc057b154" />
+<table align='center' style="border-collapse: collapse; border: none; border-spacing: 0;">
+    <tr align='center' style="border: none;">
+        <td style="border: none;">
+            <img src="https://github.com/user-attachments/assets/ab1e7e41-eb0d-421b-ab0e-9d0bc057b154" width="600" alt="레이아웃 무결성" />
+        </td>
+    </tr>
+</table>
 
 - **에셋의 유지보수성 및 성능 최적화:** 외부 로고 파일을 Inline SVG 컴포넌트화하여 HTTP 요청을 최소화(Zero HTTP Request)하고, CSS 변수와 연동하여 실시간 테마 대응 및 코드 기반의 에셋 관리 환경 구축.
 - **스타일 병합 유틸리티(cn):** tailwind-merge와 clsx를 결합한 cn 함수를 구축하여 클래스 우선순위 충돌 해결 및 스타일 확장성 확보.
@@ -461,11 +546,12 @@ src/
 <details>
 <summary><strong>[데이터 모델링] 관계형 스키마 설계 및 SSOT 확보</strong></summary>
 
-- **계층적 레퍼런스 모델링:** `System(시스템)` > `Robot(로봇)` > `Component(부품)`** 으로 이어지는 1:N 참조 관계 설계하여 데이터 무결성 확보.
+- **계층적 레퍼런스 모델링:** `System(시스템)` > `Robot(로봇)` > `Component(부품)` 으로 이어지는 1:N 참조 관계 설계하여 데이터 무결성 확보.
 - **단일 진실 공급원(SSOT) 구축:** 산업군과 제품군을 독립 엔티티로 분리하여 데이터 중복을 방지하고, 전사적인 데이터 정합성 유지.
 - **참조 무결성(Referential Integrity):** 텍스트가 아닌 고유 ID(UUID) 기반의 참조 시스템 구축.
 - **싱글톤 운영 아키텍처:** 사이트 전역 설정 데이터를 싱글톤으로 관리하여 데이터 중복을 방지하고 비개발자 운영자의 실수 방지 및 효율 증대.
-- **부품화(Object) 설계:** 반복되는 데이터 구조(연락처, 연혁 항목 등)를 객체 타입으로 모듈화하여 스키마 재사용성 강화한 컴포지션(Composition) 기반 스키마 설계.
+- **구조적 모듈화(Object):** 복잡한 중첩 데이터(제품 사양 등)를 객체 타입으로 캡슐화하여 스키마 가독성을 높이고 유지보수 포인트를 격리한 관심사 분리 기반 설계.
+- **공통 필드(Mix-in) 전략:** 여러 스키마가 공유하는 속성을 상수로 모듈화하여 중복 코드를 제거하고 전 제품군의 데이터 규격 일관성을 강제한 상속형 스키마 설계.
 </details>
 <details>
 <summary><strong>[쿼리 최적화] 서버 사이드 데이터 전처리</strong></summary>
@@ -490,13 +576,51 @@ src/
 <details>
 <summary><strong>[운영 효율화] CMS 커스터마이징</strong></summary>
 
-- **자산 메타데이터 자동화:** `AssetTitleInput` 컴포넌트 개발. 파일 업로드 시 서버 에셋을 역조회하여 파일명을 제목 필드와 실시간 동기화하여 이미지 에셋 접근성 및 Technical SEO 대응.
-- **그리드 사양 편집기:** @sanity/ui 기반의 `SpecsTableInput` 구축. 복잡한 배열 데이터를 엑셀 스타일로 관리하여 운영 생산성 향상.
-    ![Before](https://github.com/user-attachments/assets/7a7ddf0a-e8b9-49d4-9e6e-f4060d173b18)
-    ![After](https://github.com/user-attachments/assets/76f4594a-d02f-48c8-9a10-12e67c4846b2)
-- **전시 제어 시스템:** 기능 플래그(Feature Flag)와 전시 토글을 도입하여 재배포 없는 실시간 서비스 가동 제어 환경 구축.
-    ![Feature Flag 및 운영 가이드라인 내재화](https://github.com/user-attachments/assets/29c2bf99-7d2b-4dd7-b112-c16a3bb2e0cc)
 - **코드-콘텐츠 완전 분리(Decoupled):** 모든 마케팅 텍스트와 에셋을 CMS로 관리하여 개발자의 개입 없는 실시간 사이트 운영 환경 구축
+- **자산 메타데이터 자동화:** `AssetTitleInput` 컴포넌트 개발. 파일 업로드 시 서버 에셋을 역조회를 통 파일명을 제목 필드와 실시간 동기화하여 이미지 에셋 접근성 및 Technical SEO 대응.
+- **그리드 사양 편집기:** @sanity/ui 기반의 `SpecsTableInput` 구축. 복잡한 배열 데이터를 엑셀 스타일로 관리하여 운영 생산성 향상.
+<table align='center' style="border-collapse: collapse; border: none; border-spacing: 0;">
+    <tr align='center' style="border: none;">
+        <td style='border: none;'><b>Before (기본 편집기)</b></td>
+        <td style="border: none;"></td>
+        <td style="border: none;"><b>After (커스텀 그리드 편집기)</b></td>
+    </tr>
+    <tr align="center" style="border: none;" >
+        <td style="border: none;">
+            <img src="https://github.com/user-attachments/assets/7a7ddf0a-e8b9-49d4-9e6e-f4060d173b18" width="350" alt="Before Customization" />
+        </td>
+        <td style="border: none;" >
+            <h1>→</h1>
+        </td>
+        <td style="border: none;">
+            <img src="https://github.com/user-attachments/assets/76f4594a-d02f-48c8-9a10-12e67c4846b2" width="350" alt="After Customization" />
+        </td>
+    </tr>
+    <tr align="center" style="border: none;">
+        <td style="border: none;">
+            <p><small>단순 배열 형태로 가독성이 낮고<br>오입력 위험이 높았던 기존 구조</small></p>
+        </td>
+        <td style="border: none;"></td>
+        <td style="border: none;">
+            <p><small><b>SpecsTableInput</b> 도입으로<br>엑셀 스타일의 직관적인 데이터 관리 구현</small></p>
+        </td>
+    </tr>
+</table>
+<br>
+
+- **전시 제어 시스템:** 기능 플래그(Feature Flag)와 전시 토글을 도입하여 재배포 없는 실시간 서비스 가동 제어 환경 구축.
+<table align='center' style="border-collapse: collapse; border: none; border-spacing: 0;">
+    <tr align='center' style="border: none;">
+        <td style="border: none;">
+            <img src="https://github.com/user-attachments/assets/29c2bf99-7d2b-4dd7-b112-c16a3bb2e0cc" width="600" alt="Feature Flag" />
+            <br>
+            <sub>Feature Flag 및 운영 가이드라인 내재화</sub>
+        </td>
+    </tr>
+</table>
+<br>
+
+- **Schema Validation (데이터 품질 관리):** 스키마 레벨의 유효성 검사 규칙(Validation Rules)을 적용하여 필수 메타데이터 누락 및 휴먼 에러를 시스템적으로 차단하고, 비개발 운영 환경에서도 일관된 데이터 정합성 확보.
 </details>
 
 ### 3. 보안/웹 표준/최신 기술
@@ -529,33 +653,33 @@ src/
 - Node.js 18.18.0 이상 (v20 권장)
 
 1. **Clone the repo & Install dependencies** 
-```Bash
+    ```Bash
     git clone https://github.com/g1robot00/g1srobot-robotics-website.git
 
     cd g1srobot-robotics-website
 
     npm install
-```
+    ```
 
 2. **Environment Variables**
 _.env.local_ 파일을 생성하고 아래 키를 입력하세요.
-```python
-# Sanity CMS
-NEXT_PUBLIC_SANITY_PROJECT_ID=#PUT_SANITY_PROJECT_ID
-NEXT_PUBLIC_SANITY_DATASET=#PUT_SANITY_DATASET
+    ```python
+    # Sanity CMS
+    NEXT_PUBLIC_SANITY_PROJECT_ID=#PUT_SANITY_PROJECT_ID
+    NEXT_PUBLIC_SANITY_DATASET=#PUT_SANITY_DATASET
 
-# Resend (Email Service)
-RESEND_API_KEY=#PUT_RE_API_KEY
-EMAIL_ADDRESS=#PUT_EMAIL_ADDRESS
+    # Resend (Email Service)
+    RESEND_API_KEY=#PUT_RE_API_KEY
+    EMAIL_ADDRESS=#PUT_EMAIL_ADDRESS
 
-# kakaomap (Location)
-NEXT_PUBLIC_KAKAO_MAP_API_KEY=#PUT_KAKAO_MAP_API_KEY
-```
+    # kakaomap (Location)
+    NEXT_PUBLIC_KAKAO_MAP_API_KEY=#PUT_KAKAO_MAP_API_KEY
+    ```
 
 3. **Run development server**
-```Bash
+    ```Bash
     npm run dev
-```
+    ```
 
 
 
