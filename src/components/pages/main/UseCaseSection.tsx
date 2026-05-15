@@ -19,7 +19,7 @@ interface UseCaseSectionProps {
 
 export default function UseCaseSection({useCases}: UseCaseSectionProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
-    const bgImage = '/img/landingHeroBg/heroBg4.jpg';   //FIXME 이미지 교체
+    const bgImage = '/img/landingHeroBg/heroBg3.jpg';
     
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const selectedCase = useCases.find(item => item.id === selectedId); // FIXME 없을 경우 알림띄우기
@@ -41,10 +41,9 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
             {/* 배경 */}
             {bgImage && (
                 <div className='absolute inset-0 z-[-2]'>
-                    <Image src={bgImage} alt='useCaseBg' fill className='object-cover scale-110'/>
+                    <Image src={bgImage} alt='useCaseBg' fill className='object-cover scale-110 opacity-40'/>
                 </div>
             )}
-            <div className="absolute inset-0 z-[-1] bg-black/60 backdrop-blur-sm" />
 
             {/* 헤더 */}
             <Container>
@@ -52,7 +51,7 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                     <SectionHeader category='Use Cases'
                                     title={`파트너와 함께 달성한\n자동화 성공 경험을 공유합니다`}
                                     className='w-full'
-                                    theme='dark'
+                                    theme='light'
                     />
                     <div className='hidden md:flex gap-5 items-start mb-20'>
                         <button onClick={() => handleScroll('left')}
@@ -89,14 +88,14 @@ export default function UseCaseSection({useCases}: UseCaseSectionProps) {
                             </div>
                         ))}
                         <Link href='/use-cases' 
-                            className={cn('group ml-5 flex flex-col gap-2 items-center text-white', 'flex-shrink-0 snap-start' )}
+                            className={cn('group ml-5 flex flex-col gap-2 items-center text-gray-700 opacity-60 group-hover:opacity-100', 'flex-shrink-0 snap-start' )}
                         >
-                            <div className='h-fit p-5 border border-gray-200 rounded-full group-hover:bg-gray-300/30 cursor-pointer '>
+                            <div className='h-fit p-5 border border-gray-500 rounded-full bg-white/30 group-hover:bg-gray-300/30 cursor-pointer '>
                                 <MoveRight/>
                             </div>
-                            <span className="text-sm font-bold opacity-60 group-hover:opacity-100">전체보기</span>
+                            <span className="text-sm font-bold">전체보기</span>
                         </Link>
-                        <div className='flex-shrink-0 w-5 md:w-10 xl:w-20 3xl:w-[calc((100vw-1840px)/2+80px)]' aria-hidden='true'/>
+                        <div className='flex-shrink-0 w-5 md:w-10 xl:w-[calc((100vw-1440px)/2+80px)] 3xl:w-[calc((100vw-1840px)/2+80px)]' aria-hidden='true'/>
                     </div>
                     : <Container className='h-full'>
                         <div className='w-full h-full min-h-[400px] 3xl:h-[700px] flex items-center justify-center rounded-lg bg-white/20'>
